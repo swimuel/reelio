@@ -1,5 +1,7 @@
 # reelio
 
+<img width="1423" alt="Screen Shot 2019-08-15 at 10 48 22 PM" src="https://user-images.githubusercontent.com/31422519/63128438-102af480-c009-11e9-9bea-cc362bfab58f.png">
+
 SOFTENG 761 Project by *The Deliverables* for Vista.
 
 ## Instructions
