@@ -4,7 +4,9 @@
   "scripts": {
     "client": "cd client && npm start",
     "server": "nodemon server/server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "test": "standard",
+    "fix": "standard --fix"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -13,7 +15,16 @@
     "mongoose": "^5.6.9"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1",
-    "nodemon": "^1.19.1"
+    "babel-eslint": "^10.0.2",
+    "concurrently": "^4.1.1",
+    "nodemon": "^1.19.1",
+    "standard": "^13.1.0"
+  },
+  "standard": {
+    "globals": [
+      "fetch",
+      "it"
+    ],
+    "parser": "babel-eslint"
   }
 }
