@@ -9,8 +9,6 @@ To run the application:
 
 - Install [mongoDB](https://docs.mongodb.com/manual/installation/) and ensure it is running
 
-- In the root directory: `npm install`
-
-- In the `/client` directory: `npm install`
+- There's two node projects (client and server) which both require npm install. In the root directory: `npm run install-all` will take care of both of them.
 
 - From the root directory: `npm run dev`
