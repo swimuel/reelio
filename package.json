@@ -5,7 +5,7 @@
     "client": "cd client && npm start",
     "server": "nodemon server/server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "test": "standard",
+    "test": "standard && jest server/tests/.*.test.js",
     "install-all": "npm install && cd client && npm install",
     "fix": "standard --fix"
   },
@@ -18,13 +18,16 @@
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "concurrently": "^4.1.1",
+    "jest": "^24.9.0",
     "nodemon": "^1.19.1",
     "standard": "^13.1.0"
   },
   "standard": {
     "globals": [
       "fetch",
-      "it"
+      "it",
+      "test",
+      "expect"
     ],
     "parser": "babel-eslint"
   }
