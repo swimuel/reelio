@@ -1,7 +1,7 @@
 ---
-name: Product Backlog template
-about: Issue template for a story point
-title: ''
+name: Epic template
+about: Issue template for an epic
+title: "[EPIC](priority): Title"
 labels: ''
 assignees: ''
 
