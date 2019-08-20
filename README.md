@@ -4,6 +4,8 @@
 
 SOFTENG 761 Project by *The Deliverables* for Vista.
 
+[![Build Status](https://travis-ci.com/swimuel/reelio.svg?token=G9zx8ysL4UD2AyJxMys5&branch=master)](https://travis-ci.com/swimuel/reelio)
+
 ## Instructions
 To run the application:
 
