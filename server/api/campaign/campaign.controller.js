@@ -8,6 +8,13 @@ const getAllCampaigns = async (req, res) => {
   res.json(campaignList)
 }
 
+const getCampaignById = async (req, res) => {
+  const { id } = req.params
+  const campaign = await Campaigns.findById(id)
+  res.json(campaign)
+}
+
 module.exports = {
-  getAllCampaigns
+  getAllCampaigns,
+  getCampaignById
 }
