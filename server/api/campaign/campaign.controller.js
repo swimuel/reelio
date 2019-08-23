@@ -5,7 +5,15 @@ const Campaigns = require('./campaign')
 
 const getAllCampaigns = async (req, res) => {
   const campaignList = await Campaigns.find()
-  res.json(campaignList)
+
+  // async map functions are weird so have to use promise.all to properly await
+  const dtoList = await Promise.all(campaignList.map(async campaign => {
+    const dto = campaign.toObject()
+    dto.percentageComplete = await campaign.calculatePercentageComplete()
+    return dto
+  }))
+
+  res.json(dtoList)
 }
 
 const getCampaignById = async (req, res) => {
