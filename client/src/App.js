@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import ExampleList from './example/ExampleList'
-import TimeRemaining from './components/CampaignCard/TimeRemaining'
 
 import './App.css'
 
