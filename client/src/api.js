@@ -9,5 +9,5 @@ export const getExamples = async () => {
 }
 
 export const getTime = async () => {
-  return "5 days"
+  return '5 days'
 }

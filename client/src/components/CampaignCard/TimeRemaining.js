@@ -1,9 +1,8 @@
 import React from 'react'
-import { Tooltip, Button, Icon } from 'antd';
+import { Tooltip, Icon } from 'antd'
 import { getTime } from '../../api'
 
-class TimeRemaining extends React.Component { 
-
+class TimeRemaining extends React.Component {
   state = {
     time: null
   }
@@ -13,14 +12,15 @@ class TimeRemaining extends React.Component {
     this.setState({ time: time })
   }
 
-    render() {
-        return (
-        <div>
-        <Tooltip placement="right" title= {this.state.time + " left"}>
-        <Icon type="clock-circle" />
-      </Tooltip>
-        </div>) 
-    }
+  render () {
+    return (
+      <div>
+        <Tooltip placement='right' title={this.state.time + ' left'}>
+          <Icon type='clock-circle' />
+        </Tooltip>
+      </div>
+    )
+  }
 }
 
-export default TimeRemaining; 
+export default TimeRemaining
