@@ -1,35 +1,15 @@
 import React from "react";
-import {List, Card} from 'antd';
-import CampaignCard from "../../CampaignCard";
+import {List} from 'antd';
 
 class CampaignList extends React.Component{
     constructor(props){
         super(props);
-
+        this.state = {
+            campaigns: props.campaigns
+        }
     }
 
     render(){
-        const data = [
-            {
-                title: 'Title 1',
-            },
-            {
-                title: 'Title 2',
-            },
-            {
-                title: 'Title 3',
-            },
-            {
-                title: 'Title 4',
-            },
-            {
-                title: 'Title 5',
-            },
-            {
-                title: 'Title 6',
-            },
-        ];
-
         return (
             <List
                 grid={{
@@ -41,10 +21,10 @@ class CampaignList extends React.Component{
                     xl: 6,
                     xxl: 3,
                 }}
-                dataSource={data}
+                dataSource={this.state.campaigns}
                 renderItem={item => (
                     <List.Item>
-                        <CampaignCard/>
+                        {item.render()}
                     </List.Item>
                 )}
             />
