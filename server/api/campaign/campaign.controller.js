@@ -10,7 +10,7 @@ const getAllCampaigns = async (req, res) => {
   const dtoList = await Promise.all(campaignList.map(async campaign => {
     const dto = campaign.toObject()
     dto.percentageComplete = await campaign.calculatePercentageComplete()
-    dto.timeToCampaignEnd = await campaign.calculateCampaignTimeRemainingInDays()
+    dto.campaignFinishDate = await campaign.calculateCampaignTimeRemainingInDays()
     return dto
   }))
 

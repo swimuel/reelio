@@ -36,13 +36,10 @@ CampaignSchema.methods.calculatePercentageComplete = async function () {
 CampaignSchema.methods.calculateCampaignTimeRemainingInDays = async function () {
   // translates a Date object into a Moment object
   const screeningDate = moment(this.screeningDate)
-  const creationDate = moment(this.creationDate)
 
   // Calculates the campaigns finish date as a week before the screening date
-  screeningDate.subtract(7, 'days')
-
-  const dateDiff = moment.duration(screeningDate.diff(creationDate)).asDays()
-  return dateDiff
+  const cutOffDate = screeningDate.subtract(7, 'days')
+  return cutOffDate
 }
 
 module.exports = mongoose.model('Campaign', CampaignSchema)
