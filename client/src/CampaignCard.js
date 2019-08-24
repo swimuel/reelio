@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'antd'
+import { Card, Progress } from 'antd'
 
 class CampaignCard extends React.Component {
   render () {
@@ -11,6 +11,7 @@ class CampaignCard extends React.Component {
         cover={<img alt='example' src='http://www.impawards.com/2019/posters/avengers_endgame_ver2_xlg.jpg' width='200' />}
       >
         <Meta title='Title of Movie' description='' />
+        <Progress percent={75} />
       </Card>
     )
   }
