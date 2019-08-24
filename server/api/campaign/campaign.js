@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const ScreenType = require('../screenType/screenType')
 const Pledge = require('../pledge/pledge')
-const Moment = require('moment')
+const moment = require('moment')
 
 const Schema = mongoose.Schema
 
@@ -34,14 +34,14 @@ CampaignSchema.methods.calculatePercentageComplete = async function () {
 }
 
 CampaignSchema.methods.calculateCampaignTimeRemainingInDays = async function () {
-  // transates a Date object into a Moment objecty
-  var screeningDate = new Moment(this.screeningDate)
-  const creationDate = new Moment(this.creationDate)
+  // translates a Date object into a Moment object
+  const screeningDate = moment(this.screeningDate)
+  const creationDate = moment(this.creationDate)
 
   // Calculates the campaigns finish date as a week before the screening date
   screeningDate.subtract(7, 'days')
 
-  const dateDiff = Moment.duration(screeningDate.diff(creationDate)).asDays()
+  const dateDiff = moment.duration(screeningDate.diff(creationDate)).asDays()
   return dateDiff
 }
 
