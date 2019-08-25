@@ -17,7 +17,7 @@ class HomePage extends React.Component {
     campaigns.push(new CampaignCard())
 
     return (
-      <div className={HomePage}>
+      <div className={'HomePage'}>
         <Header />
         <CampaignList campaigns={campaigns} />
       </div>
