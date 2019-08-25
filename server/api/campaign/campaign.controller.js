@@ -2,6 +2,7 @@
 
 // the model can be used to interact with the database entities
 const Campaigns = require('./campaign')
+const ScreenType = require('../screenType/screenType')
 
 const getAllCampaigns = async (req, res) => {
   const campaignList = await Campaigns.find()
@@ -11,6 +12,7 @@ const getAllCampaigns = async (req, res) => {
     const dto = campaign.toObject()
     dto.percentageComplete = await campaign.calculatePercentageComplete()
     dto.campaignFinishDate = await campaign.calculateCampaignTimeRemainingInDays()
+    dto.screenType = await (await ScreenType.findById(dto.screenType)).calculateDisplayName()
     return dto
   }))
 
