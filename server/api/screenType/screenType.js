@@ -7,4 +7,9 @@ const ScreenTypeSchema = new Schema({
   numTicketsRequired: { type: Number, required: true }
 })
 
+// method to calculate display name, by regex replacing underscores with spaces in name attribute
+ScreenTypeSchema.methods.calculateDisplayName = async function () {
+  return this.name.replace(/_/g, ' ')
+}
+
 module.exports = mongoose.model('ScreenType', ScreenTypeSchema)
