@@ -7,3 +7,7 @@ export const getExamples = async () => {
 
   return body
 }
+
+export const getTime = async () => {
+  return '5 days'
+}

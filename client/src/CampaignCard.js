@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card } from 'antd'
+import { Card, Progress } from 'antd'
+import TimeRemaining from './components/CampaignCard/TimeRemaining'
 
 class CampaignCard extends React.Component {
   render () {
@@ -7,10 +8,12 @@ class CampaignCard extends React.Component {
     return (
       <Card
         hoverable
-        style={{ width: 200, height: 380 }}
+        style={{ width: 200, height: 440 }}
         cover={<img alt='example' src='http://www.impawards.com/2019/posters/avengers_endgame_ver2_xlg.jpg' width='200' />}
+        extra={<TimeRemaining />}
       >
         <Meta title='Title of Movie' description='' />
+        <Progress percent={75} />
       </Card>
     )
   }
