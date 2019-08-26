@@ -17,5 +17,13 @@ module.exports = [
     creationDate: new Date(),
     screeningDate: new Date('2019-09-01'),
     screenType: screenTypes[0]._id
+  },
+  {
+    _id: objectid().toString(),
+    filmTitle: 'Incredibles 2',
+    campaignTitle: 'Really overrated',
+    creationDate: new Date(),
+    screeningDate: new Date('2019-09-10'),
+    screenType: screenTypes[0]._id
   }
 ]
