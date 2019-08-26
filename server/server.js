@@ -3,6 +3,9 @@ const bodyParser = require('body-parser')
 const glob = require('glob')
 const mongoose = require('mongoose')
 const Example = require('./api/example/example')
+const Campaign = require('./api/campaign/campaign')
+const Pledge = require('./api/pledge/pledge')
+const ScreenType = require('./api/screenType/screenType')
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -18,14 +21,25 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useCreateIndex: true })
     // clear database.
     // add all models to be cleared here
     await Promise.all([
-      Example.deleteMany({})
+      Example.deleteMany({}),
+      Campaign.deleteMany({}),
+      Pledge.deleteMany({}),
+      ScreenType.deleteMany({})
     ])
 
     // init data
     // require all dummy data here and init using insertMany
     const examples = require('./api/example/example.dummy')
+    const campaigns = require('./api/campaign/campaign.dummy')
+    const pledges = require('./api/pledge/pledge.dummy')
+
+    // this data is used for production (i.e. it is not dummy data. Should be configured in the code)
+    const screenTypes = require('./api/screenType/screenType.data')
     try {
       await Example.insertMany(examples)
+      await ScreenType.insertMany(screenTypes)
+      await Campaign.insertMany(campaigns)
+      await Pledge.insertMany(pledges)
     } catch (e) {
       console.log(`error initializing data: ${e}`)
     }
