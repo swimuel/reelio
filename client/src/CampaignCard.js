@@ -8,7 +8,7 @@ const CampaignCard = (campaign) => {
     <Card
       hoverable
       style={{ width: 200, height: 440 }}
-      cover={<img alt='example' src='http://www.impawards.com/2019/posters/avengers_endgame_ver2_xlg.jpg' width='200' />}
+      cover={<img alt='example' src='https://www.joblo.com/assets/images/joblo/posters/2019/04/avengers_endgame_ver44_xlg.jpg' width='200' />}
       extra={<TimeRemaining time='1 day' />}
     >
       <Meta title={campaign.props.filmTitle} description={' (' + campaign.props.screenType + ')'} />
