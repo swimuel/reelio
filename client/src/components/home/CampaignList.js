@@ -27,7 +27,7 @@ class CampaignList extends React.Component {
           dataSource={this.state.campaigns}
           renderItem={item => (
             <List.Item>
-              {item.render()}
+              {item}
             </List.Item>
           )}
         />
