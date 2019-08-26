@@ -1,7 +1,7 @@
 import React from 'react'
 import { List } from 'antd'
 
-import './Home.css'
+import './Campaign.css'
 
 class CampaignList extends React.Component {
   constructor (props) {
@@ -13,7 +13,7 @@ class CampaignList extends React.Component {
 
   render () {
     return (
-      <div className={'container'}>
+      <div className='campaigns-container'>
         <List
           grid={{
             gutter: 16,

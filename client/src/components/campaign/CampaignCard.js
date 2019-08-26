@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Progress } from 'antd'
-import TimeRemaining from './components/CampaignCard/TimeRemaining'
+import TimeRemaining from './TimeRemaining'
 
 const CampaignCard = (campaign) => {
   const { Meta } = Card

@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../components/home/Header'
-import CampaignCard from '../CampaignCard'
-import CampaignList from '../components/home/CampaignList'
+import Header from '../components/header/Header'
+import CampaignCard from '../components/campaign/CampaignCard'
+import CampaignList from '../components/campaign/CampaignList'
 import { getCampaigns } from '../api'
 
 class HomePage extends React.Component {
