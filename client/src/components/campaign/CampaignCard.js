@@ -33,7 +33,7 @@ class CampaignCard extends React.Component {
         hoverable
         style={{ width: 200, height: 440 }}
         // TODO: include image url in dto
-        cover={<img alt='example' src='https://www.joblo.com/assets/images/joblo/posters/2019/04/avengers_endgame_ver44_xlg.jpg' width='200' />}
+        cover={<img alt='campaign poster' src={campaign.imageUrl} width='200' />}
         // TODO: calculate string to pass into time remaining
         extra={<TimeRemaining time={this.calculateTimeRemaining()} />}
       >
