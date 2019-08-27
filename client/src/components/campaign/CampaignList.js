@@ -1,18 +1,23 @@
 import React from 'react'
-import { List } from 'antd'
+import { List, Spin } from 'antd'
+import { getCampaigns } from '../../api'
+import CampaignCard from './CampaignCard'
 
 import './Campaign.css'
 
 class CampaignList extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      campaigns: props.campaigns
-    }
+  state = {
+    loading: true,
+    campaings: []
+  }
+
+  async componentDidMount () {
+    const campaigns = await getCampaigns()
+    this.setState({ campaigns: campaigns, loading: false })
   }
 
   render () {
-    return (
+    return this.state.loading ? <Spin /> : (
       <div className='campaigns-container'>
         <List
           grid={{
@@ -25,9 +30,11 @@ class CampaignList extends React.Component {
             xxl: 3
           }}
           dataSource={this.state.campaigns}
-          renderItem={item => (
+          // renderItem is called with each element in dataSource (which in this case are campaigns).
+          // Passing the campaign into a campaign card component will render that specific campaign
+          renderItem={campaign => (
             <List.Item>
-              {item}
+              <CampaignCard campaign={campaign} />
             </List.Item>
           )}
         />
