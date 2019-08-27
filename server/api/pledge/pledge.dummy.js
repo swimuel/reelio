@@ -12,12 +12,18 @@ module.exports = [
     name: 'Testy Bro',
     email: 'test@yo.com',
     campaign: campaigns[0]._id,
-    ticketsPledged: 15
+    ticketsPledged: 5
   },
   {
     name: 'Testy Bro',
     email: 'test@yo.com',
-    campaign: objectid(),
-    ticketsPledged: 15
+    campaign: campaigns[1]._id,
+    ticketsPledged: 9
+  },
+  {
+    name: 'Testy Bro',
+    email: 'test@yo.com',
+    campaign: campaigns[2]._id,
+    ticketsPledged: 1
   }
 ]

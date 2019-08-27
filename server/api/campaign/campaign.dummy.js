@@ -7,7 +7,7 @@ module.exports = [
     filmTitle: 'Spirited Away',
     campaignTitle: 'Epic movie pls come',
     creationDate: new Date(),
-    screeningDate: new Date('2019-09-24'),
+    screeningDate: new Date('2019-10-02'),
     screenType: screenTypes[0]._id
   },
   {
@@ -15,7 +15,7 @@ module.exports = [
     filmTitle: 'Avengers Endgame',
     campaignTitle: 'Sad movie :(',
     creationDate: new Date(),
-    screeningDate: new Date('2019-09-01'),
+    screeningDate: new Date('2019-09-06'),
     screenType: screenTypes[0]._id
   },
   {
@@ -23,7 +23,7 @@ module.exports = [
     filmTitle: 'Incredibles 2',
     campaignTitle: 'Really overrated',
     creationDate: new Date(),
-    screeningDate: new Date('2019-09-10'),
+    screeningDate: new Date('2019-09-04'),
     screenType: screenTypes[0]._id
   }
 ]

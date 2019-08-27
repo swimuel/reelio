@@ -39,7 +39,7 @@ CampaignSchema.methods.calculateCampaignTimeRemainingInDays = async function () 
 
   // Calculates the campaigns finish date as a week before the screening date
   const cutOffDate = screeningDate.subtract(7, 'days')
-  return cutOffDate.toDate()
+  return cutOffDate
 }
 
 module.exports = mongoose.model('Campaign', CampaignSchema)
