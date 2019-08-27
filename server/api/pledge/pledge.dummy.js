@@ -1,5 +1,4 @@
 const campaigns = require('../campaign/campaign.dummy')
-const objectid = require('objectid')
 
 module.exports = [
   {
