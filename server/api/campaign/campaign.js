@@ -11,7 +11,8 @@ const CampaignSchema = new Schema({
   campaignTitle: { type: String, required: true },
   creationDate: { type: Date, required: true },
   screeningDate: { type: Date, required: true },
-  screenType: { type: Schema.Types.ObjectId, ref: 'ScreenType', required: true }
+  screenType: { type: Schema.Types.ObjectId, ref: 'ScreenType', required: true },
+  imageUrl: { type: String, required: true }
 })
 
 CampaignSchema.methods.calculatePercentageComplete = async function () {
@@ -39,7 +40,7 @@ CampaignSchema.methods.calculateCampaignTimeRemainingInDays = async function () 
 
   // Calculates the campaigns finish date as a week before the screening date
   const cutOffDate = screeningDate.subtract(7, 'days')
-  return cutOffDate.toDate()
+  return cutOffDate
 }
 
 module.exports = mongoose.model('Campaign', CampaignSchema)

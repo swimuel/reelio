@@ -7,3 +7,11 @@ export const getExamples = async () => {
 
   return body
 }
+
+export const getCampaigns = async () => {
+  const response = await fetch('/api/campaigns')
+  const body = await response.json()
+  if (response.status !== 200) throw Error(body.message)
+
+  return body
+}
