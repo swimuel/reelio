@@ -34,7 +34,6 @@ class CampaignCard extends React.Component {
         style={{ width: 200, height: 440 }}
         // TODO: include image url in dto
         cover={<img alt='campaign poster' src={campaign.imageUrl} width='200' />}
-        // TODO: calculate string to pass into time remaining
         extra={<TimeRemaining time={this.calculateTimeRemaining()} />}
       >
         <Meta title={campaign.filmTitle} description={' (' + campaign.screenType + ')'} />
