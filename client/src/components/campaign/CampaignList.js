@@ -22,12 +22,12 @@ class CampaignList extends React.Component {
         <List
           grid={{
             gutter: 16,
-            xs: 2,
-            sm: 3,
-            md: 4,
-            lg: 5,
-            xl: 6,
-            xxl: 3
+            xs: 1,
+            sm: 2,
+            md: 2,
+            lg: 3,
+            xl: 4,
+            xxl: 5
           }}
           dataSource={this.state.campaigns}
           // renderItem is called with each element in dataSource (which in this case are campaigns).
