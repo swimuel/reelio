@@ -45,7 +45,7 @@ class CampaignCard extends React.Component {
         <div style={styles.subCard}>
           <Title level={4}>{campaign.filmTitle}</Title>
           <Paragraph>{campaign.campaignTitle}</Paragraph>
-          <Paragraph>Screening: {moment(campaign.screeningDate).format("Do MMMM")}</Paragraph>
+          <Paragraph>Screening: {moment(campaign.screeningDate).format('Do MMMM')}</Paragraph>
           <Progress percent={campaign.percentageComplete} />
         </div>
       </Card >
