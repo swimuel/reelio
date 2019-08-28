@@ -11,15 +11,15 @@ class CampaignCard extends React.Component {
 
     const difference = moment.duration(finishTime.diff(now))
     if (Math.trunc(difference.asWeeks()) > 0) {
-      return Math.trunc(difference.asWeeks()) + ' weeks'
+      return { value: Math.trunc(difference.asWeeks()) + ' weeks', finishSoon: false }
     } else if (Math.trunc(difference.asDays()) > 0) {
-      return Math.trunc(difference.asDays()) + ' days'
+      return { value: Math.trunc(difference.asDays()) + ' days', finishSoon: false }
     } else if (Math.trunc(difference.asHours()) > 0) {
-      return Math.trunc(difference.asHours()) + ' hours'
+      return { value: Math.trunc(difference.asHours()) + ' hours', finishSoon: true }
     } else if (Math.trunc(difference.asMinutes()) > 0) {
-      return Math.trunc(difference.asMinutes()) + ' minutes'
+      return { value: Math.trunc(difference.asMinutes()) + ' minutes', finishSoon: true }
     } else if (Math.trunc(difference.asSeconds()) > 0) {
-      return Math.trunc(difference.asSeconds()) + 'seconds'
+      return { value: Math.trunc(difference.asSeconds()) + ' seconds', finishSoon: true }
     } else {
       return 'unknown'
     }
