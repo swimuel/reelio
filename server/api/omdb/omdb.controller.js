@@ -3,23 +3,23 @@
 const axios = require('axios')
 const config = require('../../config')
 
+// e.g localhost:3000/api/omdb/tt0848228 (Avengers)
 const getMovieById = async (req, res) => {
   const { id } = req.params
-
-  // insert movie logic here
-  console.log('PRINTING STUFF YEAH:')
-  console.log('http://www.omdbapi.com/?apikey=' + config.omdbApiKey + '&i=' + id)
-  console.log('CONFIG STUFF: ' + config.omdbApiKey)
   const movie = await axios.get('http://www.omdbapi.com/?apikey=' + config.omdbApiKey + '&i=' + id)
-
-  console.log(movie.data)
-  // const example = {
-  //   hello: 'yeah'
-  // }
 
   res.json(movie.data)
 }
 
+// e.g localhost:3000/api/omdb/search=Avengers+The
+const getMoviesBySearch = async (req, res) => {
+  const { search } = req.params
+  const movieSearchResults = await axios.get('http://www.omdbapi.com/?apikey=' + config.omdbApiKey + '&s=' + search)
+
+  res.json(movieSearchResults.data.Search)
+}
+
 module.exports = {
-  getMovieById
+  getMovieById,
+  getMoviesBySearch
 }
