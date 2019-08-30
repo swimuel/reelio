@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Progress, Typography } from 'antd'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import TimeRemaining from './TimeRemaining'
 const moment = require('moment')
 
@@ -26,37 +26,41 @@ class CampaignCard extends React.Component {
     }
   }
 
+  goToDetails = () => {
+    const { history, campaign } = this.props
+    history.push(`/campaigns/${campaign._id}`)
+  }
+
   render () {
     const { Paragraph, Title } = Typography
     const { campaign } = this.props
     return (
-      <Link to={`/campaigns/${campaign._id}`}>
-        <Card
-          hoverable
-          style={{ ...styles.card, ...{ backgroundImage: `url(${campaign.imageUrl})` } }}
-          bodyStyle={styles.bodyOverride}
-        >
-          <div style={styles.screenType}>
-            <Paragraph style={{ margin: 0 }}>{campaign.screenType}</Paragraph>
-          </div>
+      <Card
+        onClick={this.goToDetails}
+        hoverable
+        style={{ ...styles.card, ...{ backgroundImage: `url(${campaign.imageUrl})` } }}
+        bodyStyle={styles.bodyOverride}
+      >
+        <div style={styles.screenType}>
+          <Paragraph style={{ margin: 0 }}>{campaign.screenType}</Paragraph>
+        </div>
 
-          <div style={styles.timeRemaining}>
-            <TimeRemaining time={this.calculateTimeRemaining()} />
-          </div>
+        <div style={styles.timeRemaining}>
+          <TimeRemaining time={this.calculateTimeRemaining()} />
+        </div>
 
-          <div style={styles.subCard}>
-            <Title level={4}>{campaign.filmTitle}</Title>
-            <Paragraph>{campaign.campaignTitle}</Paragraph>
-            <Paragraph>Screening: {moment(campaign.screeningDate).format('Do MMMM')}</Paragraph>
-            <Progress percent={campaign.percentageComplete} />
-          </div>
-        </Card >
-      </Link>
+        <div style={styles.subCard}>
+          <Title level={4}>{campaign.filmTitle}</Title>
+          <Paragraph>{campaign.campaignTitle}</Paragraph>
+          <Paragraph>Screening: {moment(campaign.screeningDate).format('Do MMMM')}</Paragraph>
+          <Progress percent={campaign.percentageComplete} />
+        </div>
+      </Card >
     )
   }
 }
 
-export default CampaignCard
+export default withRouter(CampaignCard)
 
 const styles = {
   card: {
