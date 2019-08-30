@@ -11,9 +11,9 @@ const getMovieById = async (req, res) => {
   res.json(movie.data)
 }
 
-// e.g localhost:3000/api/omdb/search=Avengers+The
+// e.g localhost:3000/api/omdb?search=Avengers+The
 const getMoviesBySearch = async (req, res) => {
-  const { search } = req.params
+  const { search } = req.query
   const movieSearchResults = await axios.get('http://www.omdbapi.com/?apikey=' + config.omdbApiKey + '&s=' + search)
 
   res.json(movieSearchResults.data.Search)
