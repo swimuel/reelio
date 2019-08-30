@@ -12,14 +12,21 @@ const getMovieById = async (req, res) => {
 }
 
 // e.g localhost:3000/api/omdb?search=Avengers+The
-const getMoviesBySearch = async (req, res) => {
+const getMovies = async (req, res) => {
   const { search } = req.query
-  const movieSearchResults = await axios.get('http://www.omdbapi.com/?apikey=' + config.omdbApiKey + '&s=' + search)
+  let queryStringParameters = '' // built to allow for future query parameters to be added
 
-  res.json(movieSearchResults.data.Search)
+  // replicate this block to add new query params (currently built for retrieving suggestions from a query)
+  if (search !== undefined) {
+    queryStringParameters += '&s=' + search
+  }
+
+  // sends request for retrieving movie information based on query params
+  const response = await axios.get('http://www.omdbapi.com/?apikey=' + config.omdbApiKey + queryStringParameters)
+  res.status(200).json(response.data.Search)
 }
 
 module.exports = {
   getMovieById,
-  getMoviesBySearch
+  getMovies
 }
