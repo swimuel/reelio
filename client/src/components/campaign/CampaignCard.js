@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Progress, Typography } from 'antd'
+import { withRouter } from 'react-router-dom'
 import TimeRemaining from './TimeRemaining'
 const moment = require('moment')
 
@@ -25,11 +26,17 @@ class CampaignCard extends React.Component {
     }
   }
 
+  goToDetails = () => {
+    const { history, campaign } = this.props
+    history.push(`/campaigns/${campaign._id}`)
+  }
+
   render () {
     const { Paragraph, Title } = Typography
     const { campaign } = this.props
     return (
       <Card
+        onClick={this.goToDetails}
         hoverable
         style={{ ...styles.card, ...{ backgroundImage: `url(${campaign.imageUrl})` } }}
         bodyStyle={styles.bodyOverride}
@@ -53,7 +60,7 @@ class CampaignCard extends React.Component {
   }
 }
 
-export default CampaignCard
+export default withRouter(CampaignCard)
 
 const styles = {
   card: {
