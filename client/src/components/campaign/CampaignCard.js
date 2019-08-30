@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Progress, Typography } from 'antd'
+import { Link } from 'react-router-dom'
 import TimeRemaining from './TimeRemaining'
 const moment = require('moment')
 
@@ -29,26 +30,28 @@ class CampaignCard extends React.Component {
     const { Paragraph, Title } = Typography
     const { campaign } = this.props
     return (
-      <Card
-        hoverable
-        style={{ ...styles.card, ...{ backgroundImage: `url(${campaign.imageUrl})` } }}
-        bodyStyle={styles.bodyOverride}
-      >
-        <div style={styles.screenType}>
-          <Paragraph style={{ margin: 0 }}>{campaign.screenType}</Paragraph>
-        </div>
+      <Link to={`/campaigns/${campaign._id}`}>
+        <Card
+          hoverable
+          style={{ ...styles.card, ...{ backgroundImage: `url(${campaign.imageUrl})` } }}
+          bodyStyle={styles.bodyOverride}
+        >
+          <div style={styles.screenType}>
+            <Paragraph style={{ margin: 0 }}>{campaign.screenType}</Paragraph>
+          </div>
 
-        <div style={styles.timeRemaining}>
-          <TimeRemaining time={this.calculateTimeRemaining()} />
-        </div>
+          <div style={styles.timeRemaining}>
+            <TimeRemaining time={this.calculateTimeRemaining()} />
+          </div>
 
-        <div style={styles.subCard}>
-          <Title level={4}>{campaign.filmTitle}</Title>
-          <Paragraph>{campaign.campaignTitle}</Paragraph>
-          <Paragraph>Screening: {moment(campaign.screeningDate).format('Do MMMM')}</Paragraph>
-          <Progress percent={campaign.percentageComplete} />
-        </div>
-      </Card >
+          <div style={styles.subCard}>
+            <Title level={4}>{campaign.filmTitle}</Title>
+            <Paragraph>{campaign.campaignTitle}</Paragraph>
+            <Paragraph>Screening: {moment(campaign.screeningDate).format('Do MMMM')}</Paragraph>
+            <Progress percent={campaign.percentageComplete} />
+          </div>
+        </Card >
+      </Link>
     )
   }
 }
