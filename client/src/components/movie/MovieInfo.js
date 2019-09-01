@@ -54,7 +54,6 @@ class MovieInfo extends Component {
     }
 
     render () {
-        console.log(this.state.movieInfo.Title)
         return (
             <div className={'info-container'}>
                 <div className={'heading'}>
@@ -62,8 +61,30 @@ class MovieInfo extends Component {
                         {this.state.movieInfo.Title}
                     </text>
                     <text className={'rated'}>
-                        {this.state.movieInfo.Rated + " " + this.state.movieInfo.imdbRating + "/10.0"}
+                        {this.state.movieInfo.Rated + "    " + this.state.movieInfo.imdbRating + "/10.0"}
                     </text>
+                </div>
+                <div className={'subtext-container'}>
+                    <div className={'subtext'}>
+                        {this.state.movieInfo.Year}
+                    </div>
+                    <div className={'subtext'}>
+                        {this.state.movieInfo.Production}
+                    </div>
+                    <div className={'subtext'}>
+                        {this.state.movieInfo.Runtime}
+                    </div>
+                </div>
+                <div className={'prod-team-container'}>
+                    <div className={'prod-member'}>
+                        {"Directors: " + this.state.movieInfo.Director}
+                    </div>
+                    <div className={'prod-member'}>
+                        {"Writers: " + this.state.movieInfo.Writer}
+                    </div>
+                    <div className={'prod-member'}>
+                        {"Cast: " + this.state.movieInfo.Actors}
+                    </div>
                 </div>
             </div>
         );

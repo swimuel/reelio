@@ -1,6 +1,7 @@
 .info-container {
     width: 500px;
     height: 100px;
+    margin: auto;
 }
 
 .info-container .heading {
@@ -14,7 +15,9 @@
     bottom:0;
     line-height: 1;
 }
+
 .info-container .heading text.title {
+    font-weight: bold;
     font-size: 40px;
     left:0;
 }
@@ -23,5 +26,34 @@
     font-size: 20px;
     right: 0;
 }
+
+.info-container .subtext-container {
+    margin-top: 10px;
+    width:inherit;
+    overflow: auto;
+    position: relative;
+    font-size: 12px;
+}
+
+.info-container .subtext-container .subtext{
+    float: left;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.info-container .prod-team-container{
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.info-container .prod-team-container .prod-member{
+    text-align: left;
+    position: relative;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+
 
 
