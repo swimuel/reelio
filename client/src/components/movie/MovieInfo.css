@@ -1,28 +1,30 @@
 .info-container {
     width: 500px;
-    height: 100px;
+    overflow: auto;
     margin: auto;
+    text-align: left;
 }
 
 .info-container .heading {
-    width: inherit;
-    height: inherit;
     position: relative;
+    height: 60px;
 }
 
 .info-container .heading text {
-    position: absolute;
     bottom:0;
     line-height: 1;
 }
 
-.info-container .heading text.title {
+.info-container .heading .title {
+    position: absolute;
     font-weight: bold;
     font-size: 40px;
     left:0;
 }
 
-.info-container .heading text.rated{
+.info-container .heading .rated{
+    position: absolute;
+    text-align: right;
     font-size: 20px;
     right: 0;
 }
@@ -48,12 +50,24 @@
 }
 
 .info-container .prod-team-container .prod-member{
-    text-align: left;
     position: relative;
     margin-left: 0;
     margin-right: auto;
 }
 
+.info-container .summary {
+    margin-top: 30px;
+}
+
+.info-container .tags {
+    margin-top: 15px;
+}
+
+.info-container .accolades-container .accolade {
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 50px;
+}
 
 
 

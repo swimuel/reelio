@@ -86,6 +86,20 @@ class MovieInfo extends Component {
                         {"Cast: " + this.state.movieInfo.Actors}
                     </div>
                 </div>
+                <div className={'summary'}>
+                    {this.state.movieInfo.Plot}
+                </div>
+                <div className={'tags'}>
+                    {"Tags: " + this.state.movieInfo.Genre}
+                </div>
+                <div className={'accolades-container'}>
+                    <div className={'accolade'}>
+                        {this.state.movieInfo.Metascore + " Metascore"}
+                    </div>
+                    <div className={'accolade'}>
+                        {this.state.movieInfo.Awards}
+                    </div>
+                </div>
             </div>
         );
     }
