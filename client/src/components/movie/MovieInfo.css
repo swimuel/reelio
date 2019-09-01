@@ -1,0 +1,27 @@
+.info-container {
+    width: 500px;
+    height: 100px;
+}
+
+.info-container .heading {
+    width: inherit;
+    height: inherit;
+    position: relative;
+}
+
+.info-container .heading text {
+    position: absolute;
+    bottom:0;
+    line-height: 1;
+}
+.info-container .heading text.title {
+    font-size: 40px;
+    left:0;
+}
+
+.info-container .heading text.rated{
+    font-size: 20px;
+    right: 0;
+}
+
+
