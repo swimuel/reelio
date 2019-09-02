@@ -6,6 +6,15 @@ SOFTENG 761 Project by *The Deliverables* for Vista.
 
 [![Build Status](https://travis-ci.com/swimuel/reelio.svg?token=G9zx8ysL4UD2AyJxMys5&branch=master)](https://travis-ci.com/swimuel/reelio)
 
+## Setup configuration
+Note to get the repository fully working, you will have to generate an API key through OMDb [here](http://www.omdbapi.com/apikey.aspx).
+Choose the FREE option, enter your email, and once you have the key, insert it into the **config.js** file under /server, e.g:
+```
+module.exports = {
+  omdbApiKey: '123456789' // Insert API key here to use
+}
+```
+
 ## Instructions
 To run the application:
 
