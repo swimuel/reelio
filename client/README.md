@@ -1,14 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Setup configuration
-Note to get the repository fully working, you will have to generate an API key through OMDb [here](http://www.omdbapi.com/apikey.aspx).
-Choose the FREE option, enter your email, and once you have the key, insert it into the **config.js** file under /server, e.g:
-```
-module.exports = {
-  omdbApiKey: '123456789' // Insert API key here to use
-}
-```
-
 ## Available Scripts
 
 In the project directory, you can run:
