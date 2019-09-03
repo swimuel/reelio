@@ -4,7 +4,8 @@ import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
 import { Link } from 'react-router-dom'
 
-import MovieInfo from "../components/movie/MovieInfo";
+import MovieInfo from "../components/movie/MovieInfo"
+import MoviePoster from "../components/movie/MoviePoster"
 
 class DetailsPage extends React.Component {
   state = {
