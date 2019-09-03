@@ -1,5 +1,11 @@
+.sub-header {
+    width: 100%;
+    padding: 20px;
+    background-color: #ff9485;
+    display: flex;
+    flex-direction: row-reverse;
+}
 .campaigns-container {
-    height: 100%;
-    padding-top: 0px;
-    /* overflow:auto; */
+    margin: 20px;
+    overflow: hidden;
 }
