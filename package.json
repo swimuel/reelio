@@ -15,6 +15,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "glob": "^7.1.4",
+    "google-map-react": "^1.1.4",
     "moment": "^2.24.0",
     "mongoose": "^5.6.9",
     "objectid": "^3.2.1"
