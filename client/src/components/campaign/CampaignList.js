@@ -1,78 +1,65 @@
 import React from 'react'
-import { List, Spin, TreeSelect } from 'antd'
+import { List, Spin } from 'antd'
 import { getCampaigns } from '../../api'
 import CampaignCard from './CampaignCard'
 
 import './Campaign.css'
-const moment = require('moment')
-const { TreeNode } = TreeSelect
+import CampaignFilters from '../filters/CampaignFilters'
 
 class CampaignList extends React.Component {
   state = {
     loading: true,
     campaigns: [],
-    value: undefined
+    filters: []
   }
 
   async componentDidMount () {
     const campaigns = await getCampaigns()
-    // const locations (all of the locations existing in the campaigns)
+    // all of the locations existing in the campaigns
     const locations = ['Albany Event', 'Hoyts Sylvia Park']
-    // const genres (all of the genres existing in the campaigns)
+    // all of the genres existing in the campaigns
     const genres = ['Action', 'Comedy', 'Drama']
-    // const times (range of dates between first and last campaign?)
-    const times = [...new Set(campaigns.map(x => x.screeningDate))]
-    console.log(times)
-    // const types (the different cinema types, iMax, iMax 3D etc)
-    const types = [...new Set(campaigns.map(x => x.screenType))]
-    console.log(types)
+    // the different cinema types, iMax, iMax 3D etc
+    const screenTypes = [...new Set(campaigns.map(x => x.screenType))]
+
     this.setState({
       campaigns: campaigns,
       loading: false,
       locations: locations,
       genres: genres,
-      times: times,
-      types: types
+      screenTypes: screenTypes
     })
   }
 
+  handleFilterChange = (filters) => {
+    this.setState({ filters })
+  }
+
   render () {
-    const { loading, campaigns, locations, genres, times, types, value } = this.state
+    const { loading, campaigns, locations, genres, screenTypes, filters } = this.state
+    const filteredCampaigns = filters.length === 0
+      ? campaigns
+      : campaigns.filter(campaign => {
+        let match = false
+        filters.forEach(f => {
+        // for each filter, access the campaign's corresponding value
+        // to check if the value matches the selected filter
+          if (campaign[f.property] === f.value) {
+            match = true
+          }
+        })
+        return match
+      })
+
     return loading ? <Spin /> : (
       <div>
         <div className='sub-header'>
-          <div className='campaigns-filter'>
-            <TreeSelect
-              showSearch
-              multiple
-              treeDefaultExpandAll
-              allowClear
-              value={value}
-              placeholder='Filter'
-              style={{ width: 300 }}
-              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-              onChange={(value) => {
-                this.setState({ value: value })
-              }}
-            >
-              <TreeNode selectable={false} value='locations' title='Locations'>
-                {locations.map(x =>
-                  <TreeNode value={x} title={x} />)}
-              </TreeNode>
-              <TreeNode selectable={false} value='genres' title='Genres'>
-                {genres.map(x =>
-                  <TreeNode value={x} title={x} />)}
-              </TreeNode>
-              <TreeNode selectable={false} value='times' title='Times'>
-                {times.map(x =>
-                  <TreeNode value={x} title={moment(x).format('Do MMMM')} />)}
-              </TreeNode>
-              <TreeNode selectable={false} value='types' title='Types'>
-                {types.map(x =>
-                  <TreeNode value={x} title={x} />)}
-              </TreeNode>
-            </TreeSelect>
-          </div>
+          <CampaignFilters
+            locations={locations}
+            genres={genres}
+            screenTypes={screenTypes}
+            onFilterChange={this.handleFilterChange}
+          />
         </div>
         <div className='campaigns-container'>
           <List
@@ -85,7 +72,7 @@ class CampaignList extends React.Component {
               xl: 4,
               xxl: 5
             }}
-            dataSource={campaigns}
+            dataSource={filteredCampaigns}
             // renderItem is called with each element in dataSource (which in this case are campaigns).
             // Passing the campaign into a campaign card component will render that specific campaign
             renderItem={campaign => (

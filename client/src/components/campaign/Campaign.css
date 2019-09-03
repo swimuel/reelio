@@ -5,10 +5,7 @@
     display: flex;
     flex-direction: row-reverse;
 }
-.campaigns-filter {
-    width: 300px;
-    z-index: 99;
-}
+
 .campaigns-container {
     margin: 20px;
     overflow: hidden;
