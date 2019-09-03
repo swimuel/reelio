@@ -12,7 +12,12 @@ const CampaignSchema = new Schema({
   creationDate: { type: Date, required: true },
   screeningDate: { type: Date, required: true },
   screenType: { type: Schema.Types.ObjectId, ref: 'ScreenType', required: true },
-  imageUrl: { type: String, required: true }
+  imageUrl: { type: String, required: true },
+  creatorName: { type: String, required: true },
+  creatorEmail: { type: String, required: true },
+  cinemaName: { type: String, required: true },
+  cinemaAddress: { type: String, required: true },
+  price: { type: Schema.Types.Number, ref: 'ScreenType', required: true }
 })
 
 CampaignSchema.methods.calculatePercentageComplete = async function () {

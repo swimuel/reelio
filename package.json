@@ -36,6 +36,8 @@
     "parser": "babel-eslint"
   },
   "nodemonConfig": {
-    "ignore": ["client/*"]
+    "ignore": [
+      "client/*"
+    ]
   }
 }
