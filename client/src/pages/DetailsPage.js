@@ -26,10 +26,10 @@ class DetailsPage extends React.Component {
       <div>
         <Row>
           <Col>
-          <Card bordered={false}>
-          <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
-            <h1>{campaign.campaignTitle}</h1>
-          </Card>
+            <Card bordered={false}>
+              <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
+              <h1>{campaign.campaignTitle}</h1>
+            </Card>
           </Col>
         </Row>
         <Row gutter={16}>
