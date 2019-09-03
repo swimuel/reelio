@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin, Row, Col } from 'antd';
+import { Spin, Row, Col } from 'antd'
 import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
 
@@ -9,14 +9,14 @@ class DetailsPage extends React.Component {
     loading: true
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     const { match } = this.props
     const { id } = match.params
     const campaign = await getCampaignById(id)
     this.setState({ campaign: campaign, loading: false })
   }
 
-  render() {
+  render () {
     const { campaign } = this.state
 
     // TODO: render campaign details component and pass in id,
@@ -28,10 +28,8 @@ class DetailsPage extends React.Component {
           <Col span={8}>
             <CampaignDetails campaign={campaign} />
           </Col>
-          <Col span={8}>
-          </Col>
-          <Col span={8}>
-          </Col>
+          <Col span={8} />
+          <Col span={8} />
         </Row>
       </div>
     )
