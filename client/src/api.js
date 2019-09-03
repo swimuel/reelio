@@ -1,4 +1,3 @@
-import CampaignDetails from "./components/campaign/CampaignDetails";
 
 // contains functions to interact with the back-end
 
@@ -18,8 +17,8 @@ export const getCampaigns = async () => {
   return body
 }
 
-export const getCampaignById = async () => {
-  const response = await fetch('/api/campaigns/5d6df1ff8928f2d42e000003')
+export const getCampaignById = async (id) => {
+  const response = await fetch(`/api/campaigns/${id}`)
   const body = await response.json()
   if (response.status !== 200) throw Error(body.message)
 
