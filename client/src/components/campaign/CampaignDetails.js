@@ -1,5 +1,5 @@
 import React from 'react'
-import CinemaMap from './CinemaMap'
+import { Card, Icon, Tag } from 'antd';
 const moment = require('moment')
 
 class CampaignDetails extends React.Component {
@@ -8,16 +8,30 @@ class CampaignDetails extends React.Component {
         const { campaign } = this.props
 
         return (
-            <div>
-                <h3>{ moment(campaign.screeningDate).format('MMMM Do YYYY, h:mm a') }</h3>
-                <h3>Ticket price: ${ campaign.price }.00</h3>
-                <h3>{ campaign.screenType }</h3>
-                <h3>Organiser: { campaign.creatorName }</h3>
-                <h3>{ campaign.cinemaName }</h3>
-                <CinemaMap></CinemaMap>
-            </div>
+            <div style={{ padding: '30px' }}>
+            <Card bordered={false} style={{ width: 600, textAlign: "left" }}>
+                <Tag style={styles.tag}>{ campaign.screenType }</Tag>
+                <h2><Icon type="compass" style={styles.icon}/> { campaign.cinemaName }</h2>
+                <h2><Icon type="calendar" style={styles.icon}/> { moment(campaign.screeningDate).format('MMMM Do YYYY') }</h2>
+                <h2><Icon type="clock-circle" style={styles.icon}/> { moment(campaign.screeningDate).format('h:mm a') }</h2>
+                <h2><Icon type="dollar" style={styles.icon}/> ${ campaign.price }.00</h2>
+                <br></br>
+                <h3>Organiser: {campaign.creatorName} </h3>
+            </Card>
+          </div>
         )
     }
 }
 
 export default CampaignDetails
+
+const styles = {
+    icon: {
+        marginRight: 30
+    },
+    tag: {
+        marginBottom: 30,
+        fontSize: 20,
+        padding: 5
+    }
+  }

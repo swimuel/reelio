@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
+/** API key can only be used once per day for free  */
 class CinemaMap extends React.Component {
     static defaultProps = {
         center: {
