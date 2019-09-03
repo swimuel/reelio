@@ -3,3 +3,13 @@
     padding-top: 0px;
     /* overflow:auto; */
 }
+.campaigns-filter {
+    width: 300px;
+    margin: 20px;
+    position: absolute;
+    right: 0px;
+    top: 70px;
+}
+.campaigns-grid {
+    margin-top: 70px;
+}
