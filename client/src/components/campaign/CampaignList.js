@@ -18,7 +18,7 @@ class CampaignList extends React.Component {
     // all of the locations existing in the campaigns
     const locations = ['Albany Event', 'Hoyts Sylvia Park']
     // all of the genres existing in the campaigns
-    const genres = ['Action', 'Comedy', 'Drama']
+    const genres = [...new Set(campaigns.map(x => x.genre))]
     // the different cinema types, iMax, iMax 3D etc
     const screenTypes = [...new Set(campaigns.map(x => x.screenType))]
 
