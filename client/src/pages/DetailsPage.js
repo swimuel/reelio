@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin, Row, Col, Icon } from 'antd'
+import { Spin, Row, Col, Icon, Card } from 'antd'
 import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
 import { Link } from 'react-router-dom'
@@ -26,8 +26,10 @@ class DetailsPage extends React.Component {
       <div>
         <Row>
           <Col>
-            <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
+          <Card bordered={false}>
+          <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
             <h1>{campaign.campaignTitle}</h1>
+          </Card>
           </Col>
         </Row>
         <Row gutter={16}>
@@ -47,8 +49,7 @@ export default DetailsPage
 const styles = {
   backButton: {
     float: 'left',
-    fontSize: 30,
-    color: '#FF6852',
-    padding: 10
+    fontSize: '2em',
+    color: '#FF6852'
   }
 }
