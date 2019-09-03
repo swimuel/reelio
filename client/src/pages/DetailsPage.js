@@ -23,14 +23,14 @@ class DetailsPage extends React.Component {
     // which then fetches more data for the campaign
     return this.state.loading ? <Spin /> : (
       <div>
-        <h1>{ campaign.campaignTitle }</h1>
+        <h1>{campaign.campaignTitle}</h1>
         <Row gutter={16}>
-          <Col span={8}> 
-          <CampaignDetails campaign={campaign} />
+          <Col span={8}>
+            <CampaignDetails campaign={campaign} />
           </Col>
-          <Col span={8}> 
+          <Col span={8}>
           </Col>
-          <Col span={8}> 
+          <Col span={8}>
           </Col>
         </Row>
       </div>

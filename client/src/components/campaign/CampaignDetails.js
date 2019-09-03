@@ -1,4 +1,5 @@
 import React from 'react'
+import CinemaMap from './CinemaMap'
 const moment = require('moment')
 
 class CampaignDetails extends React.Component {
@@ -13,6 +14,7 @@ class CampaignDetails extends React.Component {
                 <h3>{ campaign.screenType }</h3>
                 <h3>Organiser: { campaign.creatorName }</h3>
                 <h3>{ campaign.cinemaName }</h3>
+                <CinemaMap></CinemaMap>
             </div>
         )
     }
