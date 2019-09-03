@@ -26,8 +26,8 @@ class DetailsPage extends React.Component {
       <div>
         <Row>
           <Col>
-          <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
-          <h1>{campaign.campaignTitle}</h1>
+            <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
+            <h1>{campaign.campaignTitle}</h1>
           </Col>
         </Row>
         <Row gutter={16}>
@@ -46,8 +46,8 @@ export default DetailsPage
 
 const styles = {
   backButton: {
-    float: 'left', 
-    fontSize: 30, 
+    float: 'left',
+    fontSize: 30,
     color: '#FF6852',
     padding: 10
   }
