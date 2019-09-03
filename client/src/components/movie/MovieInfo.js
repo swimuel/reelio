@@ -1,37 +1,17 @@
 import React, {Component} from 'react'
 
-import {Spin} from "antd";
-
-import {getMoviesByID, getMoviesBySearch} from "../../api";
 import './MovieInfo.css'
 
 class MovieInfo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            loading: true,
-            movieInfo: {}
-        }
-    }
-
-    async componentDidMount(){
-        const omdb = await getMoviesBySearch(this.props.title)
-        const id = omdb[0].imdbID
-        const movie = await getMoviesByID(id)
-
-        this.setState({
-            movieInfo: movie,
-            loading: false
-        })
     }
 
     render () {
-        const { loading, movieInfo} = this.state
+        const movieInfo = this.props.movieInfo
 
-        console.log(movieInfo)
-
-        return loading ? <Spin/> : (
+        return (
             <div className={'info-container'}>
                 <div className={'heading'}>
                     <text className={'title'}>

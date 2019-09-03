@@ -57,16 +57,19 @@
 
 .info-container .summary {
     margin-top: 30px;
+    font-size: 14px;
 }
 
 .info-container .tags {
     margin-top: 15px;
+    font-size: 14px;
 }
 
 .info-container .accolades-container .accolade {
     display: inline-block;
     margin-top: 20px;
     margin-right: 50px;
+    font-size: 14px;
 }
 
 

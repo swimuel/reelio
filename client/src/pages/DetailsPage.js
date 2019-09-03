@@ -4,9 +4,7 @@ import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
 import { Link } from 'react-router-dom'
 
-import MovieInfo from "../components/movie/MovieInfo"
-import MoviePoster from "../components/movie/MoviePoster"
-
+import MovieDetails from "../components/movie/MovieDetails";
 class DetailsPage extends React.Component {
   state = {
     campaign: null,
@@ -22,11 +20,11 @@ class DetailsPage extends React.Component {
 
   render () {
     const { campaign } = this.state
-
-    console.log(id)
+    console.log(campaign)
 
     // TODO: render campaign details component and pass in id,
     // which then fetches more data for the campaign
+
     return this.state.loading ? <Spin /> : (
       <div>
         <Row>
@@ -42,8 +40,8 @@ class DetailsPage extends React.Component {
             <CampaignDetails campaign={campaign} />
           </Col>
           <Col span={16}>
-            <MovieInfo title={'Incredibles 2'}>
-            </MovieInfo>
+            <MovieDetails title={'Incredibles 2'}>
+            </MovieDetails>
           </Col>
         </Row>
       </div>
