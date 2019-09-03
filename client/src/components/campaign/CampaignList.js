@@ -10,7 +10,7 @@ class CampaignList extends React.Component {
   state = {
     loading: true,
     campaigns: [],
-    filters: []
+    filters: {}
   }
 
   async componentDidMount () {
@@ -35,21 +35,38 @@ class CampaignList extends React.Component {
     this.setState({ filters })
   }
 
-  render () {
-    const { loading, campaigns, locations, genres, screenTypes, filters } = this.state
-    const filteredCampaigns = filters.length === 0
-      ? campaigns
-      : campaigns.filter(campaign => {
-        let match = false
-        filters.forEach(f => {
-        // for each filter, access the campaign's corresponding value
-        // to check if the value matches the selected filter
-          if (campaign[f.property] === f.value) {
-            match = true
+  getFilteredCampaigns = () => {
+    const { filters, campaigns } = this.state
+
+    if (Object.keys(filters).length === 0) {
+      return campaigns
+    }
+
+    return campaigns.filter(campaign => {
+      // filter should be an OR within categories,
+      // and an AND between categories.
+      let match = true
+      Object.keys(filters).forEach(property => {
+        let matchWithinProperty = false
+        filters[property].forEach(value => {
+          if (campaign[property] === value) {
+            // this campaign matches a value within this filter property
+            matchWithinProperty = true
           }
         })
-        return match
+
+        if (!matchWithinProperty) {
+          match = false
+        }
       })
+
+      return match
+    })
+  }
+
+  render () {
+    const { loading, locations, genres, screenTypes } = this.state
+    const filteredCampaigns = this.getFilteredCampaigns()
 
     return loading ? <Spin /> : (
       <div>

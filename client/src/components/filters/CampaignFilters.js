@@ -12,16 +12,19 @@ state = {
 }
 
 handleFilterChange = (newValue) => {
-  // array of property / value pairs.
+  // object of property / value pairs.
   // property represents the property the filter applies to.
-  // value represents the actual filter value
-  const filters = newValue.map(v => {
-    const [property, value] = v.split(PROP_VAL_SEPARATOR)
-    return {
-      property,
-      value
+  // value represents the actual filter value(s)
+  const filters = {}
+  newValue.forEach(selectedValue => {
+    const [property, value] = selectedValue.split(PROP_VAL_SEPARATOR)
+    if (filters[property] === undefined) {
+      filters[property] = [value]
+    } else {
+      filters[property].push(value)
     }
   })
+
   this.props.onFilterChange(filters)
 
   this.setState({ value: newValue })
