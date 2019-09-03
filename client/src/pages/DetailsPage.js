@@ -4,6 +4,8 @@ import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
 import { Link } from 'react-router-dom'
 
+import MovieInfo from "../components/movie/MovieInfo";
+
 class DetailsPage extends React.Component {
   state = {
     campaign: null,
@@ -19,6 +21,8 @@ class DetailsPage extends React.Component {
 
   render () {
     const { campaign } = this.state
+
+    console.log(id)
 
     // TODO: render campaign details component and pass in id,
     // which then fetches more data for the campaign
@@ -36,8 +40,10 @@ class DetailsPage extends React.Component {
           <Col span={8}>
             <CampaignDetails campaign={campaign} />
           </Col>
-          <Col span={8} />
-          <Col span={8} />
+          <Col span={16}>
+            <MovieInfo title={'Incredibles 2'}>
+            </MovieInfo>
+          </Col>
         </Row>
       </div>
     )

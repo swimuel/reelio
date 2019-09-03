@@ -24,3 +24,19 @@ export const getCampaignById = async (id) => {
 
   return body
 }
+
+export const getMoviesByID = async (id) => {
+  const response = await fetch('/api/omdb/' + id)
+  const body = await response.json()
+  if (response.status !== 200) throw Error(body.message)
+
+  return body
+}
+
+export const getMoviesBySearch = async (query) => {
+  const response = await fetch('/api/omdb?search=' + query)
+  const body = await response.json()
+  if (response.status !== 200) throw Error(body.message)
+
+  return body
+}
