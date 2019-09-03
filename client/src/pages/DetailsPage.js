@@ -1,7 +1,8 @@
 import React from 'react'
-import { Spin, Row, Col } from 'antd'
+import { Spin, Row, Col, Icon } from 'antd'
 import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
+import { Link } from 'react-router-dom'
 
 class DetailsPage extends React.Component {
   state = {
@@ -23,7 +24,12 @@ class DetailsPage extends React.Component {
     // which then fetches more data for the campaign
     return this.state.loading ? <Spin /> : (
       <div>
-        <h1>{campaign.campaignTitle}</h1>
+        <Row>
+          <Col>
+          <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
+          <h1>{campaign.campaignTitle}</h1>
+          </Col>
+        </Row>
         <Row gutter={16}>
           <Col span={8}>
             <CampaignDetails campaign={campaign} />
@@ -37,3 +43,12 @@ class DetailsPage extends React.Component {
 }
 
 export default DetailsPage
+
+const styles = {
+  backButton: {
+    float: 'left', 
+    fontSize: 30, 
+    color: '#FF6852',
+    padding: 10
+  }
+}
