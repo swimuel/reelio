@@ -11,7 +11,7 @@ class CampaignList extends React.Component {
   state = {
     loading: true,
     campaigns: [],
-    value: ['Action', 'Comedy', 'Albany Event']
+    value: undefined
   }
 
   async componentDidMount () {
@@ -39,43 +39,42 @@ class CampaignList extends React.Component {
   render () {
     const { loading, campaigns, locations, genres, times, types, value } = this.state
     return loading ? <Spin /> : (
-      <div className='campaigns-container'>
-        <div className='campaigns-filter'>
-          <TreeSelect
-            showSearch
-            multiple
-            treeDefaultExpandAll
-            allowClear
-            value={value}
-            placeholder='Filter'
-            maxTagCount={0}
-            maxTagPlaceholder={`${value.length} Selected`}
-            style={{ width: 300 }}
-            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-            onChange={(value) => {
-              console.log(value)
-              this.setState({ value: value })
-            }}
-          >
-            <TreeNode selectable={false} value='locations' title='Locations'>
-              {locations.map(x =>
-                <TreeNode value={x} title={x} />)}
-            </TreeNode>
-            <TreeNode selectable={false} value='genres' title='Genres'>
-              {genres.map(x =>
-                <TreeNode value={x} title={x} />)}
-            </TreeNode>
-            <TreeNode selectable={false} value='times' title='Times'>
-              {times.map(x =>
-                <TreeNode value={x} title={moment(x).format('Do MMMM')} />)}
-            </TreeNode>
-            <TreeNode selectable={false} value='types' title='Types'>
-              {types.map(x =>
-                <TreeNode value={x} title={x} />)}
-            </TreeNode>
-          </TreeSelect>
+      <div>
+        <div className='sub-header'>
+          <div className='campaigns-filter'>
+            <TreeSelect
+              showSearch
+              multiple
+              treeDefaultExpandAll
+              allowClear
+              value={value}
+              placeholder='Filter'
+              style={{ width: 300 }}
+              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+              onChange={(value) => {
+                this.setState({ value: value })
+              }}
+            >
+              <TreeNode selectable={false} value='locations' title='Locations'>
+                {locations.map(x =>
+                  <TreeNode value={x} title={x} />)}
+              </TreeNode>
+              <TreeNode selectable={false} value='genres' title='Genres'>
+                {genres.map(x =>
+                  <TreeNode value={x} title={x} />)}
+              </TreeNode>
+              <TreeNode selectable={false} value='times' title='Times'>
+                {times.map(x =>
+                  <TreeNode value={x} title={moment(x).format('Do MMMM')} />)}
+              </TreeNode>
+              <TreeNode selectable={false} value='types' title='Types'>
+                {types.map(x =>
+                  <TreeNode value={x} title={x} />)}
+              </TreeNode>
+            </TreeSelect>
+          </div>
         </div>
-        <div className='campaigns-grid'>
+        <div className='campaigns-container'>
           <List
             grid={{
               gutter: 16,

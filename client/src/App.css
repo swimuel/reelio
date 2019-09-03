@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  font-size: 0;
+}
+
+/* Resets all margins and paddings that browsers like to insert*/
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
