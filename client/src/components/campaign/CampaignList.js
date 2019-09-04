@@ -72,7 +72,7 @@ class CampaignList extends React.Component {
     return loading ? <Spin /> : (
       <div>
         <div className='sub-header'>
-          <SearchBar/>
+          <SearchBar />
           <CampaignFilters
             locations={locations}
             genres={genres}
