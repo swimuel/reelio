@@ -40,8 +40,7 @@ class DetailsPage extends React.Component {
             <CampaignDetails campaign={campaign} />
           </Col>
           <Col span={16}>
-            <MovieDetails title={'Incredibles 2'}>
-            </MovieDetails>
+            <MovieDetails title={campaign.filmTitle} />
           </Col>
         </Row>
       </div>
