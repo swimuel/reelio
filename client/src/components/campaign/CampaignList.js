@@ -5,6 +5,7 @@ import CampaignCard from './CampaignCard'
 
 import './Campaign.css'
 import CampaignFilters from '../filters/CampaignFilters'
+import SearchBar from '../search/SearchBar'
 
 class CampaignList extends React.Component {
   state = {
@@ -71,6 +72,7 @@ class CampaignList extends React.Component {
     return loading ? <Spin /> : (
       <div>
         <div className='sub-header'>
+          <SearchBar />
           <CampaignFilters
             locations={locations}
             genres={genres}
