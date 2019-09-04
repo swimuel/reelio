@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import './MovieInfo.css'
 
 class MovieInfo extends Component {
-  render() {
+  render () {
     const movieInfo = this.props.movieInfo
 
     return (

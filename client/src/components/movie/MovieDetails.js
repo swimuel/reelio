@@ -33,7 +33,7 @@ class MovieDetails extends Component {
     const movieInfo = this.movieInfo
 
     return loading ? <Spin /> : (
-      <Row type="flex" justify="center" gutter={8}>
+      <Row type='flex' justify='center' gutter={8}>
         <Col span={12}>
           <MovieInfo movieInfo={movieInfo} />
         </Col>
