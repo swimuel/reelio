@@ -8,7 +8,7 @@ class CampaignDetails extends React.Component {
 
     return (
       <div style={{ padding: '30px' }}>
-        <Card bordered={false} style={{ width: 600, textAlign: 'left' }}>
+        <Card bordered={false} style={{ width: 600, textAlign: 'left', marginLeft: 120}}>
           <Tag style={styles.tag}>{ campaign.screenType }</Tag>
           <h2><Icon type='compass' style={styles.icon} /> { campaign.cinemaName }</h2>
           <h2><Icon type='calendar' style={styles.icon} /> { moment(campaign.screeningDate).format('MMMM Do YYYY') }</h2>

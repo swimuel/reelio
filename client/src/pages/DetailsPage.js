@@ -31,11 +31,11 @@ class DetailsPage extends React.Component {
           <Col>
             <Card bordered={false}>
               <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
-              <h1>{campaign.campaignTitle}</h1>
+              <h1 style={{fontSize: '2.8em'}}>{campaign.campaignTitle}</h1>
             </Card>
           </Col>
-        </Row>
-        <Row gutter={16}>
+        </Row >
+        <Row gutter={8} type="flex" justify="center">
           <Col span={8}>
             <CampaignDetails campaign={campaign} />
           </Col>

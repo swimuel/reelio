@@ -3,18 +3,15 @@ import React, { Component } from 'react'
 import './MovieInfo.css'
 
 class MovieInfo extends Component {
-  render () {
+  render() {
     const movieInfo = this.props.movieInfo
 
     return (
       <div className={'info-container'}>
         <div className={'heading'}>
-          <text className={'title'}>
+          <div className={'title'}>
             {movieInfo.Title}
-          </text>
-          <text className={'rated'}>
-            {movieInfo.Rated + '    ' + movieInfo.imdbRating + '/10.0'}
-          </text>
+          </div>
         </div>
         <div className={'subtext-container'}>
           <div className={'subtext'}>
@@ -26,6 +23,9 @@ class MovieInfo extends Component {
           <div className={'subtext'}>
             {movieInfo.Runtime}
           </div>
+          <div className={'subtext'}>
+            {movieInfo.Rated}
+          </div>
         </div>
         <div className={'prod-team-container'}>
           <div className={'prod-member'}>
@@ -36,6 +36,9 @@ class MovieInfo extends Component {
           </div>
           <div className={'prod-member'}>
             {'Cast: ' + movieInfo.Actors}
+          </div>
+          <div className={'prod-member'}>
+            {'Rating: ' + movieInfo.imdbRating + '/10.0'}
           </div>
         </div>
         <div className={'summary'}>
