@@ -73,7 +73,9 @@ class CampaignList extends React.Component {
     return loading ? <Spin /> : (
       <div>
         <div className='sub-header'>
-          <Link to='/newcampaign'><Button >Create Campaign</Button></Link>
+          <div className='left'>
+            <Link to='/newcampaign'><Button >Create Campaign</Button></Link>
+          </div>
           <div className='right'>
             <CampaignFilters
               locations={locations}
