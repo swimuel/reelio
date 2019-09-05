@@ -12,7 +12,8 @@ class CampaignList extends React.Component {
   state = {
     loading: true,
     campaigns: [],
-    filters: {}
+    filters: {},
+    searchTerm: ''
   }
 
   async componentDidMount () {
@@ -33,42 +34,58 @@ class CampaignList extends React.Component {
     })
   }
 
+  handleSearch = (value) => {
+    this.setState({ searchTerm: value })
+  }
+
   handleFilterChange = (filters) => {
     this.setState({ filters })
   }
 
-  getFilteredCampaigns = () => {
-    const { filters, campaigns } = this.state
+  getFilteredAndSearchedCampaigns = () => {
+    const { filters, campaigns, searchTerm } = this.state
 
+    let filtered = null
     if (Object.keys(filters).length === 0) {
-      return campaigns
-    }
-
-    return campaigns.filter(campaign => {
-      // filter should be an OR within categories,
-      // and an AND between categories.
-      let match = true
-      Object.keys(filters).forEach(property => {
-        let matchWithinProperty = false
-        filters[property].forEach(value => {
-          if (campaign[property] === value) {
-            // this campaign matches a value within this filter property
-            matchWithinProperty = true
+      filtered = campaigns
+    } else {
+      filtered = campaigns.filter(campaign => {
+        // filter should be an OR within categories,
+        // and an AND between categories.
+        let match = true
+        Object.keys(filters).forEach(property => {
+          let matchWithinProperty = false
+          filters[property].forEach(value => {
+            if (campaign[property] === value) {
+              // this campaign matches a value within this filter property
+              matchWithinProperty = true
+            }
+          })
+          if (!matchWithinProperty) {
+            match = false
           }
         })
-
-        if (!matchWithinProperty) {
-          match = false
-        }
+        return match
       })
+    }
 
-      return match
-    })
+    let searched = null
+    if (searchTerm) {
+      searched = filtered.filter(campaign => {
+        const lowercaseSearch = searchTerm.toLowerCase()
+        return campaign.filmTitle.toLowerCase().includes(lowercaseSearch) ||
+        campaign.campaignTitle.toLowerCase().includes(lowercaseSearch)
+      })
+    } else {
+      searched = filtered
+    }
+
+    return searched
   }
 
   render () {
     const { loading, locations, genres, screenTypes } = this.state
-    const filteredCampaigns = this.getFilteredCampaigns()
+    const filteredCampaigns = this.getFilteredAndSearchedCampaigns()
 
     return loading ? <Spin /> : (
       <div>
@@ -83,7 +100,7 @@ class CampaignList extends React.Component {
               screenTypes={screenTypes}
               onFilterChange={this.handleFilterChange}
             />
-            <SearchBar />
+            <SearchBar onSearch={this.handleSearch} />
           </div>
         </div>
         <div className='campaigns-container'>
