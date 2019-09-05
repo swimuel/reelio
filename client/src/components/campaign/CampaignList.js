@@ -1,11 +1,12 @@
 import React from 'react'
-import { List, Spin } from 'antd'
+import { List, Spin, Button } from 'antd'
 import { getCampaigns } from '../../api'
 import CampaignCard from './CampaignCard'
 
 import './Campaign.css'
 import CampaignFilters from '../filters/CampaignFilters'
 import SearchBar from '../search/SearchBar'
+import { Link } from 'react-router-dom'
 
 class CampaignList extends React.Component {
   state = {
@@ -72,13 +73,18 @@ class CampaignList extends React.Component {
     return loading ? <Spin /> : (
       <div>
         <div className='sub-header'>
-          <SearchBar />
-          <CampaignFilters
-            locations={locations}
-            genres={genres}
-            screenTypes={screenTypes}
-            onFilterChange={this.handleFilterChange}
-          />
+          <div className='left'>
+            <Link to='/newcampaign'><Button >Create Campaign</Button></Link>
+          </div>
+          <div className='right'>
+            <CampaignFilters
+              locations={locations}
+              genres={genres}
+              screenTypes={screenTypes}
+              onFilterChange={this.handleFilterChange}
+            />
+            <SearchBar />
+          </div>
         </div>
         <div className='campaigns-container'>
           <List

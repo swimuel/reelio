@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import DetailsPage from './pages/DetailsPage'
+import NewCampaignPage from './pages/NewCampaignPage'
 import './App.css'
 import Header from './components/header/Header'
 
@@ -13,6 +14,7 @@ class App extends Component {
           <Header />
           <Route exact path='/' component={HomePage} />
           <Route path='/campaigns/:id' component={DetailsPage} />
+          <Route path='/newcampaign' component={NewCampaignPage} />
         </Router>
       </div>
     )

@@ -8,7 +8,7 @@ class SearchBar extends React.Component {
     return (
       <div>
         <Search
-          placeholder='search'
+          placeholder='Search'
           onSearch={value => console.log(value)}
           style={{ width: 200 }}
         />

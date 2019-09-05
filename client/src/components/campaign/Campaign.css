@@ -1,16 +1,23 @@
 .sub-header {
     width: 100%;
-    padding: 10px;
     background-color: #ff9485;
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.sub-header > *{
+  padding: 10px;
+}
+
+.left, .right > * {
+  margin: 10px;
+}
+.right{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 .campaigns-container {
     margin: 20px;
     overflow: hidden;
-}
-
-
-.sub-header > * {
-    margin: 10px;
 }
