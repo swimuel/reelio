@@ -38,8 +38,7 @@ const newCampaign = async (req, res) => {
   try {
     campaign.screeningDate = Date.parse(req.body.screeningDate)
   } catch (err) {
-    res.json({ error: err })
-    res.status(400)
+    res.json({ error: err }).status(400)
     return
   }
   campaign.imageUrl = req.body.imageUrl
@@ -65,19 +64,16 @@ const newCampaign = async (req, res) => {
       }
     })
   } else {
-    res.json('Screen Type not found for ' + screenTypeID)
-    res.status(404)
+    res.status(404).json('Screen Type not found for ' + screenTypeID)
     return
   }
 
   // save the contact and check for errors
   campaign.save(function (err) {
     if (err) {
-      res.json(err)
-      res.status(400)
+      res.status(400).json(err)
     } else {
-      res.json({ data: campaign })
-      res.status(201)
+      res.status(201).json({ data: campaign })
     }
   })
 }
