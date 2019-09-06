@@ -29,30 +29,55 @@ const getCampaignById = async (req, res) => {
 }
 
 const newCampaign = async (req, res) => {
-  console.log('new campaign')
   const campaign = new Campaigns()
   campaign.filmTitle = req.body.filmTitle
   campaign.campaignTitle = req.body.campaignTitle
   campaign.creationDate = moment()
-  campaign.screeningDate = Date.parse(req.body.screeningDate)
-  campaign.screenType = req.body.screenType
+
+  // try making a Date object form supplied data. If for some reason its invalid then return
+  try {
+    campaign.screeningDate = Date.parse(req.body.screeningDate)
+  } catch (err) {
+    res.json({ error: err })
+    res.status(400)
+    return
+  }
   campaign.imageUrl = req.body.imageUrl
   campaign.genre = req.body.genre
   campaign.creatorName = req.body.creatorName
   campaign.creatorEmail = req.body.creatorEmail
   campaign.cinemaName = req.body.cinemaName
   campaign.cinemaAddress = req.body.cinemaAddress
-  campaign.price = req.body.price
+
+  // Check that the screen type is in DB and populate price field
+  const screenTypesList = await ScreenType.find()
+
+  const screenTypeID = req.body.screenType
+  let foundType = false
+  if (screenTypesList.some(e => e._id.toString() === screenTypeID)) {
+    foundType = true
+  }
+  if (foundType) {
+    screenTypesList.forEach(function (type) {
+      if (type._id.toString() === screenTypeID) {
+        campaign.screenType = screenTypeID
+        campaign.price = type.price
+      }
+    })
+  } else {
+    res.json('Screen Type not found for ' + screenTypeID)
+    res.status(404)
+    return
+  }
 
   // save the contact and check for errors
   campaign.save(function (err) {
     if (err) {
       res.json(err)
+      res.status(400)
     } else {
-      res.json({
-        message: 'Done',
-        data: campaign
-      })
+      res.json({ data: campaign })
+      res.status(201)
     }
   })
 }
