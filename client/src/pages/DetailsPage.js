@@ -4,6 +4,8 @@ import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
 import { Link } from 'react-router-dom'
 
+import MovieDetails from '../components/movie/MovieDetails'
+import './DetailsPage.css'
 class DetailsPage extends React.Component {
   state = {
     campaign: null,
@@ -22,23 +24,25 @@ class DetailsPage extends React.Component {
 
     // TODO: render campaign details component and pass in id,
     // which then fetches more data for the campaign
+
     return this.state.loading ? <Spin /> : (
       <div>
         <Row>
-          <Col>
+          <Col span={24}>
             <Card bordered={false}>
               <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
-              <h1>{campaign.campaignTitle}</h1>
+              <h1 style={{ fontSize: '2.8em' }}>{campaign.campaignTitle}</h1>
             </Card>
           </Col>
         </Row>
-        <Row gutter={16}>
-          <Col span={8}>
+        <div className={'details-container'}>
+          <div className={'custom-col-1'}>
             <CampaignDetails campaign={campaign} />
-          </Col>
-          <Col span={8} />
-          <Col span={8} />
-        </Row>
+          </div>
+          <div className={'custom-col-2'}>
+            <MovieDetails title={campaign.filmTitle} />
+          </div>
+        </div>
       </div>
     )
   }

@@ -1,0 +1,78 @@
+.info-container {
+    width: fit-content;
+    max-width: 500px;
+    overflow: auto;
+    margin: auto;
+    text-align: left;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.info-container .heading {
+    position: relative;
+    height: fit-content;
+}
+
+.info-container .heading text {
+    bottom:0;
+    line-height: 1;
+}
+
+.info-container .heading .title {
+    font-weight: bold;
+    font-size: 40px;
+    left:0;
+}
+
+.info-container .heading .rated{
+    text-align: right;
+    font-size: 20px;
+    right: 0;
+}
+
+.info-container .subtext-container {
+    width:inherit;
+    overflow: auto;
+    position: relative;
+    font-size: 12px;
+}
+
+.info-container .subtext-container .subtext{
+    float: left;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.info-container .prod-team-container{
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.info-container .prod-team-container .prod-member{
+    position: relative;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.info-container .summary {
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.info-container .tags {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.info-container .accolades-container .accolade {
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 50px;
+    font-size: 14px;
+}
+
+
+
