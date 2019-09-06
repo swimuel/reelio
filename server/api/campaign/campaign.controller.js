@@ -30,9 +30,16 @@ const getCampaignById = async (req, res) => {
 
 const newCampaign = async (req, res) => {
   const campaign = new Campaigns()
+
   campaign.filmTitle = req.body.filmTitle
   campaign.campaignTitle = req.body.campaignTitle
   campaign.creationDate = moment()
+  campaign.imageUrl = req.body.imageUrl
+  campaign.genre = req.body.genre
+  campaign.creatorName = req.body.creatorName
+  campaign.creatorEmail = req.body.creatorEmail
+  campaign.cinemaName = req.body.cinemaName
+  campaign.cinemaAddress = req.body.cinemaAddress
 
   // try making a Date object form supplied data. If for some reason its invalid then return
   try {
@@ -41,30 +48,14 @@ const newCampaign = async (req, res) => {
     res.json({ error: err }).status(400)
     return
   }
-  campaign.imageUrl = req.body.imageUrl
-  campaign.genre = req.body.genre
-  campaign.creatorName = req.body.creatorName
-  campaign.creatorEmail = req.body.creatorEmail
-  campaign.cinemaName = req.body.cinemaName
-  campaign.cinemaAddress = req.body.cinemaAddress
 
   // Check that the screen type is in DB and populate price field
-  const screenTypesList = await ScreenType.find()
-
-  const screenTypeID = req.body.screenType
-  let foundType = false
-  if (screenTypesList.some(e => e._id.toString() === screenTypeID)) {
-    foundType = true
-  }
-  if (foundType) {
-    screenTypesList.forEach(function (type) {
-      if (type._id.toString() === screenTypeID) {
-        campaign.screenType = screenTypeID
-        campaign.price = type.price
-      }
-    })
-  } else {
-    res.status(404).json('Screen Type not found for ' + screenTypeID)
+  try {
+    const screenTypeEntry = await ScreenType.findById(req.body.screenType)
+    campaign.screenType = screenTypeEntry._id
+    campaign.price = screenTypeEntry.price
+  } catch (err) {
+    res.status(404).json({ error: 'Screen Type not found for ' + req.body.screenType })
     return
   }
 
