@@ -11,10 +11,9 @@ class MovieDetails extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: true
+      loading: true,
+      movieInfo: null
     }
-
-    this.movieInfo = {}
   }
 
   async componentDidMount () {
@@ -22,16 +21,15 @@ class MovieDetails extends Component {
     const id = omdb[0].imdbID
     const movie = await getMoviesByID(id)
 
-    this.movieInfo = movie
-
     this.setState({
-      loading: false
+      loading: false,
+      movieInfo: movie
     })
   }
 
   render () {
     const loading = this.state.loading
-    const movieInfo = this.movieInfo
+    const movieInfo = this.state.movieInfo
 
     return loading ? <Spin /> : (
       <div className={'det-container'}>

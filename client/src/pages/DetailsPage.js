@@ -21,7 +21,6 @@ class DetailsPage extends React.Component {
 
   render () {
     const { campaign } = this.state
-    console.log(campaign)
 
     // TODO: render campaign details component and pass in id,
     // which then fetches more data for the campaign
