@@ -5,6 +5,7 @@ import { getCampaignById } from '../api'
 import { Link } from 'react-router-dom'
 
 import MovieDetails from '../components/movie/MovieDetails'
+import './DetailsPage.css'
 class DetailsPage extends React.Component {
   state = {
     campaign: null,
@@ -28,21 +29,21 @@ class DetailsPage extends React.Component {
     return this.state.loading ? <Spin /> : (
       <div>
         <Row>
-          <Col>
+          <Col span={24}>
             <Card bordered={false}>
               <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
               <h1 style={{ fontSize: '2.8em' }}>{campaign.campaignTitle}</h1>
             </Card>
           </Col>
-        </Row >
-        <Row gutter={8} type='flex' justify='center' style={{ display: 'flex' }}>
-          <Col span={8}>
-            <CampaignDetails campaign={campaign} />
-          </Col>
-          <Col span={16}>
-            <MovieDetails title={campaign.filmTitle} />
-          </Col>
         </Row>
+        <div className={'details-container'}>
+          <div className={'custom-col-1'}>
+            <CampaignDetails campaign={campaign} />
+          </div>
+          <div className={'custom-col-2'}>
+            <MovieDetails title={campaign.filmTitle} />
+          </div>
+        </div>
       </div>
     )
   }

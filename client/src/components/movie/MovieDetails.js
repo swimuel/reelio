@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-import { Row, Col, Spin } from 'antd'
+import { Spin } from 'antd'
 
+import './MovieDetails.css'
 import MovieInfo from './MovieInfo'
 import MoviePoster from './MoviePoster'
 import { getMoviesByID, getMoviesBySearch } from '../../api'
@@ -33,14 +34,14 @@ class MovieDetails extends Component {
     const movieInfo = this.movieInfo
 
     return loading ? <Spin /> : (
-      <Row type='flex' justify='center' gutter={8}>
-        <Col span={12}>
+      <div className={'det-container'}>
+        <div className={'custom-col-1'}>
           <MovieInfo movieInfo={movieInfo} />
-        </Col>
-        <Col span={12}>
+        </div>
+        <div className={'custom-col-2'}>
           <MoviePoster poster={movieInfo.Poster} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     )
   }
 }

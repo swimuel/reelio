@@ -1,13 +1,18 @@
 .info-container {
-    width: 500px;
+    width: fit-content;
+    max-width: 500px;
     overflow: auto;
     margin: auto;
     text-align: left;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
 }
 
 .info-container .heading {
     position: relative;
-    height: 60px;
+    height: fit-content;
 }
 
 .info-container .heading text {
@@ -16,21 +21,18 @@
 }
 
 .info-container .heading .title {
-    position: absolute;
     font-weight: bold;
     font-size: 40px;
     left:0;
 }
 
 .info-container .heading .rated{
-    position: absolute;
     text-align: right;
     font-size: 20px;
     right: 0;
 }
 
 .info-container .subtext-container {
-    margin-top: 10px;
     width:inherit;
     overflow: auto;
     position: relative;

@@ -1,0 +1,25 @@
+/**
+Custom grid layout that will stack columns when width is below 768px.
+Column div must not be called col-* or else it'll interfere with antd grid
+layouts.
+ */
+[class*="custom-col-"] {
+    float: left;
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .custom-col-1 {
+        width: 33.33%;
+    }
+
+    .custom-col-2 {
+        width: 66.67%;
+    }
+}
+
+.row:after {
+    content:"";
+    clear:both;
+    display:table;
+}
