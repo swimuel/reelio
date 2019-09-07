@@ -45,7 +45,7 @@ const newCampaign = async (req, res) => {
   try {
     campaign.screeningDate = Date.parse(req.body.screeningDate)
   } catch (err) {
-    res.json({ error: err }).status(400)
+    res.status(400).json({ error: err })
     return
   }
 
