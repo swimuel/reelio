@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 class ExampleFormClass extends React.Component {
 
@@ -42,6 +42,11 @@ class ExampleFormClass extends React.Component {
               }
             ]
           })(<Input />)}
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     )
