@@ -15,11 +15,12 @@ module.exports = [
     creatorEmail: 'joe@gmail.com',
     cinemaName: 'Event Cinema Queen Street',
     cinemaAddress: '291-297 Queen Street, Auckland 1010',
-    price: screenTypes[0].price
+    price: screenTypes[0].price,
+    imdbID: 'tt0245429'
   },
   {
     _id: objectid().toString(),
-    filmTitle: 'Avengers Endgame',
+    filmTitle: 'Avengers: Endgame',
     campaignTitle: 'Sad movie :(',
     creationDate: new Date(),
     screeningDate: new Date('2019-09-05'),
@@ -30,11 +31,12 @@ module.exports = [
     creatorEmail: 'hannah@gmail.com',
     cinemaName: 'Event Cinema Albany',
     cinemaAddress: '219 Don Mckinnon Drive, Albany 0632',
-    price: screenTypes[0].price
+    price: screenTypes[0].price,
+    imdbID: 'tt4154796'
   },
   {
     _id: objectid().toString(),
-    filmTitle: 'Incredibles 2',
+    filmTitle: 'The Incredibles 2',
     campaignTitle: 'Really overrated',
     creationDate: new Date(),
     screeningDate: new Date('2019-09-06'),
@@ -45,7 +47,8 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: 'Hoyts Botany',
     cinemaAddress: '588 Chapel Road, Botany Downs 2013',
-    price: screenTypes[1].price
+    price: screenTypes[1].price,
+    imdbID: 'tt3606756'
   },
   {
     _id: objectid().toString(),
@@ -60,7 +63,8 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: 'Hoyts Botany',
     cinemaAddress: '588 Chapel Road, Botany Downs 2013',
-    price: screenTypes[1].price
+    price: screenTypes[1].price,
+    imdbID: 'tt0209144'
   },
   {
     _id: objectid().toString(),
@@ -75,11 +79,12 @@ module.exports = [
     creatorEmail: 'ryan4@gmail.com',
     cinemaName: 'Hoyts Botany',
     cinemaAddress: '588 Chapel Road, Botany Downs 2013',
-    price: screenTypes[1].price
+    price: screenTypes[1].price,
+    imdbID: 'tt2582802'
   },
   {
     _id: objectid().toString(),
-    filmTitle: 'Back to the future',
+    filmTitle: 'Back to the Future',
     campaignTitle: 'Timeless classic',
     creationDate: new Date(),
     screeningDate: new Date('2019-09-06'),
@@ -90,12 +95,13 @@ module.exports = [
     creatorEmail: 'ryan3@gmail.com',
     cinemaName: 'Hoyts Botany',
     cinemaAddress: '588 Chapel Road, Botany Downs 2013',
-    price: screenTypes[1].price
+    price: screenTypes[1].price,
+    imdbID: 'tt0088763'
   },
   {
     _id: objectid().toString(),
     filmTitle: 'Rush',
-    campaignTitle: 'Formula one rivalry',
+    campaignTitle: 'Formula 1 rivalry',
     creationDate: new Date(),
     screeningDate: new Date('2019-09-06'),
     screenType: screenTypes[2]._id,
@@ -105,11 +111,12 @@ module.exports = [
     creatorEmail: 'ryan2@gmail.com',
     cinemaName: 'Hoyts Botany',
     cinemaAddress: '588 Chapel Road, Botany Downs 2013',
-    price: screenTypes[1].price
+    price: screenTypes[1].price,
+    imdbID: 'tt1979320'
   },
   {
     _id: objectid().toString(),
-    filmTitle: 'Silence of the lambs',
+    filmTitle: 'The Silence of the Lambs',
     campaignTitle: 'Having an old friend for dinner',
     creationDate: new Date(),
     screeningDate: new Date('2019-09-06'),
@@ -120,6 +127,7 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: 'Hoyts Botany',
     cinemaAddress: '588 Chapel Road, Botany Downs 2013',
-    price: screenTypes[1].price
+    price: screenTypes[1].price,
+    imdbID: 'tt0102926'
   }
 ]
