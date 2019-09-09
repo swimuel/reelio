@@ -26,6 +26,18 @@ class ExampleFormClass extends React.Component {
         sm: { span: 8 },
       },
     };
+    const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 8,
+          offset: 0,
+        },
+        sm: {
+          span: 8,
+          offset: 8,
+        },
+      },
+    };
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -43,7 +55,7 @@ class ExampleFormClass extends React.Component {
             ]
           })(<Input />)}
         </Form.Item>
-        <Form.Item>
+        <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
