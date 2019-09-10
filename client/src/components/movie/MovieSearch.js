@@ -98,10 +98,10 @@ class MovieSearch extends React.Component {
         style={{ width: '50%' }}
       >
         {data.map(movie => (
-          <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} height='100' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
+          <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} width='75' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
         ))}
       </AutoComplete>
-      {movieChosen && <MovieDetails movieId={movieChosen.key} />}
+      {movieChosen && <MovieDetails imdbID={movieChosen.key} />}
     </div>
   }
 }
