@@ -5,7 +5,7 @@ import { Spin } from 'antd'
 import './MovieDetails.css'
 import MovieInfo from './MovieInfo'
 import MoviePoster from './MoviePoster'
-import { getMoviesByID, getMoviesBySearch } from '../../api'
+import { getMoviesByID } from '../../api'
 
 class MovieDetails extends Component {
   constructor (props) {
@@ -17,9 +17,7 @@ class MovieDetails extends Component {
   }
 
   async componentDidMount () {
-    const omdb = await getMoviesBySearch(this.props.title)
-    const id = omdb[0].imdbID
-    const movie = await getMoviesByID(id)
+    const movie = await getMoviesByID(this.props.imdbID)
 
     this.setState({
       loading: false,

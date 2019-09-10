@@ -21,7 +21,6 @@ class DetailsPage extends React.Component {
 
   render () {
     const { campaign } = this.state
-
     // TODO: render campaign details component and pass in id,
     // which then fetches more data for the campaign
 
@@ -40,7 +39,7 @@ class DetailsPage extends React.Component {
             <CampaignDetails campaign={campaign} />
           </div>
           <div className={'custom-col-2'}>
-            <MovieDetails title={campaign.filmTitle} />
+            <MovieDetails imdbID={campaign.imdbID} />
           </div>
         </div>
       </div>
