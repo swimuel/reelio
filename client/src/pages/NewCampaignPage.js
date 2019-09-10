@@ -7,9 +7,8 @@ class NewCampaignPage extends React.Component {
     return (
       <div>
         <Card>
-          <p>we don't have this screen yet</p>
+          <MovieSearch />
         </Card>
-        <MovieSearch />
       </div >
     )
   }

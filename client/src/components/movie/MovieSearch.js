@@ -95,7 +95,7 @@ class MovieSearch extends React.Component {
         onSearch={this.fetchMovie}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
-        style={{ width: '50%' }}
+        style={{ width: '50%', margin: '1em' }}
       >
         {data.map(movie => (
           <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} width='75' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
