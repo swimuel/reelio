@@ -25,6 +25,17 @@ class MovieDetails extends Component {
     })
   }
 
+  async componentDidUpdate (prevProps, prevState) {
+    if (this.props.imdbID !== prevProps.imdbID) {
+      const movie = await getMoviesByID(this.props.imdbID)
+
+      this.setState({
+        loading: false,
+        movieInfo: movie
+      })
+    }
+  }
+
   render () {
     const loading = this.state.loading
     const movieInfo = this.state.movieInfo
