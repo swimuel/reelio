@@ -43,7 +43,7 @@ class MovieSearch extends React.Component {
 
   // If the user deletes all characters, clear the selection, otherwise let movieChosen remain what it was
   handleChange = value => {
-    if (value.label === '') {
+    if (value === undefined || value.label === '') {
       this.setState({
         value,
         data: [],
@@ -87,9 +87,11 @@ class MovieSearch extends React.Component {
     return <div>
       <AutoComplete
         mode='multiple'
+        allowClear
+        dropdownMatchSelectWidth
         labelInValue
         value={value}
-        placeholder='Select a movie'
+        placeholder='Search for a movie...'
         notFoundContent={fetching ? <Spin size='small' /> : null}
         filterOption={false}
         onSearch={this.fetchMovie}
