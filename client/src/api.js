@@ -40,3 +40,26 @@ export const getMoviesBySearch = async (query) => {
 
   return body
 }
+
+export const createCampaign = async (campaign) => {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(campaign)
+  }
+
+  const response = await fetch('/api/campaign', options)
+  if (response.status !== 201) throw Error(response.message)
+
+  return response.json()
+}
+
+export const getScreenTypes = async () => {
+  const response = await fetch('/api/screenTypes')
+  const body = await response.json()
+  if (response.status !== 200) throw Error(body.message)
+
+  return body
+}

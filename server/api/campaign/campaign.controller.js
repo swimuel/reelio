@@ -40,6 +40,7 @@ const newCampaign = async (req, res) => {
   campaign.creatorEmail = req.body.creatorEmail
   campaign.cinemaName = req.body.cinemaName
   campaign.cinemaAddress = req.body.cinemaAddress
+  campaign.imdbID = req.body.imdbID
 
   // try making a Date object form supplied data. If for some reason its invalid then return
   try {
