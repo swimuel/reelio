@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Spin, Form, Alert, Button, Select } from 'antd'
-import { createCampaign, getScreenTypes, getScreenTypeById } from '../../api'
+import { createCampaign, getScreenTypes } from '../../api'
 import SeatingChart from '../../assets/seating_chart.png'
 
 class ScreenTypeFormClass extends React.Component {
@@ -12,15 +12,13 @@ class ScreenTypeFormClass extends React.Component {
   }
 
   async componentDidMount () {
-    // TODO: load this data elsewhere and show loading indicator before rendering form
     const screenTypes = await getScreenTypes()
-    this.setState({ screenTypes:screenTypes, loading: false })
+    this.setState({ screenTypes: screenTypes, loading: false })
   }
 
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
-      console.log(values)
       if (!err) {
         const campaign = {
           ...values,
@@ -42,7 +40,7 @@ class ScreenTypeFormClass extends React.Component {
   }
 
   handleChange = (event, data) => {
-    this.setState({selectedType: data.props.children});
+    this.setState({ selectedType: data.props.children })
   }
 
   render () {
@@ -93,15 +91,15 @@ class ScreenTypeFormClass extends React.Component {
         {
           this.state.screenTypes.map(st => {
             console.log(this.props.form)
-            const priceMessage = "The selected type will mean tickets are $" + st.price + " each"
-            const seatsMessage = "You must sell at least " + st.numTicketsRequired + " tickets for this campaign to succeed"
-              return this.state.selectedType === st.name ?
-                <div>
-                  <img src={SeatingChart}></img>
-                  <Alert message={priceMessage} type="info" showIcon />
-                  <br></br>
-                  <Alert message={seatsMessage} type="info" showIcon />
-                </div> 
+            const priceMessage = 'The selected type will mean tickets are $' + st.price + ' each'
+            const seatsMessage = 'You must sell at least ' + st.numTicketsRequired + ' tickets for this campaign to succeed'
+            return this.state.selectedType === st.name
+              ? <div>
+                <img src={SeatingChart} />
+                <Alert message={priceMessage} type='info' showIcon />
+                <br />
+                <Alert message={seatsMessage} type='info' showIcon />
+              </div>
               : null
           })
         }

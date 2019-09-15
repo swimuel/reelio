@@ -1,3 +1,3 @@
 module.exports = {
-  omdbApiKey: ''
+  omdbApiKey: '4f8ec939'
 }
