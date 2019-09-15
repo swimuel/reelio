@@ -1,0 +1,20 @@
+[class*="custom-col-"] {
+    float: left;
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .custom-col-1 {
+        width: 50%;
+    }
+
+    .custom-col-2 {
+        width: 50%;
+    }
+}
+
+.row:after {
+    content:"";
+    clear:both;
+    display:table;
+}
