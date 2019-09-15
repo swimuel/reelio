@@ -31,7 +31,7 @@ handleFilterChange = (newValue) => {
 }
 
 render () {
-  const { locations, genres, screenTypes } = this.props
+  const { cinemas, genres, screenTypes } = this.props
   const { value } = this.state
   return <div className='campaigns-filter'>
     <TreeSelect
@@ -47,9 +47,9 @@ render () {
       dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
       onChange={this.handleFilterChange}
     >
-      <TreeNode selectable={false} value='locations-parent' title='Locations'>
-        {locations.map(x =>
-          <TreeNode key={x} value={`location${PROP_VAL_SEPARATOR}${x}`} title={x} />)}
+      <TreeNode selectable={false} value='cinemas-parent' title='Cinema Names'>
+        {cinemas.map(x =>
+          <TreeNode key={x} value={`cinemaName${PROP_VAL_SEPARATOR}${x}`} title={x} />)}
       </TreeNode>
       <TreeNode selectable={false} value='genres-parent' title='Genres'>
         {genres.map(x =>
