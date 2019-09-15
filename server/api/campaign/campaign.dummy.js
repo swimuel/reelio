@@ -1,5 +1,6 @@
 const objectid = require('objectid')
 const screenTypes = require('../screenType/screenType.data')
+const cinemas = require('../cinema/cinema.dummy')
 
 module.exports = [
   {
@@ -13,8 +14,8 @@ module.exports = [
     genre: 'Action',
     creatorName: 'Joe Smith',
     creatorEmail: 'joe@gmail.com',
-    cinemaName: 'Event Cinema Queen Street',
-    cinemaAddress: '291-297 Queen Street, Auckland 1010',
+    cinemaName: cinemas[0].name,
+    cinemaAddress: cinemas[0].address,
     price: screenTypes[0].price,
     imdbID: 'tt0245429'
   },
@@ -29,8 +30,8 @@ module.exports = [
     genre: 'Comedy',
     creatorName: 'Hannah McDonald',
     creatorEmail: 'hannah@gmail.com',
-    cinemaName: 'Event Cinema Albany',
-    cinemaAddress: '219 Don Mckinnon Drive, Albany 0632',
+    cinemaName: cinemas[1].name,
+    cinemaAddress: cinemas[1].address,
     price: screenTypes[0].price,
     imdbID: 'tt4154796'
   },
@@ -45,8 +46,8 @@ module.exports = [
     genre: 'Superhero',
     creatorName: 'Ryan Hall',
     creatorEmail: 'ryan@gmail.com',
-    cinemaName: 'Hoyts Botany',
-    cinemaAddress: '588 Chapel Road, Botany Downs 2013',
+    cinemaName: cinemas[2].name,
+    cinemaAddress: cinemas[2].address,
     price: screenTypes[1].price,
     imdbID: 'tt3606756'
   },
@@ -61,8 +62,8 @@ module.exports = [
     genre: 'Mystery',
     creatorName: 'Ryan Hall5',
     creatorEmail: 'ryan@gmail.com',
-    cinemaName: 'Hoyts Botany',
-    cinemaAddress: '588 Chapel Road, Botany Downs 2013',
+    cinemaName: cinemas[3].name,
+    cinemaAddress: cinemas[3].address,
     price: screenTypes[1].price,
     imdbID: 'tt0209144'
   },
@@ -77,8 +78,8 @@ module.exports = [
     genre: 'Drama',
     creatorName: 'Ryan Hall4',
     creatorEmail: 'ryan4@gmail.com',
-    cinemaName: 'Hoyts Botany',
-    cinemaAddress: '588 Chapel Road, Botany Downs 2013',
+    cinemaName: cinemas[2].name,
+    cinemaAddress: cinemas[2].address,
     price: screenTypes[1].price,
     imdbID: 'tt2582802'
   },
@@ -93,8 +94,8 @@ module.exports = [
     genre: 'Science Fiction',
     creatorName: 'Ryan Three',
     creatorEmail: 'ryan3@gmail.com',
-    cinemaName: 'Hoyts Botany',
-    cinemaAddress: '588 Chapel Road, Botany Downs 2013',
+    cinemaName: cinemas[2].name,
+    cinemaAddress: cinemas[2].address,
     price: screenTypes[1].price,
     imdbID: 'tt0088763'
   },
@@ -109,8 +110,8 @@ module.exports = [
     genre: 'Sports',
     creatorName: 'Ryan Hall2',
     creatorEmail: 'ryan2@gmail.com',
-    cinemaName: 'Hoyts Botany',
-    cinemaAddress: '588 Chapel Road, Botany Downs 2013',
+    cinemaName: cinemas[2].name,
+    cinemaAddress: cinemas[2].address,
     price: screenTypes[1].price,
     imdbID: 'tt1979320'
   },
@@ -125,8 +126,8 @@ module.exports = [
     genre: 'Superhero',
     creatorName: 'Ryan Hall',
     creatorEmail: 'ryan@gmail.com',
-    cinemaName: 'Hoyts Botany',
-    cinemaAddress: '588 Chapel Road, Botany Downs 2013',
+    cinemaName: cinemas[2].name,
+    cinemaAddress: cinemas[2].address,
     price: screenTypes[1].price,
     imdbID: 'tt0102926'
   }

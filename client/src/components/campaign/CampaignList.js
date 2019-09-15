@@ -19,7 +19,7 @@ class CampaignList extends React.Component {
   async componentDidMount () {
     const campaigns = await getCampaigns()
     // all of the locations existing in the campaigns
-    const locations = ['Albany Event', 'Hoyts Sylvia Park']
+    const locations = [...new Set(campaigns.map(x => x.cinemaName))]
     // all of the genres existing in the campaigns
     const genres = [...new Set(campaigns.map(x => x.genre))]
     // the different cinema types, iMax, iMax 3D etc
