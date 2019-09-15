@@ -18,8 +18,8 @@ class CampaignList extends React.Component {
 
   async componentDidMount () {
     const campaigns = await getCampaigns()
-    // all of the locations existing in the campaigns
-    const locations = ['Albany Event', 'Hoyts Sylvia Park']
+    // all of the cinemas existing in the campaigns
+    const cinemas = [...new Set(campaigns.map(x => x.cinemaName))]
     // all of the genres existing in the campaigns
     const genres = [...new Set(campaigns.map(x => x.genre))]
     // the different cinema types, iMax, iMax 3D etc
@@ -28,7 +28,7 @@ class CampaignList extends React.Component {
     this.setState({
       campaigns: campaigns,
       loading: false,
-      locations: locations,
+      cinemas: cinemas,
       genres: genres,
       screenTypes: screenTypes
     })
@@ -84,7 +84,7 @@ class CampaignList extends React.Component {
   }
 
   render () {
-    const { loading, locations, genres, screenTypes } = this.state
+    const { loading, cinemas, genres, screenTypes } = this.state
     const filteredCampaigns = this.getFilteredAndSearchedCampaigns()
 
     return loading ? <Spin /> : (
@@ -95,7 +95,7 @@ class CampaignList extends React.Component {
           </div>
           <div className='right'>
             <CampaignFilters
-              locations={locations}
+              cinemas={cinemas}
               genres={genres}
               screenTypes={screenTypes}
               onFilterChange={this.handleFilterChange}

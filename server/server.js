@@ -6,6 +6,7 @@ const Example = require('./api/example/example')
 const Campaign = require('./api/campaign/campaign')
 const Pledge = require('./api/pledge/pledge')
 const ScreenType = require('./api/screenType/screenType')
+const Cinema = require('./api/cinema/cinema')
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -24,7 +25,8 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useCreateIndex: true })
       Example.deleteMany({}),
       Campaign.deleteMany({}),
       Pledge.deleteMany({}),
-      ScreenType.deleteMany({})
+      ScreenType.deleteMany({}),
+      Cinema.deleteMany({})
     ])
 
     // init data
@@ -32,6 +34,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useCreateIndex: true })
     const examples = require('./api/example/example.dummy')
     const campaigns = require('./api/campaign/campaign.dummy')
     const pledges = require('./api/pledge/pledge.dummy')
+    const cinemas = require('./api/cinema/cinema.dummy')
 
     // this data is used for production (i.e. it is not dummy data. Should be configured in the code)
     const screenTypes = require('./api/screenType/screenType.data')
@@ -40,6 +43,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useCreateIndex: true })
       await ScreenType.insertMany(screenTypes)
       await Campaign.insertMany(campaigns)
       await Pledge.insertMany(pledges)
+      await Cinema.insertMany(cinemas)
     } catch (e) {
       console.log(`error initializing data: ${e}`)
     }
