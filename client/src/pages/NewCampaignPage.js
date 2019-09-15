@@ -6,7 +6,7 @@ import './NewCampaignPage.css'
 import GeneralDetailsForm from '../components/form/GeneralDetailsForm'
 
 class NewCampaignPage extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <Row>
@@ -25,7 +25,7 @@ class NewCampaignPage extends React.Component {
           </div>
           <div className={'custom-col-2'}>
             <Card bordered={false}>
-            <h2>Movie</h2>
+              <h2>Movie</h2>
               <MovieSearch />
             </Card>
           </div>
