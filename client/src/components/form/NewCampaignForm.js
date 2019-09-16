@@ -54,6 +54,7 @@ class NewCampaignFormClass extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form
+    const { MonthPicker } = DatePicker
 
     // TODO: adjust these to be responsive
     const formItemLayout = {
@@ -200,7 +201,7 @@ class NewCampaignFormClass extends React.Component {
           </Select>
         </Form.Item>
         <Form.Item label='Payment Type'>
-          {getFieldDecorator('screeningTime', {
+          {getFieldDecorator('paymentType', {
             rules: [
               { required: true,
                 message: 'A payment type is required' }
@@ -232,14 +233,14 @@ class NewCampaignFormClass extends React.Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label='Expiry Date'>
-            {getFieldDecorator('expiryDate', {
+            {getFieldDecorator('expiryMonth', {
               rules: [
                 {
                   required: true,
                   message: 'An expiry date is required'
                 }
               ]
-            })(<DatePicker style={{ width: '100%' }} />)}
+            })(<MonthPicker placeholder='Select Month' style={{ width: '100%' }} />)}
           </Form.Item>
           <Form.Item label='CVV'>
             {getFieldDecorator('cvvNumber', {
