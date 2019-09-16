@@ -3,7 +3,7 @@ import { Row, Col, Icon, Card } from 'antd'
 import MovieSearch from '../components/movie/MovieSearch'
 import { Link } from 'react-router-dom'
 import './NewCampaignPage.css'
-import GeneralDetailsForm from '../components/form/GeneralDetailsForm'
+import NewCampaignForm from '../components/form/NewCampaignForm'
 
 class NewCampaignPage extends React.Component {
   render () {
@@ -20,7 +20,7 @@ class NewCampaignPage extends React.Component {
         <div className={'form-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <GeneralDetailsForm />
+              <NewCampaignForm />
             </Card>
           </div>
           <div className={'custom-col-2'}>
