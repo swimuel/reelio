@@ -101,7 +101,7 @@ class GeneralDetailsFormClass extends React.Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label='Email'>
-            {getFieldDecorator('organiserEmail', {
+            {getFieldDecorator('creatorEmail', {
               rules: [
                 {
                   type: 'email',

@@ -1,8 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Spin, Form, Alert, Button, Select, Input, DatePicker, Divider } from 'antd'
+import { Spin, Form, Alert, Button, Select, Input, DatePicker, Divider, Radio } from 'antd'
 import { createCampaign, getScreenTypes, getCinemas } from '../../api'
 import moment from 'moment'
+import './PaymentDetailsForm.css'
 
 class NewCampaignFormClass extends React.Component {
   state = {
@@ -53,16 +54,17 @@ class NewCampaignFormClass extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form
+    const { MonthPicker } = DatePicker
 
     // TODO: adjust these to be responsive
     const formItemLayout = {
       labelCol: {
-        xs: { span: 8 },
-        sm: { span: 8 }
+        xs: { span: 6 },
+        sm: { span: 6 }
       },
       wrapperCol: {
-        xs: { span: 8 },
-        sm: { span: 8 }
+        xs: { span: 12 },
+        sm: { span: 12 }
       }
     }
     const tailFormItemLayout = {
@@ -92,7 +94,7 @@ class NewCampaignFormClass extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Form.Item label='Cinema'>
-          {getFieldDecorator('Cinema', {
+          {getFieldDecorator('cinemaName', {
             rules: [
               { required: true,
                 message: 'A cinema is required' }
@@ -172,7 +174,7 @@ class NewCampaignFormClass extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Form.Item label='Email'>
-          {getFieldDecorator('organiserEmail', {
+          {getFieldDecorator('creatorEmail', {
             rules: [
               {
                 type: 'email',
@@ -186,9 +188,76 @@ class NewCampaignFormClass extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Divider />
+        <h2>Payment</h2>
+        <Alert message='You must secure one ticket to start the campaign' type='info'
+          className={'info-alert'} showIcon />
+        <Form.Item label='Number of Tickets'>
+          <Select defaultValue='1ticket' className={'ticket-select'}>
+            <Select.Option value='1ticket'>1</Select.Option>
+            <Select.Option value='2ticket'>2</Select.Option>
+            <Select.Option value='3ticket'>3</Select.Option>
+            <Select.Option value='4ticket'>4</Select.Option>
+            <Select.Option value='5ticket'>5</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label='Payment Type'>
+          {getFieldDecorator('paymentType', {
+            rules: [
+              { required: true,
+                message: 'A payment type is required' }
+            ]
+          })(<Radio.Group defaultValue='a'>
+            <Radio.Button value='visa'>Visa</Radio.Button>
+            <Radio.Button value='mastercard'>Mastercard</Radio.Button>
+            <Radio.Button value='americanExpress'>American Express</Radio.Button>
+          </Radio.Group>)}
+        </Form.Item>
+        <div className={'card-details'}>
+          <Form.Item label='Card Number'>
+            {getFieldDecorator('cardNumber', {
+              rules: [
+                { required: true,
+                  message: 'A card number is required' },
+                { len: 16,
+                  message: 'Please input a valid 16-digit card number.'
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label='Card Name'>
+            {getFieldDecorator('cardName', {
+              rules: [
+                { required: true,
+                  message: 'A card name is required' }
+              ]
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label='Expiry Date'>
+            {getFieldDecorator('expiryMonth', {
+              rules: [
+                {
+                  required: true,
+                  message: 'An expiry date is required'
+                }
+              ]
+            })(<MonthPicker placeholder='Select Month' style={{ width: '100%' }} />)}
+          </Form.Item>
+          <Form.Item label='CVV'>
+            {getFieldDecorator('cvvNumber', {
+              rules: [
+                { required: true,
+                  message: 'A CVV number is required' },
+                { len: 3,
+                  message: 'Please input a valid 3-digit CVV number.'
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
+        </div>
+        <Divider />
         <Form.Item {...tailFormItemLayout}>
           <Button type='primary' htmlType='submit'>
-            Submit
+      Submit
           </Button>
         </Form.Item>
       </Form>
