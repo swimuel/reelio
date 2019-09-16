@@ -80,189 +80,189 @@ class NewCampaignFormClass extends React.Component {
     }
 
     return this.state.loading ? <Spin /> : (
-    <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-      <h2>Campaign</h2>
-      <Form.Item label='Campaign Title'>
-      {getFieldDecorator('campaignTitle', {
-      rules: [
+      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+        <h2>Campaign</h2>
+        <Form.Item label='Campaign Title'>
+          {getFieldDecorator('campaignTitle', {
+            rules: [
+              {
+                required: true,
+                message: 'A campaign title is required'
+              }
+            ]
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label='Cinema'>
+          {getFieldDecorator('cinemaName', {
+            rules: [
+              { required: true,
+                message: 'A cinema is required' }
+            ]
+          })(<Select placeholder='Select a cinema'>
+            {this.state.cinemas.map(c => {
+              return <Select.Option
+                key={c._id}
+                value={c._id}>
+                {c.name}
+              </Select.Option>
+            })}
+          </Select>)}
+        </Form.Item>
+        <Form.Item label='Screening Date'>
+          {getFieldDecorator('screeningDate', {
+            rules: [
+              {
+                required: true,
+                message: 'A screening date is required'
+              }
+            ]
+          })(<DatePicker disabledDate={this.disabledDate} style={{ width: '100%' }} />)}
+        </Form.Item>
+        <Form.Item label='Screening Time'>
+          {getFieldDecorator('screeningTime', {
+            rules: [
+              { required: true,
+                message: 'A screening time is required' }
+            ]
+          })(<Select placeholder='Select a screening time'>
+            <Select.Option value='time1'>10:30 am</Select.Option>
+            <Select.Option value='time2'>2:00 pm</Select.Option>
+            <Select.Option value='time3'>6:00 pm</Select.Option>
+            <Select.Option value='time4'>8:30 pm</Select.Option>
+          </Select>)}
+        </Form.Item>
+        <Form.Item label='Screen type'>
+          {getFieldDecorator('screenType', {
+            rules: [
+              { required: true,
+                message: 'A screen type is required' }
+            ]
+          })(<Select placeholder='Select a screen type' onChange={this.handleChange}>
+            {this.state.screenTypes.map(st => {
+              return <Select.Option
+                key={st._id}
+                value={st._id}>
+                {st.name}
+              </Select.Option>
+            })}
+          </Select>)}
+        </Form.Item>
         {
-          required: true,
-          message: 'A campaign title is required'
+          this.state.screenTypes.map(st => {
+            const priceMessage = 'The selected type will mean tickets are $' + st.price + ' each'
+            const seatsMessage = 'You must sell at least ' + st.numTicketsRequired + ' tickets for this campaign to succeed'
+            return this.state.selectedType === st.name
+              ? <div>
+                <Alert message={priceMessage} type='info' showIcon />
+                <br />
+                <Alert message={seatsMessage} type='info' showIcon />
+              </div>
+              : null
+          })
         }
-      ]
-    })(<Input />)}
-  </Form.Item>
-    <Form.Item label='Cinema'>
-      {getFieldDecorator('cinemaName', {
-      rules: [
-        { required: true,
-          message: 'A cinema is required' }
-      ]
-    })(<Select placeholder='Select a cinema'>
-      {this.state.cinemas.map(c => {
-          return <Select.Option
-          key={c._id}
-          value={c._id}>
-            {c.name}
-            </Select.Option>
-        })}
-      </Select>)}
-      </Form.Item>
-      <Form.Item label='Screening Date'>
-      {getFieldDecorator('screeningDate', {
-      rules: [
-        {
-          required: true,
-          message: 'A screening date is required'
-        }
-      ]
-    })(<DatePicker disabledDate={this.disabledDate} style={{ width: '100%' }} />)}
-    </Form.Item>
-    <Form.Item label='Screening Time'>
-      {getFieldDecorator('screeningTime', {
-      rules: [
-        { required: true,
-          message: 'A screening time is required' }
-      ]
-    })(<Select placeholder='Select a screening time'>
-      <Select.Option value='time1'>10:30 am</Select.Option>
-    <Select.Option value='time2'>2:00 pm</Select.Option>
-    <Select.Option value='time3'>6:00 pm</Select.Option>
-    <Select.Option value='time4'>8:30 pm</Select.Option>
-    </Select>)}
-    </Form.Item>
-    <Form.Item label='Screen type'>
-      {getFieldDecorator('screenType', {
-      rules: [
-        { required: true,
-          message: 'A screen type is required' }
-      ]
-    })(<Select placeholder='Select a screen type' onChange={this.handleChange}>
-      {this.state.screenTypes.map(st => {
-          return <Select.Option
-          key={st._id}
-          value={st._id}>
-            {st.name}
-            </Select.Option>
-        })}
-      </Select>)}
-      </Form.Item>
-    {
-      this.state.screenTypes.map(st => {
-        const priceMessage = 'The selected type will mean tickets are $' + st.price + ' each'
-        const seatsMessage = 'You must sell at least ' + st.numTicketsRequired + ' tickets for this campaign to succeed'
-        return this.state.selectedType === st.name
-          ? <div>
-        <Alert message={priceMessage} type='info' showIcon />
-        <br />
-        <Alert message={seatsMessage} type='info' showIcon />
+        <Divider />
+        <h2>Organiser</h2>
+        <Form.Item label='Name'>
+          {getFieldDecorator('organiserName', {
+            rules: [
+              {
+                required: true,
+                message: 'An organiser name is required'
+              }
+            ]
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label='Email'>
+          {getFieldDecorator('creatorEmail', {
+            rules: [
+              {
+                type: 'email',
+                message: 'Please input a valid email.'
+              },
+              {
+                required: true,
+                message: 'Please input your email.'
+              }
+            ]
+          })(<Input />)}
+        </Form.Item>
+        <Divider />
+        <h2>Payment</h2>
+        <Alert message='You must secure one ticket to start the campaign' type='info'
+          className={'info-alert'} showIcon />
+        <Form.Item label='Number of Tickets'>
+          <Select defaultValue='1ticket' className={'ticket-select'}>
+            <Select.Option value='1ticket'>1</Select.Option>
+            <Select.Option value='2ticket'>2</Select.Option>
+            <Select.Option value='3ticket'>3</Select.Option>
+            <Select.Option value='4ticket'>4</Select.Option>
+            <Select.Option value='5ticket'>5</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label='Payment Type'>
+          {getFieldDecorator('screeningTime', {
+            rules: [
+              { required: true,
+                message: 'A payment type is required' }
+            ]
+          })(<Radio.Group defaultValue='a'>
+            <Radio.Button value='visa'>Visa</Radio.Button>
+            <Radio.Button value='mastercard'>Mastercard</Radio.Button>
+            <Radio.Button value='americanExpress'>American Express</Radio.Button>
+          </Radio.Group>)}
+        </Form.Item>
+        <div className={'card-details'}>
+          <Form.Item label='Card Number'>
+            {getFieldDecorator('cardNumber', {
+              rules: [
+                { required: true,
+                  message: 'A card number is required' },
+                { len: 16,
+                  message: 'Please input a valid 16-digit card number.'
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label='Card Name'>
+            {getFieldDecorator('cardName', {
+              rules: [
+                { required: true,
+                  message: 'A card name is required' }
+              ]
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label='Expiry Date'>
+            {getFieldDecorator('expiryDate', {
+              rules: [
+                {
+                  required: true,
+                  message: 'An expiry date is required'
+                }
+              ]
+            })(<DatePicker style={{ width: '100%' }} />)}
+          </Form.Item>
+          <Form.Item label='CVV'>
+            {getFieldDecorator('cvvNumber', {
+              rules: [
+                { required: true,
+                  message: 'A CVV number is required' },
+                { len: 3,
+                  message: 'Please input a valid 3-digit CVV number.'
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
         </div>
-      : null
-      })
-    }
-  <Divider />
-    <h2>Organiser</h2>
-    <Form.Item label='Name'>
-      {getFieldDecorator('organiserName', {
-      rules: [
-        {
-          required: true,
-          message: 'An organiser name is required'
-        }
-      ]
-    })(<Input />)}
-  </Form.Item>
-    <Form.Item label='Email'>
-      {getFieldDecorator('creatorEmail', {
-      rules: [
-        {
-          type: 'email',
-          message: 'Please input a valid email.'
-        },
-        {
-          required: true,
-          message: 'Please input your email.'
-        }
-      ]
-    })(<Input />)}
-  </Form.Item>
-    <Divider />
-    <h2>Payment</h2>
-    <Alert message='You must secure one ticket to start the campaign' type='info'
-    className={'info-alert'} showIcon />
-    <Form.Item label='Number of Tickets'>
-      <Select defaultValue='1ticket' className={'ticket-select'}>
-      <Select.Option value='1ticket'>1</Select.Option>
-      <Select.Option value='2ticket'>2</Select.Option>
-      <Select.Option value='3ticket'>3</Select.Option>
-      <Select.Option value='4ticket'>4</Select.Option>
-      <Select.Option value='5ticket'>5</Select.Option>
-      </Select>
-      </Form.Item>
-      <Form.Item label='Payment Type'>
-      {getFieldDecorator('screeningTime', {
-      rules: [
-        { required: true,
-          message: 'A payment type is required' }
-      ]
-    })(<Radio.Group defaultValue='a'>
-      <Radio.Button value='visa'>Visa</Radio.Button>
-      <Radio.Button value='mastercard'>Mastercard</Radio.Button>
-      <Radio.Button value='americanExpress'>American Express</Radio.Button>
-    </Radio.Group>)}
-    </Form.Item>
-    <div className={'card-details'}>
-      <Form.Item label='Card Number'>
-      {getFieldDecorator('cardNumber', {
-      rules: [
-        { required: true,
-          message: 'A card number is required' },
-        { len: 16,
-          message: 'Please input a valid 16-digit card number.'
-        }
-      ]
-    })(<Input />)}
-  </Form.Item>
-    <Form.Item label='Card Name'>
-      {getFieldDecorator('cardName', {
-      rules: [
-        { required: true,
-          message: 'A card name is required' }
-      ]
-    })(<Input />)}
-  </Form.Item>
-    <Form.Item label='Expiry Date'>
-      {getFieldDecorator('expiryDate', {
-      rules: [
-        {
-          required: true,
-          message: 'An expiry date is required'
-        }
-      ]
-    })(<DatePicker style={{ width: '100%' }} />)}
-    </Form.Item>
-    <Form.Item label='CVV'>
-      {getFieldDecorator('cvvNumber', {
-      rules: [
-        { required: true,
-          message: 'A CVV number is required' },
-        { len: 3,
-          message: 'Please input a valid 3-digit CVV number.'
-        }
-      ]
-    })(<Input />)}
-  </Form.Item>
-    </div>
-    <Divider />
-    <Form.Item {...tailFormItemLayout}>
-  <Button type='primary' htmlType='submit'>
+        <Divider />
+        <Form.Item {...tailFormItemLayout}>
+          <Button type='primary' htmlType='submit'>
       Submit
-      </Button>
-      </Form.Item>
+          </Button>
+        </Form.Item>
       </Form>
-  )
+    )
   }
-  }
+}
 
-    const NewCampaignForm = Form.create({ name: 'newCampaign' })(NewCampaignFormClass)
-    export default withRouter(NewCampaignForm)
+const NewCampaignForm = Form.create({ name: 'newCampaign' })(NewCampaignFormClass)
+export default withRouter(NewCampaignForm)
