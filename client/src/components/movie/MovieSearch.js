@@ -2,6 +2,7 @@ import React from 'react'
 import debounce from 'lodash/debounce'
 import { AutoComplete, Spin } from 'antd'
 import MovieDetails from './MovieDetails'
+
 const { Option } = AutoComplete
 const axios = require('axios')
 
@@ -15,7 +16,8 @@ class MovieSearch extends React.Component {
     data: [], // array of suggested movies
     value: [], // the input value in the autocomplete
     movieChosen: null, // the most recent movie selected
-    fetching: false // used to render loading spin icon
+    fetching: false, // used to render loading spin icon
+    validationError: '' // used to indicate if an input error message should be displayed
   }
 
   fetchMovie = async (value) => {
@@ -48,13 +50,19 @@ class MovieSearch extends React.Component {
         value,
         data: [],
         movieChosen: null,
-        fetching: false
+        fetching: false,
+        validationError: 'Please select a movie'
+      }, () => {
+        this.props.sendDetails(this.state.movieChosen);
       })
+      // validation errors
+
     } else {
       this.setState({
         value,
         data: [],
-        fetching: false
+        fetching: false,
+        validationError: ''
       })
     }
   }
@@ -69,7 +77,8 @@ class MovieSearch extends React.Component {
         key: value.key,
         label: value.label[2]
       },
-      fetching: false
+      fetching: false, 
+      validationError: ''
     })
     this.setState({
       data: [],
@@ -78,7 +87,8 @@ class MovieSearch extends React.Component {
         key: value.key,
         label: value.label[2]
       },
-      fetching: false
+      fetching: false,
+      validationError: ''
     }, () => {
       this.props.sendDetails(this.state.movieChosen);
     })
@@ -87,25 +97,28 @@ class MovieSearch extends React.Component {
   render () {
     const { fetching, data, value, movieChosen } = this.state
     return <div>
-      <AutoComplete
-        mode='multiple'
-        allowClear
-        dropdownMatchSelectWidth
-        labelInValue
-        value={value}
-        placeholder='Search for a movie...'
-        notFoundContent={fetching ? <Spin size='small' /> : null}
-        filterOption={false}
-        onSearch={this.fetchMovie}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-        style={{ width: '50%', margin: '1em' }}
-      >
-        {data.map(movie => (
-          <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} width='75' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
-        ))}
-      </AutoComplete>
-      {movieChosen && <MovieDetails imdbID={movieChosen.key} />}
+        <AutoComplete
+          mode='multiple'
+          allowClear
+          dropdownMatchSelectWidth
+          labelInValue
+          value={value}
+          placeholder='Search for a movie...'
+          notFoundContent={fetching ? <Spin size='small' /> : null}
+          filterOption={false}
+          onSearch={this.fetchMovie}
+          onChange={this.handleChange}
+          onSelect={this.handleSelect}
+          style={{ width: '50%', margin: '1em' }}
+        >
+          {data.map(movie => (
+            <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} width='75' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
+          ))} 
+        </AutoComplete>
+        <div style={{color: 'red', marginTop: '5px'}}>
+        {this.state.validationError}
+      </div>
+        {movieChosen && <MovieDetails imdbID={movieChosen.key} />}
     </div>
   }
 }

@@ -1,16 +1,16 @@
 import React from 'react'
 import { Row, Col, Icon, Card } from 'antd'
-import MovieSearch from '../components/movie/MovieSearch'
+import MovieSearchClass from '../components/movie/MovieSearch'
 import { Link } from 'react-router-dom'
 import './NewCampaignPage.css'
 import NewCampaignForm from '../components/form/NewCampaignForm'
 
 class NewCampaignPage extends React.Component {
 
-    state = {
-      CampaignForm: null,
-      MovieSearchForm: null,
-    };
+  state = {
+    CampaignForm: null,
+    MovieSearchForm: null,
+  };
 
   render () {
     return (
@@ -32,7 +32,7 @@ class NewCampaignPage extends React.Component {
           <div className={'custom-col-2'}>
             <Card bordered={false}>
               <h2>Movie</h2>
-              <MovieSearch sendDetails = {this.fromMovieSearch} />
+              <MovieSearchClass sendDetails = {this.fromMovieSearch} />
             </Card>
           </div>
         </div>
