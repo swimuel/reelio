@@ -79,6 +79,8 @@ class MovieSearch extends React.Component {
         label: value.label[2]
       },
       fetching: false
+    }, () => {
+      this.props.sendDetails(this.state.movieChosen);
     })
   }
 

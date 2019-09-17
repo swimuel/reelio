@@ -10,13 +10,14 @@ class NewCampaignFormClass extends React.Component {
     cinemas: [],
     screenTypes: [],
     selectedType: '',
-    loading: true
+    loading: true,
+    campaignDetails: {}
   }
 
   async componentDidMount () {
     const cinemas = await getCinemas()
     const screenTypes = await getScreenTypes()
-    this.setState({ cinemas: cinemas, screenTypes: screenTypes, loading: false })
+    this.setState({ cinemas: cinemas, screenTypes: screenTypes, loading: false, campaignDetails: {} })
   }
 
   handleSubmit = e => {
@@ -36,6 +37,11 @@ class NewCampaignFormClass extends React.Component {
           cinemaAddress: '42 Wallaby Way, Sydney',
           imdbID: 'tt6320628'
         }
+        this.setState({
+          campaignDetails: campaign,
+        }, () => {
+          this.props.sendDetails(this.state.campaignDetails);
+        })
         createCampaign(campaign).then(created => {
           this.props.history.push(`/campaigns/${created.data._id}`)
         })

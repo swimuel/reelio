@@ -6,6 +6,12 @@ import './NewCampaignPage.css'
 import NewCampaignForm from '../components/form/NewCampaignForm'
 
 class NewCampaignPage extends React.Component {
+
+    state = {
+      CampaignForm: null,
+      MovieSearchForm: null,
+    };
+
   render () {
     return (
       <div>
@@ -20,19 +26,34 @@ class NewCampaignPage extends React.Component {
         <div className={'form-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <NewCampaignForm />
+              <NewCampaignForm sendDetails = {this.fromCampaignForm} />
             </Card>
           </div>
           <div className={'custom-col-2'}>
             <Card bordered={false}>
               <h2>Movie</h2>
-              <MovieSearch />
+              <MovieSearch sendDetails = {this.fromMovieSearch} />
             </Card>
           </div>
         </div>
       </div>
     )
   }
+
+  fromCampaignForm = (formData) => {
+    console.log('formData', formData);
+    this.setState({CampaignForm: formData})
+  }
+
+  fromMovieSearch = (searchResults) => {
+    console.log('searchResults', searchResults);
+    this.setState({MovieSearchForm: searchResults})
+  }
+
+  saveCampaign() {
+    // need to get movie search result before other form!! somehow
+  }
+
 }
 export default NewCampaignPage
 
