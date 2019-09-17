@@ -31,9 +31,6 @@ class NewCampaignFormClass extends React.Component {
           filmTitle: 'Spider-Man: Far From Home',
           imageUrl: 'https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxN2E3ODYxMWVmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg',
           genre: 'Superhero',
-          creatorName: 'Marty McFly',
-          cinemaName: 'Event Cinemas Newmarket',
-          cinemaAddress: '42 Wallaby Way, Sydney',
           imdbID: 'tt6320628'
         }
         createCampaign(campaign).then(created => {
@@ -48,9 +45,19 @@ class NewCampaignFormClass extends React.Component {
     return current && current < moment().add(1, 'week')
   }
 
-  handleChange = (event, data) => {
+  handleTypeChange = (event, data) => {
     this.setState({ selectedType: data.props.children })
   }
+
+  handleCinemaChange = (value) => {
+    this.state.cinemas.map(c => {
+      if (c.name === value) {
+        this.props.form.setFieldsValue({
+          cinemaAddress: c.address
+        });
+      }
+    })
+  };
 
   render () {
     const { getFieldDecorator } = this.props.form
@@ -99,15 +106,20 @@ class NewCampaignFormClass extends React.Component {
               { required: true,
                 message: 'A cinema is required' }
             ]
-          })(<Select placeholder='Select a cinema'>
+          })(<Select placeholder='Select a cinema' onChange={this.handleCinemaChange}>
             {this.state.cinemas.map(c => {
               return <Select.Option
-                key={c._id}
-                value={c._id}>
+                key={c.name}
+                value={c.name}>
                 {c.name}
               </Select.Option>
             })}
           </Select>)}
+        </Form.Item>
+        <Form.Item label='Cinema Address' style={{display: 'none'}}>
+          {getFieldDecorator('cinemaAddress', {
+            initialValue: ''
+          })(<Input />)}
         </Form.Item>
         <Form.Item label='Screening Date'>
           {getFieldDecorator('screeningDate', {
@@ -138,7 +150,7 @@ class NewCampaignFormClass extends React.Component {
               { required: true,
                 message: 'A screen type is required' }
             ]
-          })(<Select placeholder='Select a screen type' onChange={this.handleChange}>
+          })(<Select placeholder='Select a screen type' onChange={this.handleTypeChange}>
             {this.state.screenTypes.map(st => {
               return <Select.Option
                 key={st._id}
@@ -164,7 +176,7 @@ class NewCampaignFormClass extends React.Component {
         <Divider />
         <h2>Organiser</h2>
         <Form.Item label='Name'>
-          {getFieldDecorator('organiserName', {
+          {getFieldDecorator('creatorName', {
             rules: [
               {
                 required: true,
