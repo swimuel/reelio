@@ -53,7 +53,7 @@ class MovieSearch extends React.Component {
         fetching: false,
         validationError: 'Please select a movie'
       }, () => {
-        this.props.sendDetails(this.state.movieChosen);
+        this.props.sendDetails(this.state.movieChosen)
       })
     } else {
       this.setState({
@@ -75,7 +75,7 @@ class MovieSearch extends React.Component {
         key: value.key,
         label: value.label[2]
       },
-      fetching: false, 
+      fetching: false,
       validationError: ''
     })
     this.setState({
@@ -88,35 +88,35 @@ class MovieSearch extends React.Component {
       fetching: false,
       validationError: ''
     }, () => {
-      this.props.sendDetails(this.state.movieChosen);
+      this.props.sendDetails(this.state.movieChosen)
     })
   }
 
   render () {
     const { fetching, data, value, movieChosen } = this.state
     return <div>
-        <AutoComplete
-          mode='multiple'
-          allowClear
-          dropdownMatchSelectWidth
-          labelInValue
-          value={value}
-          placeholder='Search for a movie...'
-          notFoundContent={fetching ? <Spin size='small' /> : null}
-          filterOption={false}
-          onSearch={this.fetchMovie}
-          onChange={this.handleChange}
-          onSelect={this.handleSelect}
-          style={{ width: '50%', margin: '1em' }}
-        >
-          {data.map(movie => (
-            <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} width='75' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
-          ))} 
-        </AutoComplete>
-        <div style={{color: 'red', marginTop: '3px'}}>
+      <AutoComplete
+        mode='multiple'
+        allowClear
+        dropdownMatchSelectWidth
+        labelInValue
+        value={value}
+        placeholder='Search for a movie...'
+        notFoundContent={fetching ? <Spin size='small' /> : null}
+        filterOption={false}
+        onSearch={this.fetchMovie}
+        onChange={this.handleChange}
+        onSelect={this.handleSelect}
+        style={{ width: '50%', margin: '1em' }}
+      >
+        {data.map(movie => (
+          <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} width='75' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
+        ))}
+      </AutoComplete>
+      <div style={{ color: 'red', marginTop: '3px' }}>
         {this.state.validationError}
       </div>
-        {movieChosen && <MovieDetails imdbID={movieChosen.key} />}
+      {movieChosen && <MovieDetails imdbID={movieChosen.key} />}
     </div>
   }
 }

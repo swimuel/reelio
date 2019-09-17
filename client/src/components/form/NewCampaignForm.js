@@ -24,23 +24,24 @@ class NewCampaignFormClass extends React.Component {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err && this.props.canSubmit) {
-      const campaign = {
-        ...values,
-        campaignTitle: values.campaignTitle,
-        screeningDate: values.screeningDate.toDate(),
-        creationDate: Date(),
-        creatorName: values.organiserName,
-        screenType: this.state.screenTypes.find(st => st._id === values.screenType).name,
-        cinemaName: this.state.cinemas.find(c => c._id === values.cinemaName).name,
-        creatorEmail: values.creatorEmail,
-        cinemaAddress: this.state.cinemas.find(c => c._id === values.cinemaName).address,
-        price: this.state.screenTypes.find(st => st._id === values.screenType).price
-      }
-      this.setState({
-        campaignDetails: campaign,
-      }, () => {
-        this.props.sendDetails(this.state.campaignDetails);
-      })
+        const campaign = {
+          ...values,
+          campaignTitle: values.campaignTitle,
+          screeningDate: values.screeningDate.toDate(),
+          creationDate: Date(),
+          creatorName: values.organiserName,
+          screenType: values.screenType,
+          // screenType: this.state.screenTypes.find(st => st._id === values.screenType).name,
+          cinemaName: this.state.cinemas.find(c => c._id === values.cinemaName).name,
+          creatorEmail: values.creatorEmail,
+          cinemaAddress: this.state.cinemas.find(c => c._id === values.cinemaName).address,
+          price: this.state.screenTypes.find(st => st._id === values.screenType).price
+        }
+        this.setState({
+          campaignDetails: campaign
+        }, () => {
+          this.props.sendDetails(this.state.campaignDetails)
+        })
         // createCampaign(campaign).then(created => {
         //   this.props.history.push(`/campaigns/${created.data._id}`)
         // })
@@ -210,7 +211,7 @@ class NewCampaignFormClass extends React.Component {
             rules: [
               { required: true,
                 message: 'A payment type is required',
-                initialValue: 'a'}
+                initialValue: 'a' }
             ]
           })(<Radio.Group>
             <Radio.Button value='visa'>Visa</Radio.Button>

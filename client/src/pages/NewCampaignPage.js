@@ -7,7 +7,6 @@ import NewCampaignForm from '../components/form/NewCampaignForm'
 import { createCampaign, getMoviesByID } from '../api'
 
 class NewCampaignPage extends React.Component {
-
   state = {
     CampaignForm: null,
     MovieSearchForm: null,
@@ -28,13 +27,13 @@ class NewCampaignPage extends React.Component {
         <div className={'form-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <NewCampaignForm sendDetails = {this.fromCampaignForm} canSubmit={this.state.CanSubmitForm}/>
+              <NewCampaignForm sendDetails={this.fromCampaignForm} canSubmit={this.state.CanSubmitForm} />
             </Card>
           </div>
           <div className={'custom-col-2'}>
             <Card bordered={false}>
               <h2>Movie</h2>
-              <MovieSearchClass sendDetails = {this.fromMovieSearch} triggerValidation={!this.state.CanSubmitForm} />
+              <MovieSearchClass sendDetails={this.fromMovieSearch} triggerValidation={!this.state.CanSubmitForm} />
             </Card>
           </div>
         </div>
@@ -43,22 +42,21 @@ class NewCampaignPage extends React.Component {
   }
 
   fromCampaignForm = (formData) => {
-    this.setState({CampaignForm: formData}, () => {
+    this.setState({ CampaignForm: formData }, () => {
       this.saveData()
     })
   }
 
   fromMovieSearch = (searchResults) => {
-    this.setState({MovieSearchForm: searchResults}, () => {
+    this.setState({ MovieSearchForm: searchResults }, () => {
       if (!searchResults) {
-        this.setState({CanSubmitForm: false})
-      }
-      else {
+        this.setState({ CanSubmitForm: false })
+      } else {
         const movieInfo = getMoviesByID(this.state.MovieSearchForm.key)
         movieInfo.then(info => {
-          this.setState({MovieSearchForm: {...searchResults, movie: info}})
+          this.setState({ MovieSearchForm: { ...searchResults, movie: info } })
         })
-        this.setState({CanSubmitForm: true})
+        this.setState({ CanSubmitForm: true })
       }
     })
   }
@@ -87,7 +85,7 @@ class NewCampaignPage extends React.Component {
     createCampaign(campaign).then(created => {
       this.props.history.push(`/campaigns/${created.data._id}`)
     })
-    }
+  }
 }
 export default NewCampaignPage
 
