@@ -54,7 +54,7 @@ class NewCampaignFormClass extends React.Component {
       if (c.name === value) {
         this.props.form.setFieldsValue({
           cinemaAddress: c.address
-        });
+        })
       }
     })
   };
@@ -116,7 +116,7 @@ class NewCampaignFormClass extends React.Component {
             })}
           </Select>)}
         </Form.Item>
-        <Form.Item label='Cinema Address' style={{display: 'none'}}>
+        <Form.Item label='Cinema Address' style={{ display: 'none' }}>
           {getFieldDecorator('cinemaAddress', {
             initialValue: ''
           })(<Input />)}
