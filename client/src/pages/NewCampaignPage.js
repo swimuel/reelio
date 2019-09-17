@@ -4,6 +4,7 @@ import MovieSearchClass from '../components/movie/MovieSearch'
 import { Link } from 'react-router-dom'
 import './NewCampaignPage.css'
 import NewCampaignForm from '../components/form/NewCampaignForm'
+import { createCampaign } from '../api'
 
 class NewCampaignPage extends React.Component {
 
@@ -42,12 +43,14 @@ class NewCampaignPage extends React.Component {
   }
 
   fromCampaignForm = (formData) => {
-    console.log('formData', formData);
-    this.setState({CampaignForm: formData})
+    this.setState({CampaignForm: formData}, () => {
+      console.log('here')
+      this.saveData()
+    })
+    
   }
 
   fromMovieSearch = (searchResults) => {
-    console.log('searchResults', searchResults);
     this.setState({MovieSearchForm: searchResults}, () => {
       console.log(searchResults);
       if (!searchResults) {
@@ -59,11 +62,33 @@ class NewCampaignPage extends React.Component {
     })
   }
 
-  saveCampaign() {
-    // need to get movie search result before other form!! somehow
+  saveData = () => {
 
-  }
+    console.log('from movie form: ', this.state.MovieSearchForm.title)
 
+    const campaign = {
+      filmTitle: this.state.MovieSearchForm.title,
+      campaignTitle: this.state.CampaignForm.campaignTitle,
+      creationDate: this.state.CampaignForm.creationDate,
+      screeningDate: this.state.CampaignForm.screeningDate,
+      screenType: this.state.CampaignForm.screenType,
+      imageUrl: this.state.MovieSearchForm.poster,
+      genre: this.state.MovieSearchForm.Genre,
+      creatorName: this.state.CampaignForm.creatorName,
+      creatorEmail: this.state.CampaignForm.creatorEmail,
+      cinemaName: this.state.CampaignForm.cinemaName,
+      cinemaAddress: this.state.CampaignForm.cinemaAddress,
+      price: this.state.CampaignForm.price,
+      imdbID: this.state.MovieSearchForm.imdbID
+    }
+
+    console.log('campaign: ', campaign)
+
+    // Call api to store the new campaign in the back end
+    // createCampaign(campaign).then(created => {
+    //   this.props.history.push(`/campaigns/${created.data._id}`)
+    // })
+    }
 }
 export default NewCampaignPage
 

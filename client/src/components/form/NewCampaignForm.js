@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Spin, Form, Alert, Button, Select, Input, DatePicker, Divider, Radio } from 'antd'
-import { createCampaign, getScreenTypes, getCinemas } from '../../api'
+import { getScreenTypes, getCinemas } from '../../api'
 import moment from 'moment'
 import './PaymentDetailsForm.css'
 
@@ -23,28 +23,27 @@ class NewCampaignFormClass extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
-      console.log(values)
       if (!err && this.props.canSubmit) {
-        const campaign = {
-          ...values,
-          screeningDate: values.screeningDate.toDate(),
-          // TODO: don't hardcode anything
-          filmTitle: 'Spider-Man: Far From Home',
-          imageUrl: 'https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxN2E3ODYxMWVmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg',
-          genre: 'Superhero',
-          creatorName: 'Marty McFly',
-          cinemaName: 'Event Cinemas Newmarket',
-          cinemaAddress: '42 Wallaby Way, Sydney',
-          imdbID: 'tt6320628'
-        }
-        this.setState({
-          campaignDetails: campaign,
-        }, () => {
-          this.props.sendDetails(this.state.campaignDetails);
-        })
-        createCampaign(campaign).then(created => {
-          this.props.history.push(`/campaigns/${created.data._id}`)
-        })
+      const campaign = {
+        ...values,
+        campaignTitle: values.campaignTitle,
+        screeningDate: values.screeningDate.toDate(),
+        creationDate: Date(),
+        creatorName: values.organiserName,
+        screenType: this.state.screenTypes.find(st => st._id === values.screenType).name,
+        cinemaName: this.state.cinemas.find(c => c._id === values.cinemaName).name,
+        creatorEmail: values.creatorEmail,
+        cinemaAddress: this.state.cinemas.find(c => c._id === values.cinemaName).address,
+        price: this.state.screenTypes.find(st => st._id === values.screenType).price
+      }
+      this.setState({
+        campaignDetails: campaign,
+      }, () => {
+        this.props.sendDetails(this.state.campaignDetails);
+      })
+        // createCampaign(campaign).then(created => {
+        //   this.props.history.push(`/campaigns/${created.data._id}`)
+        // })
       }
     })
   }
@@ -210,9 +209,10 @@ class NewCampaignFormClass extends React.Component {
           {getFieldDecorator('paymentType', {
             rules: [
               { required: true,
-                message: 'A payment type is required' }
+                message: 'A payment type is required',
+                initialValue: 'a'}
             ]
-          })(<Radio.Group defaultValue='a'>
+          })(<Radio.Group>
             <Radio.Button value='visa'>Visa</Radio.Button>
             <Radio.Button value='mastercard'>Mastercard</Radio.Button>
             <Radio.Button value='americanExpress'>American Express</Radio.Button>
