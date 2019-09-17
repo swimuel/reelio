@@ -13,8 +13,7 @@ class CampaignDetails extends React.Component {
         <h2 style={styles.h2}><Icon type='calendar' style={styles.icon} /> { moment(campaign.screeningDate).format('MMMM Do YYYY') }</h2>
         <h2 style={styles.h2}><Icon type='clock-circle' style={styles.icon} /> { moment(campaign.screeningDate).format('h:mm a') }</h2>
         <h2 style={styles.h2}><Icon type='dollar' style={styles.icon} /> ${ campaign.price }.00</h2>
-        <br />
-        <h3>Organiser: {campaign.creatorName} </h3>
+        <h3 style={styles.h3}>Organiser: {campaign.creatorName} </h3>
       </div>
     )
   }
@@ -25,6 +24,10 @@ export default CampaignDetails
 const styles = {
   h2: {
     fontSize: 20
+  },
+  h3: {
+    fontSize: 16,
+    marginTop: 50
   },
   icon: {
     marginRight: 30
