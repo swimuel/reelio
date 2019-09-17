@@ -31,7 +31,6 @@ class NewCampaignFormClass extends React.Component {
           creationDate: Date(),
           creatorName: values.organiserName,
           screenType: values.screenType,
-          // screenType: this.state.screenTypes.find(st => st._id === values.screenType).name,
           cinemaName: this.state.cinemas.find(c => c._id === values.cinemaName).name,
           creatorEmail: values.creatorEmail,
           cinemaAddress: this.state.cinemas.find(c => c._id === values.cinemaName).address,
@@ -42,9 +41,6 @@ class NewCampaignFormClass extends React.Component {
         }, () => {
           this.props.sendDetails(this.state.campaignDetails)
         })
-        // createCampaign(campaign).then(created => {
-        //   this.props.history.push(`/campaigns/${created.data._id}`)
-        // })
       }
     })
   }
