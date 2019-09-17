@@ -10,6 +10,7 @@ class NewCampaignPage extends React.Component {
   state = {
     CampaignForm: null,
     MovieSearchForm: null,
+    CanSubmitForm: false
   };
 
   render () {
@@ -26,13 +27,13 @@ class NewCampaignPage extends React.Component {
         <div className={'form-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <NewCampaignForm sendDetails = {this.fromCampaignForm} />
+              <NewCampaignForm sendDetails = {this.fromCampaignForm} canSubmit={this.state.CanSubmitForm}/>
             </Card>
           </div>
           <div className={'custom-col-2'}>
             <Card bordered={false}>
               <h2>Movie</h2>
-              <MovieSearchClass sendDetails = {this.fromMovieSearch} />
+              <MovieSearchClass sendDetails = {this.fromMovieSearch} triggerValidation={!this.state.CanSubmitForm} />
             </Card>
           </div>
         </div>
@@ -47,11 +48,20 @@ class NewCampaignPage extends React.Component {
 
   fromMovieSearch = (searchResults) => {
     console.log('searchResults', searchResults);
-    this.setState({MovieSearchForm: searchResults})
+    this.setState({MovieSearchForm: searchResults}, () => {
+      console.log(searchResults);
+      if (!searchResults) {
+        this.setState({CanSubmitForm: false})
+      }
+      else {
+        this.setState({CanSubmitForm: true})
+      }
+    })
   }
 
   saveCampaign() {
     // need to get movie search result before other form!! somehow
+
   }
 
 }

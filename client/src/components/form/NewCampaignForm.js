@@ -24,7 +24,7 @@ class NewCampaignFormClass extends React.Component {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       console.log(values)
-      if (!err) {
+      if (!err && this.props.canSubmit) {
         const campaign = {
           ...values,
           screeningDate: values.screeningDate.toDate(),

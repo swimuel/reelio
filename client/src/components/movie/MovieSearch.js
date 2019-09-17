@@ -17,7 +17,7 @@ class MovieSearch extends React.Component {
     value: [], // the input value in the autocomplete
     movieChosen: null, // the most recent movie selected
     fetching: false, // used to render loading spin icon
-    validationError: '' // used to indicate if an input error message should be displayed
+    validationError: this.props.triggerValidation ? 'Please select a movie' : '' // used to indicate if an input error message should be displayed
   }
 
   fetchMovie = async (value) => {
@@ -55,8 +55,6 @@ class MovieSearch extends React.Component {
       }, () => {
         this.props.sendDetails(this.state.movieChosen);
       })
-      // validation errors
-
     } else {
       this.setState({
         value,
@@ -115,7 +113,7 @@ class MovieSearch extends React.Component {
             <Option key={movie.id}>{movie.posterUrl !== 'N/A' && <img src={movie.posterUrl} width='75' />}&nbsp;&nbsp;&nbsp;&nbsp;{movie.title} <b>({movie.year})</b></Option>
           ))} 
         </AutoComplete>
-        <div style={{color: 'red', marginTop: '5px'}}>
+        <div style={{color: 'red', marginTop: '3px'}}>
         {this.state.validationError}
       </div>
         {movieChosen && <MovieDetails imdbID={movieChosen.key} />}
