@@ -4,7 +4,7 @@ import MovieSearchClass from '../components/movie/MovieSearch'
 import { Link } from 'react-router-dom'
 import './NewCampaignPage.css'
 import NewCampaignForm from '../components/form/NewCampaignForm'
-import { createCampaign } from '../api'
+import { createCampaign, getMoviesByID } from '../api'
 
 class NewCampaignPage extends React.Component {
 
@@ -44,50 +44,49 @@ class NewCampaignPage extends React.Component {
 
   fromCampaignForm = (formData) => {
     this.setState({CampaignForm: formData}, () => {
-      console.log('here')
       this.saveData()
     })
-    
   }
 
   fromMovieSearch = (searchResults) => {
     this.setState({MovieSearchForm: searchResults}, () => {
-      console.log(searchResults);
       if (!searchResults) {
         this.setState({CanSubmitForm: false})
       }
       else {
+        const movieInfo = getMoviesByID(this.state.MovieSearchForm.key)
+        movieInfo.then(info => {
+          this.setState({MovieSearchForm: {...searchResults, movie: info}})
+        })
         this.setState({CanSubmitForm: true})
       }
     })
   }
 
   saveData = () => {
-
-    console.log('from movie form: ', this.state.MovieSearchForm.title)
+    const movie = this.state.MovieSearchForm.movie
 
     const campaign = {
-      filmTitle: this.state.MovieSearchForm.title,
+      filmTitle: movie.Title,
       campaignTitle: this.state.CampaignForm.campaignTitle,
       creationDate: this.state.CampaignForm.creationDate,
       screeningDate: this.state.CampaignForm.screeningDate,
       screenType: this.state.CampaignForm.screenType,
-      imageUrl: this.state.MovieSearchForm.poster,
-      genre: this.state.MovieSearchForm.Genre,
+      imageUrl: movie.Poster,
+      genre: movie.Genre,
       creatorName: this.state.CampaignForm.creatorName,
       creatorEmail: this.state.CampaignForm.creatorEmail,
       cinemaName: this.state.CampaignForm.cinemaName,
       cinemaAddress: this.state.CampaignForm.cinemaAddress,
       price: this.state.CampaignForm.price,
-      imdbID: this.state.MovieSearchForm.imdbID
+      imdbID: this.state.MovieSearchForm.key
     }
 
-    console.log('campaign: ', campaign)
-
+    // console.log('campaign: ', campaign)
     // Call api to store the new campaign in the back end
-    // createCampaign(campaign).then(created => {
-    //   this.props.history.push(`/campaigns/${created.data._id}`)
-    // })
+    createCampaign(campaign).then(created => {
+      this.props.history.push(`/campaigns/${created.data._id}`)
+    })
     }
 }
 export default NewCampaignPage
