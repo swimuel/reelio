@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Spin, Form, Alert, Button, Select, Input, DatePicker, Divider, Radio } from 'antd'
-import { createCampaign, getScreenTypes, getCinemas } from '../../api'
+import { getScreenTypes, getCinemas } from '../../api'
 import moment from 'moment'
 import './PaymentDetailsForm.css'
 
@@ -10,31 +10,36 @@ class NewCampaignFormClass extends React.Component {
     cinemas: [],
     screenTypes: [],
     selectedType: '',
-    loading: true
+    loading: true,
+    campaignDetails: {}
   }
 
   async componentDidMount () {
     const cinemas = await getCinemas()
     const screenTypes = await getScreenTypes()
-    this.setState({ cinemas: cinemas, screenTypes: screenTypes, loading: false })
+    this.setState({ cinemas: cinemas, screenTypes: screenTypes, loading: false, campaignDetails: {} })
   }
 
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
-      console.log(values)
-      if (!err) {
+      if (!err && this.props.canSubmit) {
         const campaign = {
           ...values,
+          campaignTitle: values.campaignTitle,
           screeningDate: values.screeningDate.toDate(),
-          // TODO: don't hardcode anything
-          filmTitle: 'Spider-Man: Far From Home',
-          imageUrl: 'https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxN2E3ODYxMWVmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg',
-          genre: 'Superhero',
-          imdbID: 'tt6320628'
+          creationDate: Date(),
+          creatorName: values.creatorName,
+          screenType: values.screenType,
+          cinemaName: this.state.cinemas.find(c => c.name === values.cinemaName).name,
+          creatorEmail: values.creatorEmail,
+          cinemaAddress: this.state.cinemas.find(c => c.name === values.cinemaName).address,
+          price: this.state.screenTypes.find(st => st._id === values.screenType).price
         }
-        createCampaign(campaign).then(created => {
-          this.props.history.push(`/campaigns/${created.data._id}`)
+        this.setState({
+          campaignDetails: campaign
+        }, () => {
+          this.props.sendDetails(this.state.campaignDetails)
         })
       }
     })
@@ -216,9 +221,10 @@ class NewCampaignFormClass extends React.Component {
           {getFieldDecorator('paymentType', {
             rules: [
               { required: true,
-                message: 'A payment type is required' }
+                message: 'A payment type is required',
+                initialValue: 'a' }
             ]
-          })(<Radio.Group defaultValue='a'>
+          })(<Radio.Group>
             <Radio.Button value='visa'>Visa</Radio.Button>
             <Radio.Button value='mastercard'>Mastercard</Radio.Button>
             <Radio.Button value='americanExpress'>American Express</Radio.Button>
