@@ -80,7 +80,6 @@ class NewCampaignPage extends React.Component {
       imdbID: this.state.MovieSearchForm.key
     }
 
-    // console.log('campaign: ', campaign)
     // Call api to store the new campaign in the back end
     createCampaign(campaign).then(created => {
       this.props.history.push(`/campaigns/${created.data._id}`)

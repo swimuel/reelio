@@ -29,11 +29,11 @@ class NewCampaignFormClass extends React.Component {
           campaignTitle: values.campaignTitle,
           screeningDate: values.screeningDate.toDate(),
           creationDate: Date(),
-          creatorName: values.organiserName,
+          creatorName: values.creatorName,
           screenType: values.screenType,
-          cinemaName: this.state.cinemas.find(c => c._id === values.cinemaName).name,
+          cinemaName: this.state.cinemas.find(c => c.name === values.cinemaName).name,
           creatorEmail: values.creatorEmail,
-          cinemaAddress: this.state.cinemas.find(c => c._id === values.cinemaName).address,
+          cinemaAddress: this.state.cinemas.find(c => c.name === values.cinemaName).address,
           price: this.state.screenTypes.find(st => st._id === values.screenType).price
         }
         this.setState({
