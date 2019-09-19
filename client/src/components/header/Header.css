@@ -1,11 +1,10 @@
 .header{
     background: #ff6852;
-    width: 100%;
+    width: 100vw;
     height: 70px;
     overflow: hidden;
     display: inline-block;
     text-align: center;
-    position: -webkit-sticky;
     position: sticky;
     top: 0px;
     left: 0px;
