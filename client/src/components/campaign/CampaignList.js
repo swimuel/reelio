@@ -108,11 +108,11 @@ class CampaignList extends React.Component {
             grid={{
               gutter: 16,
               xs: 1,
-              sm: 2,
+              sm: 1,
               md: 2,
               lg: 3,
-              xl: 4,
-              xxl: 5
+              xl: 3,
+              xxl: 4
             }}
             dataSource={filteredCampaigns}
             // renderItem is called with each element in dataSource (which in this case are campaigns).
