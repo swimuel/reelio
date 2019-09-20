@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
-class PledgePage extends Component{
-  render() {
+class PledgePage extends Component {
+  render () {
     return (
-      <div></div>
+      <div />
     )
   }
 }

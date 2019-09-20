@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage'
 import DetailsPage from './pages/DetailsPage'
 import NewCampaignPage from './pages/NewCampaignPage'
 import ExampleFormPage from './pages/ExampleFormPage'
-import PledgePage from "./pages/PledgePage";
+import PledgePage from './pages/PledgePage'
 import './App.css'
 import Header from './components/header/Header'
 

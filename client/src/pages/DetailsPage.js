@@ -45,7 +45,7 @@ class DetailsPage extends React.Component {
         <div className={'pub-container'}>
           <Button type={'primary'} href={`/campaigns/${campaign._id}/pledge`}>
             Book
-            <Icon type="double-right" />
+            <Icon type='double-right' />
           </Button>
         </div>
       </div>
