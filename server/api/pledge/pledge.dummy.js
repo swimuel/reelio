@@ -26,7 +26,7 @@ module.exports = [
     email: 'test@yo.com',
     campaign: campaigns[1]._id,
     ticketsPledged: 9,
-    creditCardNumber: '13579111212345e61',
+    creditCardNumber: '1357911121234561',
     creditCardExpiry: new Date('2021-02-01'),
     creditCardCVV: '567',
     creditCardName: 'Whats his face'
