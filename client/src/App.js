@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import DetailsPage from './pages/DetailsPage'
 import NewCampaignPage from './pages/NewCampaignPage'
 import ExampleFormPage from './pages/ExampleFormPage'
+import PledgePage from "./pages/PledgePage";
 import './App.css'
 import Header from './components/header/Header'
 
@@ -14,7 +15,8 @@ class App extends Component {
         <Router>
           <Header />
           <Route exact path='/' component={HomePage} />
-          <Route path='/campaigns/:id' component={DetailsPage} />
+          <Route exact path='/campaigns/:id/pledge' component={PledgePage} />
+          <Route exact path='/campaigns/:id' component={DetailsPage} />
           <Route path='/newcampaign' component={NewCampaignPage} />
           <Route path='/exampleform' component={ExampleFormPage} />
         </Router>
