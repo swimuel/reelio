@@ -3,6 +3,11 @@ Custom grid layout that will stack columns when width is below 768px.
 Column div must not be called col-* or else it'll interfere with antd grid
 layouts.
  */
+
+.details-container {
+    overflow-y: auto;
+}
+
 [class*="custom-col-"] {
     float: left;
     width: 100%;
@@ -16,10 +21,40 @@ layouts.
     .custom-col-2 {
         width: 66.67%;
     }
+
+    .pub-container .ant-btn.ant-btn-primary{
+        margin-right: 0;
+        margin-left: auto;
+        display: block;
+    }
 }
 
 .row:after {
     content:"";
     clear:both;
     display:table;
+}
+
+.pub-container {
+    width: 90vw;
+    overflow-y: auto;
+    margin-top: 1%;
+    display: inline-block;
+    position: relative;
+}
+
+.pub-container .ant-btn.ant-btn-primary{
+    width: fit-content;
+    height: fit-content;
+    font-size: medium;
+    color: #4f4f4f;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+    border-color: #4f4f4f;
+}
+
+.pub-container .ant-btn.ant-btn-primary:hover {
+    border-color: #29b1fb;
+    color: #29b1fb;
 }

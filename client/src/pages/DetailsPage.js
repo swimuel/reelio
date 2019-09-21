@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin, Row, Col, Icon, Card } from 'antd'
+import { Spin, Row, Col, Icon, Card, Button } from 'antd'
 import CampaignDetails from '../components/campaign/CampaignDetails'
 import { getCampaignById } from '../api'
 import { Link } from 'react-router-dom'
@@ -41,6 +41,12 @@ class DetailsPage extends React.Component {
           <div className={'custom-col-2'}>
             <MovieDetails imdbID={campaign.imdbID} />
           </div>
+        </div>
+        <div className={'pub-container'}>
+          <Button type={'primary'} href={`/campaigns/${campaign._id}/pledge`}>
+            Book
+            <Icon type='double-right' />
+          </Button>
         </div>
       </div>
     )
