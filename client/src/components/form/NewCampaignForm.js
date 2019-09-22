@@ -209,13 +209,16 @@ class NewCampaignFormClass extends React.Component {
         <Alert message='You must secure one ticket to start the campaign' type='info'
           className={'info-alert'} showIcon />
         <Form.Item label='Number of Tickets'>
-          <Select defaultValue='1ticket' className={'ticket-select'}>
-            <Select.Option value='1ticket'>1</Select.Option>
-            <Select.Option value='2ticket'>2</Select.Option>
-            <Select.Option value='3ticket'>3</Select.Option>
-            <Select.Option value='4ticket'>4</Select.Option>
-            <Select.Option value='5ticket'>5</Select.Option>
-          </Select>
+          {getFieldDecorator('numTicketsPledged', {
+            rules: [],
+            initialValue: '1'
+          })(<Select className={'ticket-select'}>
+            <Select.Option value='1'>1</Select.Option>
+            <Select.Option value='2'>2</Select.Option>
+            <Select.Option value='3'>3</Select.Option>
+            <Select.Option value='4'>4</Select.Option>
+            <Select.Option value='5'>5</Select.Option>
+          </Select>)}
         </Form.Item>
         <Form.Item label='Payment Type'>
           {getFieldDecorator('paymentType', {
