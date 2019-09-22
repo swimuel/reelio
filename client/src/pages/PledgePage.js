@@ -12,13 +12,13 @@ class PledgePage extends Component {
     loading: true
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     const id = this.props.match.params.id
     const campaign = await getCampaignById(id)
     this.setState({ campaign: campaign, loading: false, CanSubmitForm: false })
   }
 
-  render() {
+  render () {
     const { campaign } = this.state
 
     return this.state.loading ? <Spin /> : (
