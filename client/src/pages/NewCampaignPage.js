@@ -45,7 +45,10 @@ class NewCampaignPage extends React.Component {
           title={'Campaign successfully created!'}
           closable={false}
           footer={<Button type='primary' onClick={this.goToCreatedCampaign}>Go to campaign</Button>}
-        >{this.state.showConfirmation && `You have pledged ${this.state.numTicketsPledged} tickets towards a screening of
+        >{this.state.showConfirmation &&
+          `You have pledged ${this.state.numTicketsPledged}
+           ${this.state.numTicketsPledged > 1 ? 'tickets' : 'ticket'} 
+        towards a screening of
           ${this.state.MovieSearchForm.movie.Title}`}
         </Modal>
       </div>
