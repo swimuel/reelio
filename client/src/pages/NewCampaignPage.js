@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Icon, Card } from 'antd'
+import { Row, Col, Icon, Card, Modal, Button } from 'antd'
 import MovieSearchClass from '../components/movie/MovieSearch'
 import { Link } from 'react-router-dom'
 import './NewCampaignPage.css'
@@ -10,7 +10,10 @@ class NewCampaignPage extends React.Component {
   state = {
     CampaignForm: null,
     MovieSearchForm: null,
-    CanSubmitForm: false
+    CanSubmitForm: false,
+    showConfirmation: false,
+    createdCampaignId: null,
+    numTicketsPledged: null
   };
 
   render () {
@@ -37,6 +40,17 @@ class NewCampaignPage extends React.Component {
             </Card>
           </div>
         </div>
+        <Modal
+          visible={this.state.showConfirmation}
+          title={'Campaign successfully created!'}
+          closable={false}
+          footer={<Button type='primary' onClick={this.goToCreatedCampaign}>Go to campaign</Button>}
+        >{this.state.showConfirmation &&
+          `You have pledged ${this.state.numTicketsPledged}
+           ${this.state.numTicketsPledged > 1 ? 'tickets' : 'ticket'} 
+        towards a screening of
+          ${this.state.MovieSearchForm.movie.Title}`}
+        </Modal>
       </div>
     )
   }
@@ -61,6 +75,10 @@ class NewCampaignPage extends React.Component {
     })
   }
 
+  goToCreatedCampaign = () => {
+    this.props.history.push(`/campaigns/${this.state.createdCampaignId}`)
+  }
+
   saveData = () => {
     const movie = this.state.MovieSearchForm.movie
 
@@ -82,7 +100,9 @@ class NewCampaignPage extends React.Component {
 
     // Call api to store the new campaign in the back end
     createCampaign(campaign).then(created => {
-      this.props.history.push(`/campaigns/${created.data._id}`)
+      const id = created.data._id
+      const numTicketsPledged = this.state.CampaignForm.numTicketsPledged
+      this.setState({ showConfirmation: true, createdCampaignId: id, numTicketsPledged })
     })
   }
 }

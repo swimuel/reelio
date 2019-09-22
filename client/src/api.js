@@ -1,4 +1,3 @@
-
 // contains functions to interact with the back-end
 
 export const getExamples = async () => {
