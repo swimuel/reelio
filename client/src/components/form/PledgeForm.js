@@ -1,9 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Spin, Form, Alert, Button, Select, Input, DatePicker, Divider, Radio } from 'antd'
-import { getScreenTypes, getCinemas } from '../../api'
-import moment from 'moment'
+import { Spin, Form, Button, Select, Input, DatePicker, Divider, Radio } from 'antd'
 import './PaymentDetailsForm.css'
+import Seat1 from '../../assets/1seat.PNG'
+import Seat2 from '../../assets/2seat.PNG'
+import Seat3 from '../../assets/3seat.PNG'
+import Seat4 from '../../assets/4seat.PNG'
+import Seat5 from '../../assets/5seat.PNG'
 
 class PledgeFormClass extends React.Component {
     state = {
@@ -68,96 +71,141 @@ class PledgeFormClass extends React.Component {
             }
         }
 
-        let seatAndPayment = ''
-        if (this.state.tickets){
-            seatAndPayment = 
-            <div>
-            <h2>Seats</h2>
-            <Divider />
-
-            <h2>Payment</h2>
-            <Form.Item label='Payment Type'>
-                {getFieldDecorator('paymentType', {
-                    rules: [
-                        {
-                            required: true,
-                            message: 'A payment type is required',
-                            initialValue: 'a'
-                        }
-                    ]
-                })(<Radio.Group>
-                    <Radio.Button value='visa'>Visa</Radio.Button>
-                    <Radio.Button value='mastercard'>Mastercard</Radio.Button>
-                    <Radio.Button value='americanExpress'>American Express</Radio.Button>
-                </Radio.Group>)}
-            </Form.Item>
-            <div className={'card-details'}>
-                <Form.Item label='Card Number'>
-                    {getFieldDecorator('cardNumber', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'A card number is required'
-                            },
-                            {
-                                len: 16,
-                                message: 'Please input a valid 16-digit card number.'
-                            }
-                        ]
-                    })(<Input />)}
-                </Form.Item>
-                <Form.Item label='Card Name'>
-                    {getFieldDecorator('cardName', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'A card name is required'
-                            }
-                        ]
-                    })(<Input />)}
-                </Form.Item>
-                <Form.Item label='Expiry Date'>
-                    {getFieldDecorator('expiryMonth', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'An expiry date is required'
-                            }
-                        ]
-                    })(<MonthPicker placeholder='Select Month' style={{ width: '100%' }} />)}
-                </Form.Item>
-                <Form.Item label='CVV'>
-                    {getFieldDecorator('cvvNumber', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'A CVV number is required'
-                            },
-                            {
-                                len: 3,
-                                message: 'Please input a valid 3-digit CVV number.'
-                            }
-                        ]
-                    })(<Input />)}
-                </Form.Item>
-            </div>
-            <Divider />
-            <Form.Item {...tailFormItemLayout}>
-                <Button type='primary' htmlType='submit'>
-                    Pledge
+        let seats = ''
+        let payment = ''
+        if (this.state.tickets) {
+            if (this.state.tickets == 1){
+                seats =
+                <div>
+                    <Divider />
+                    <h2>Seats</h2>
+                    <h3>You have been allocated the following seats</h3>
+                    <img src={Seat1} />
+                    <Divider />
+                </div>
+            } else if (this.state.tickets == 2){
+                seats =
+                <div>
+                    <Divider />
+                    <h2>Seats</h2>
+                    <h3>You have been allocated the following seats</h3>
+                    <img src={Seat2} />
+                    <Divider />
+                </div>
+            } else if (this.state.tickets == 3){
+                seats =
+                <div>
+                    <Divider />
+                    <h2>Seats</h2>
+                    <h3>You have been allocated the following seats</h3>
+                    <img src={Seat3} />
+                    <Divider />
+                </div>
+            } else if (this.state.tickets == 4){
+                seats =
+                <div>
+                    <Divider />
+                    <h2>Seats</h2>
+                    <h3>You have been allocated the following seats</h3>
+                    <img src={Seat4} />
+                    <Divider />
+                </div>
+            } else if (this.state.tickets == 5){
+                seats =
+                <div>
+                    <Divider />
+                    <h2>Seats</h2>
+                    <h3>You have been allocated the following seats</h3>
+                    <img src={Seat5} />
+                    <Divider />
+                </div>
+            }
+            payment = 
+                <div>
+                    <h2>Payment</h2>
+                    <Form.Item label='Payment Type'>
+                        {getFieldDecorator('paymentType', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: 'A payment type is required',
+                                    initialValue: 'a'
+                                }
+                            ]
+                        })(<Radio.Group>
+                            <Radio.Button value='visa'>Visa</Radio.Button>
+                            <Radio.Button value='mastercard'>Mastercard</Radio.Button>
+                            <Radio.Button value='americanExpress'>American Express</Radio.Button>
+                        </Radio.Group>)}
+                    </Form.Item>
+                    <div className={'card-details'}>
+                        <Form.Item label='Card Number'>
+                            {getFieldDecorator('cardNumber', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'A card number is required'
+                                    },
+                                    {
+                                        len: 16,
+                                        message: 'Please input a valid 16-digit card number.'
+                                    }
+                                ]
+                            })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label='Card Name'>
+                            {getFieldDecorator('cardName', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'A card name is required'
+                                    }
+                                ]
+                            })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label='Expiry Date'>
+                            {getFieldDecorator('expiryMonth', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'An expiry date is required'
+                                    }
+                                ]
+                            })(<MonthPicker placeholder='Select Month' style={{ width: '100%' }} />)}
+                        </Form.Item>
+                        <Form.Item label='CVV'>
+                            {getFieldDecorator('cvvNumber', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'A CVV number is required'
+                                    },
+                                    {
+                                        len: 3,
+                                        message: 'Please input a valid 3-digit CVV number.'
+                                    }
+                                ]
+                            })(<Input />)}
+                        </Form.Item>
+                    </div>
+                    <Divider />
+                    <Form.Item {...tailFormItemLayout}>
+                        <Button type='primary' htmlType='submit'>
+                            Pledge
                 </Button>
-            </Form.Item>
-            </div>
+                    </Form.Item>
+                </div>
         } else {
-            seatAndPayment = ''
+            seats = ''
+            payment = ''
         }
 
         return this.state.loading ? <Spin /> : (
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                 <h2>Pledge</h2>
                 <Form.Item label='Number of Tickets'>
-                    <Select placeholder='Select number of tickets' className={'ticket-select'} 
-                    onChange={this.handleTicketChange}>
+                    <Select placeholder='Select number of tickets' className={'ticket-select'}
+                        onChange={this.handleTicketChange}>
                         <Select.Option value='1'>1</Select.Option>
                         <Select.Option value='2'>2</Select.Option>
                         <Select.Option value='3'>3</Select.Option>
@@ -165,9 +213,9 @@ class PledgeFormClass extends React.Component {
                         <Select.Option value='5'>5</Select.Option>
                     </Select>
                 </Form.Item>
-                <Divider />
 
-                {seatAndPayment}
+                {seats}
+                {payment}
 
             </Form>
         )
