@@ -206,7 +206,7 @@ class NewCampaignFormClass extends React.Component {
         </Form.Item>
         <Divider />
         <h2>Payment</h2>
-        <Alert message='You must secure one ticket to start the campaign' type='info'
+        <Alert message='You must secure at least one ticket to start the campaign' type='info'
           className={'info-alert'} showIcon />
         <Form.Item label='Number of Tickets'>
           {getFieldDecorator('numTicketsPledged', {
