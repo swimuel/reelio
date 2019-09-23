@@ -22,7 +22,7 @@ class PaymentDetailsFormClass extends React.Component {
     return this.state.loading ? <Spin /> : (
       <Form {...formItemLayout}>
         <h2>Payment</h2>
-        <Alert message='You must secure one ticket to start the campaign' type='info'
+        <Alert message='You must secure at least one ticket to start the campaign' type='info'
           closeText='Close Now' className={'info-alert'} showIcon />
         <Form.Item label='Number of Tickets'>
           <Select defaultValue='1ticket' className={'ticket-select'}>
