@@ -64,6 +64,18 @@ class NewCampaignFormClass extends React.Component {
     })
   };
 
+  validateExpiry = (rule, value, callback) => {
+    if (value) {
+      const today = moment()
+      if (value.isBefore(today, 'month')) {
+        // eslint-disable-next-line
+        callback('That expiry date has already passed')
+      }
+    } else {
+      callback()
+    }
+  }
+
   render () {
     const { getFieldDecorator } = this.props.form
     const { MonthPicker } = DatePicker
@@ -259,7 +271,8 @@ class NewCampaignFormClass extends React.Component {
                 {
                   required: true,
                   message: 'An expiry date is required'
-                }
+                },
+                { validator: this.validateExpiry }
               ]
             })(<MonthPicker placeholder='Select Month' style={{ width: '100%' }} />)}
           </Form.Item>
