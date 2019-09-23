@@ -68,6 +68,7 @@ class NewCampaignFormClass extends React.Component {
     if (value) {
       const today = moment()
       if (value.isBefore(today, 'month')) {
+        // eslint-disable-next-line
         callback('That expiry date has already passed')
       }
     } else {
