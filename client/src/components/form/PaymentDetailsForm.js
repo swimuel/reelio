@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Spin, Form, Alert, Select, Input, DatePicker, Divider, Radio } from 'antd'
 import './PaymentDetailsForm.css'
+import PaymentIcon from 'react-payment-icons'
 
 class PaymentDetailsFormClass extends React.Component {
   render () {
@@ -34,11 +35,7 @@ class PaymentDetailsFormClass extends React.Component {
           </Select>
         </Form.Item>
         <Form.Item label='Payment Type'>
-          <Radio.Group defaultValue='a'>
-            <Radio.Button value='visa'>Visa</Radio.Button>
-            <Radio.Button value='mastercard'>Mastercard</Radio.Button>
-            <Radio.Button value='americanExpress'>American Express</Radio.Button>
-          </Radio.Group>
+
         </Form.Item>
         <div className={'card-details'}>
           <Form.Item label='Card Number'>
