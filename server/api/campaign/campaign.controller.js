@@ -37,7 +37,7 @@ const newCampaign = async (req, res) => {
   campaign.campaignTitle = req.body.campaignTitle
   campaign.creationDate = moment()
   campaign.imageUrl = req.body.imageUrl
-  campaign.genre = req.body.genre
+  campaign.genre = req.body.genre.split(',')
   campaign.creatorName = req.body.creatorName
   campaign.creatorEmail = req.body.creatorEmail
   campaign.cinemaName = req.body.cinemaName
