@@ -16,7 +16,7 @@ const getAllCampaigns = async (req, res) => {
     dto.screenType = await (await ScreenType.findById(dto.screenType)).calculateDisplayName()
     return dto
   }))
-  dtoList = dtoList.filter(campaign => campaign.screeningDate > moment())
+  dtoList = dtoList.filter(campaign => campaign.screeningDate > moment() && campaign.percentageComplete < 100)
   dtoList.sort((a, b) => {
     return a.screeningDate - b.screeningDate
   })
