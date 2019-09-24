@@ -8,3 +8,9 @@
     border: 1px solid #d9d9d9;
     border-radius: 6px;
 }
+
+.ant-radio-button-wrapper {
+    padding: 0px;
+    height:auto;
+    width: auto
+}

@@ -4,6 +4,7 @@ import { Spin, Form, Alert, Button, Select, Input, DatePicker, Divider, Radio } 
 import { getScreenTypes, getCinemas } from '../../api'
 import moment from 'moment'
 import './PaymentDetailsForm.css'
+import PaymentIcon from 'react-payment-icons'
 
 class NewCampaignFormClass extends React.Component {
   state = {
@@ -244,9 +245,24 @@ class NewCampaignFormClass extends React.Component {
                 initialValue: 'a' }
             ]
           })(<Radio.Group>
-            <Radio.Button value='visa'>Visa</Radio.Button>
-            <Radio.Button value='mastercard'>Mastercard</Radio.Button>
-            <Radio.Button value='americanExpress'>American Express</Radio.Button>
+            <Radio.Button value='visa'>
+              <PaymentIcon
+                id='visa'
+                style={{ margin: 10, width: 50 }}
+              />
+            </Radio.Button>
+            <Radio.Button value='mastercard'>
+              <PaymentIcon
+                id='mastercard'
+                style={{ margin: 10, width: 50 }}
+              />
+            </Radio.Button>
+            <Radio.Button value='americanExpress'>
+              <PaymentIcon
+                id='amex'
+                style={{ margin: 10, width: 50 }}
+              />
+            </Radio.Button>
           </Radio.Group>)}
         </Form.Item>
         <div className={'card-details'}>
