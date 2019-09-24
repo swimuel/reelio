@@ -11,7 +11,6 @@ class PledgePage extends Component {
     campaign: null,
     loading: true,
     PledgeForm: null,
-    CanSubmitForm: true,
     showConfirmation: false,
     createdPledgeId: null
   }
@@ -40,7 +39,7 @@ class PledgePage extends Component {
         <div className={'details-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <PledgeForm sendDetails={this.fromPledgeForm} canSubmit={this.state.CanSubmitForm} />
+              <PledgeForm sendDetails={this.fromPledgeForm} />
             </Card>
           </div>
           <div className={'custom-col-2'}>

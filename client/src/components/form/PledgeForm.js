@@ -24,8 +24,7 @@ class PledgeFormClass extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err && this.props.canSubmit) {
-        console.log("HELLO")
+      if (!err) {
         const pledge = {
           ...values,
           name: values.name,
@@ -42,7 +41,6 @@ class PledgeFormClass extends React.Component {
           this.props.sendDetails(this.state.pledgeDetails)
         })
       }
-      console.log(err)
     })
   }
 
