@@ -17,7 +17,7 @@ class PledgeFormClass extends React.Component {
     pledgeDetails: {}
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     this.setState({ loading: false, tickets: '', pledgeDetails: {} })
   }
 
@@ -54,13 +54,15 @@ class PledgeFormClass extends React.Component {
       if (value.isBefore(today, 'month')) {
         // eslint-disable-next-line
         callback('That expiry date has already passed')
+      } else {
+        callback()
       }
     } else {
       callback()
     }
   }
 
-  render() {
+  render () {
     const { getFieldDecorator } = this.props.form
     const { MonthPicker } = DatePicker
 
@@ -255,7 +257,7 @@ class PledgeFormClass extends React.Component {
           <Form.Item {...tailFormItemLayout}>
             <Button type='primary' htmlType='submit'>
               Pledge
-              </Button>
+            </Button>
           </Form.Item>
         </div>
     } else {
