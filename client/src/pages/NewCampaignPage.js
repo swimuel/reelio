@@ -87,6 +87,7 @@ class NewCampaignPage extends React.Component {
       campaignTitle: this.state.CampaignForm.campaignTitle,
       creationDate: this.state.CampaignForm.creationDate,
       screeningDate: this.state.CampaignForm.screeningDate,
+      screeningTime: this.state.CampaignForm.screeningTime,
       screenType: this.state.CampaignForm.screenType,
       imageUrl: movie.Poster,
       genre: movie.Genre,
