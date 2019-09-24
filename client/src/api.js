@@ -55,6 +55,21 @@ export const createCampaign = async (campaign) => {
   return response.json()
 }
 
+export const createPledge = async (pledge) => {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(pledge)
+  }
+
+  const response = await fetch('/api/pledge', options)
+  if (response.status !== 201) throw Error(response.message)
+
+  return response.json()
+}
+
 export const getScreenTypes = async () => {
   const response = await fetch('/api/screenTypes')
   const body = await response.json()

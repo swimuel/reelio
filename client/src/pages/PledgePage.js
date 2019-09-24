@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col, Icon, Card, Spin } from 'antd'
 import { Link } from 'react-router-dom'
-import { getCampaignById } from '../api'
+import { getCampaignById, createPledge } from '../api'
 import PledgeDetails from '../components/pledge/PledgeDetails'
 import PledgeForm from '../components/form/PledgeForm'
 import './NewCampaignPage.css'
@@ -9,13 +9,17 @@ import './NewCampaignPage.css'
 class PledgePage extends Component {
   state = {
     campaign: null,
-    loading: true
+    loading: true,
+    PledgeForm: null,
+    CanSubmitForm: true,
+    showConfirmation: false,
+    createdPledgeId: null
   }
 
   async componentDidMount () {
     const id = this.props.match.params.id
     const campaign = await getCampaignById(id)
-    this.setState({ campaign: campaign, loading: false, CanSubmitForm: false })
+    this.setState({ campaign: campaign, loading: false })
   }
 
   render () {
@@ -36,7 +40,7 @@ class PledgePage extends Component {
         <div className={'details-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <PledgeForm sendDetails={this.fromCampaignPledgeForm} canSubmit={this.state.CanSubmitForm} />
+              <PledgeForm sendDetails={this.fromPledgeForm} canSubmit={this.state.CanSubmitForm} />
             </Card>
           </div>
           <div className={'custom-col-2'}>
@@ -58,8 +62,18 @@ class PledgePage extends Component {
       name: this.state.PledgeForm.name,
       email: this.state.PledgeForm.email,
       campaign: this.state.campaign._id,
-      ticketsPledged: this.state.PledgeForm.ticketsPledged
+      ticketsPledged: this.state.PledgeForm.ticketsPledged,
+      creditCardNumber: this.state.PledgeForm.creditCardNumber,
+      creditCardExpiry: this.state.PledgeForm.creditCardExpiry,
+      creditCardCVV: this.state.PledgeForm.creditCardCVV,
+      creditCardName: this.state.PledgeForm.creditCardName
     }
+
+    // Call api to store the new pledge in the back end
+    createPledge(pledge).then(created => {
+      const id = created.data._id
+      this.setState({ showConfirmation: true, createdPledgeId: id })
+    })
   }
 }
 
