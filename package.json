@@ -19,6 +19,8 @@
     "moment": "^2.24.0",
     "mongoose": "^5.6.9",
     "objectid": "^3.2.1",
+    "react": "^16.9.0",
+    "react-copy-to-clipboard": "^5.0.1"
     "react-payment-icons": "^1.2.6"
   },
   "devDependencies": {

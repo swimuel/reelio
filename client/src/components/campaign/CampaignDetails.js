@@ -1,10 +1,12 @@
 import React from 'react'
-import { Icon, Tag } from 'antd'
+import { Icon, Tag, Button, Popover } from 'antd'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 const moment = require('moment')
 
 class CampaignDetails extends React.Component {
   render () {
     const { campaign } = this.props
+    const url = window.location.href
 
     return (
       <div style={{ paddingLeft: '10px', paddingRight: '10px', paddingBottom: '10px', margin: 'auto', textAlign: 'left', width: 'fit-content' }}>
@@ -14,6 +16,11 @@ class CampaignDetails extends React.Component {
         <h2 style={styles.h2}><Icon type='clock-circle' style={styles.icon} /> { campaign.screeningTime }</h2>
         <h2 style={styles.h2}><Icon type='dollar' style={styles.icon} /> ${ campaign.price }.00</h2>
         <h3 style={styles.h3}>Organiser: {campaign.creatorName} </h3>
+        <CopyToClipboard text={url}>
+          <Popover content='Link copied!' trigger='click'>
+            <Button size='large' style={styles.h3}>Share <Icon type='share-alt' /></Button>
+          </Popover>
+        </CopyToClipboard>
       </div>
     )
   }
