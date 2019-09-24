@@ -21,7 +21,9 @@ class CampaignList extends React.Component {
     // all of the cinemas existing in the campaigns
     const cinemas = [...new Set(campaigns.map(x => x.cinemaName))]
     // all of the genres existing in the campaigns
-    const genres = [...new Set(campaigns.map(x => x.genre))]
+    const genres = [...new Set(campaigns.map(x => x.genre).reduce((allGenres, currentGenre) => {
+      return [...allGenres, ...currentGenre]
+    }))]
     // the different cinema types, iMax, iMax 3D etc
     const screenTypes = [...new Set(campaigns.map(x => x.screenType))]
 
@@ -56,9 +58,16 @@ class CampaignList extends React.Component {
         Object.keys(filters).forEach(property => {
           let matchWithinProperty = false
           filters[property].forEach(value => {
-            if (campaign[property] === value) {
-              // this campaign matches a value within this filter property
-              matchWithinProperty = true
+            if (Array.isArray(campaign[property])) {
+              if (campaign[property].includes(value)) {
+                // this campaign matches a value within this filter property
+                matchWithinProperty = true
+              }
+            } else {
+              if (campaign[property] === value) {
+                // this campaign matches a value within this filter property
+                matchWithinProperty = true
+              }
             }
           })
           if (!matchWithinProperty) {
