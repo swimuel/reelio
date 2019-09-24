@@ -12,7 +12,8 @@ class NewCampaignFormClass extends React.Component {
     screenTypes: [],
     selectedType: '',
     loading: true,
-    campaignDetails: {}
+    campaignDetails: {},
+    selectedCinema: null
   }
 
   async componentDidMount () {
@@ -29,6 +30,7 @@ class NewCampaignFormClass extends React.Component {
           ...values,
           campaignTitle: values.campaignTitle,
           screeningDate: values.screeningDate.toDate(),
+          screeningTime: values.screeningTime,
           creationDate: Date(),
           creatorName: values.creatorName,
           screenType: values.screenType,
@@ -37,6 +39,7 @@ class NewCampaignFormClass extends React.Component {
           cinemaAddress: this.state.cinemas.find(c => c.name === values.cinemaName).address,
           price: this.state.screenTypes.find(st => st._id === values.screenType).price
         }
+
         this.setState({
           campaignDetails: campaign
         }, () => {
@@ -58,8 +61,10 @@ class NewCampaignFormClass extends React.Component {
   handleCinemaChange = (value) => {
     this.state.cinemas.map(c => {
       if (c.name === value) {
+        this.setState({ selectedCinema: c })
         this.props.form.setFieldsValue({
-          cinemaAddress: c.address
+          cinemaAddress: c.address,
+          screeningTime: null
         })
       }
     })
@@ -71,6 +76,8 @@ class NewCampaignFormClass extends React.Component {
       if (value.isBefore(today, 'month')) {
         // eslint-disable-next-line
         callback('That expiry date has already passed')
+      } else {
+        callback()
       }
     } else {
       callback()
@@ -156,10 +163,9 @@ class NewCampaignFormClass extends React.Component {
                 message: 'A screening time is required' }
             ]
           })(<Select placeholder='Select a screening time'>
-            <Select.Option value='time1'>10:30 am</Select.Option>
-            <Select.Option value='time2'>2:00 pm</Select.Option>
-            <Select.Option value='time3'>6:00 pm</Select.Option>
-            <Select.Option value='time4'>8:30 pm</Select.Option>
+            {this.state.selectedCinema &&
+            this.state.selectedCinema.availableTimes.map(time =>
+              <Select.Option key={time} value={time}>{time}</Select.Option>)}
           </Select>)}
         </Form.Item>
         <Form.Item label='Screen type'>

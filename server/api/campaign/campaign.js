@@ -11,6 +11,7 @@ const CampaignSchema = new Schema({
   campaignTitle: { type: String, required: true },
   creationDate: { type: Date, required: true },
   screeningDate: { type: Date, required: true },
+  screeningTime: { type: String, required: true },
   screenType: { type: Schema.Types.ObjectId, ref: 'ScreenType', required: true },
   imageUrl: { type: String, required: true },
   genre: { type: String, required: true },
