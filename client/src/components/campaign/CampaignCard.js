@@ -11,14 +11,31 @@ class CampaignCard extends React.Component {
     const now = moment()
 
     const difference = moment.duration(finishTime.diff(now))
-    if (Math.trunc(difference.asWeeks()) > 0) {
-      return { value: Math.trunc(difference.asWeeks()) + ' weeks', finishSoon: false }
+    if (Math.trunc(difference.asMonths()) > 0) {
+      return {
+        value: Math.trunc(difference.asMonths()) + (Math.trunc(difference.asMonths()) === 1 ? ' month' : ' months'),
+        finishSoon: false
+      }
+    } else if (Math.trunc(difference.asWeeks()) > 0) {
+      return {
+        value: Math.trunc(difference.asWeeks()) + (Math.trunc(difference.asWeeks()) === 1 ? ' week' : ' weeks'),
+        finishSoon: false
+      }
     } else if (Math.trunc(difference.asDays()) > 0) {
-      return { value: Math.trunc(difference.asDays()) + ' days', finishSoon: false }
+      return {
+        value: Math.trunc(difference.asDays()) + (Math.trunc(difference.asDays()) === 1 ? ' day' : ' days'),
+        finishSoon: false
+      }
     } else if (Math.trunc(difference.asHours()) > 0) {
-      return { value: Math.trunc(difference.asHours()) + ' hours', finishSoon: true }
+      return {
+        value: Math.trunc(difference.asHours()) + (Math.trunc(difference.asHours()) === 1 ? ' hour' : ' hours'),
+        finishSoon: true
+      }
     } else if (Math.trunc(difference.asMinutes()) > 0) {
-      return { value: Math.trunc(difference.asMinutes()) + ' minutes', finishSoon: true }
+      return {
+        value: Math.trunc(difference.asMinutes()) + (Math.trunc(difference.asMinutes()) === 1 ? ' minute' : ' minutes'),
+        finishSoon: true
+      }
     } else if (Math.trunc(difference.asSeconds()) > 0) {
       return { value: Math.trunc(difference.asSeconds()) + ' seconds', finishSoon: true }
     } else {
