@@ -64,6 +64,18 @@ class NewCampaignFormClass extends React.Component {
     })
   };
 
+  validateExpiry = (rule, value, callback) => {
+    if (value) {
+      const today = moment()
+      if (value.isBefore(today, 'month')) {
+        // eslint-disable-next-line
+        callback('That expiry date has already passed')
+      }
+    } else {
+      callback()
+    }
+  }
+
   render () {
     const { getFieldDecorator } = this.props.form
     const { MonthPicker } = DatePicker
@@ -206,16 +218,19 @@ class NewCampaignFormClass extends React.Component {
         </Form.Item>
         <Divider />
         <h2>Payment</h2>
-        <Alert message='You must secure one ticket to start the campaign' type='info'
+        <Alert message='You must secure at least one ticket to start the campaign' type='info'
           className={'info-alert'} showIcon />
         <Form.Item label='Number of Tickets'>
-          <Select defaultValue='1ticket' className={'ticket-select'}>
-            <Select.Option value='1ticket'>1</Select.Option>
-            <Select.Option value='2ticket'>2</Select.Option>
-            <Select.Option value='3ticket'>3</Select.Option>
-            <Select.Option value='4ticket'>4</Select.Option>
-            <Select.Option value='5ticket'>5</Select.Option>
-          </Select>
+          {getFieldDecorator('numTicketsPledged', {
+            rules: [],
+            initialValue: '1'
+          })(<Select className={'ticket-select'}>
+            <Select.Option value='1'>1</Select.Option>
+            <Select.Option value='2'>2</Select.Option>
+            <Select.Option value='3'>3</Select.Option>
+            <Select.Option value='4'>4</Select.Option>
+            <Select.Option value='5'>5</Select.Option>
+          </Select>)}
         </Form.Item>
         <Form.Item label='Payment Type'>
           {getFieldDecorator('paymentType', {
@@ -256,7 +271,8 @@ class NewCampaignFormClass extends React.Component {
                 {
                   required: true,
                   message: 'An expiry date is required'
-                }
+                },
+                { validator: this.validateExpiry }
               ]
             })(<MonthPicker placeholder='Select Month' style={{ width: '100%' }} />)}
           </Form.Item>
