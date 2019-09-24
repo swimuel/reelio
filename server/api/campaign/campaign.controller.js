@@ -9,13 +9,14 @@ const getAllCampaigns = async (req, res) => {
   const campaignList = await Campaigns.find()
 
   // async map functions are weird so have to use promise.all to properly await
-  const dtoList = await Promise.all(campaignList.map(async campaign => {
+  let dtoList = await Promise.all(campaignList.map(async campaign => {
     const dto = campaign.toObject()
     dto.percentageComplete = await campaign.calculatePercentageComplete()
     dto.campaignFinishDate = await campaign.calculateCampaignTimeRemainingInDays()
     dto.screenType = await (await ScreenType.findById(dto.screenType)).calculateDisplayName()
     return dto
   }))
+  dtoList = dtoList.filter(campaign => campaign.screeningDate > moment())
   dtoList.sort((a, b) => {
     return a.screeningDate - b.screeningDate
   })
