@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Spin, Form, Button, Select, Input, DatePicker, Divider, Radio } from 'antd'
+import { Spin, Form, Button, Select, Input, DatePicker, Divider, Radio, Alert } from 'antd'
 import './PaymentDetailsForm.css'
 import Seat1 from '../../assets/1seat.PNG'
 import Seat2 from '../../assets/2seat.PNG'
@@ -14,7 +14,8 @@ class PledgeFormClass extends React.Component {
   state = {
     loading: true,
     tickets: '',
-    pledgeDetails: {}
+    pledgeDetails: {},
+    totalPrice: ''
   }
 
   async componentDidMount () {
@@ -45,7 +46,8 @@ class PledgeFormClass extends React.Component {
   }
 
   handleTicketChange = (value) => {
-    this.setState({ tickets: value })
+    var total = (Number(value) * Number(this.props.campaign.price))
+    this.setState({ tickets: value, totalPrice: total })
   }
 
   validateExpiry = (rule, value, callback) => {
@@ -172,6 +174,8 @@ class PledgeFormClass extends React.Component {
       payment =
         <div>
           <h2>Payment</h2>
+          <Alert message={`Your credit card will be charged $${this.state.totalPrice}.00, if this campaign succeeds`} type='info' showIcon />
+          <br />
           <Form.Item label='Payment Type'>
             {getFieldDecorator('paymentType', {
               rules: [

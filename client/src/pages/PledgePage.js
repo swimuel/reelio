@@ -39,7 +39,7 @@ class PledgePage extends Component {
         <div className={'details-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <PledgeForm sendDetails={this.fromPledgeForm} />
+              <PledgeForm sendDetails={this.fromPledgeForm} campaign={this.state.campaign} />
             </Card>
           </div>
           <div className={'custom-col-2'}>
