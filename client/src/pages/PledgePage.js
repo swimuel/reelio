@@ -84,9 +84,9 @@ class PledgePage extends Component {
     createPledge(pledge).then(created => {
       const id = created.data._id
       this.setState({ showConfirmation: true, createdPledgeId: id, pledgeCampaign: created.data.campaign })
-      // this.props.history.push(`/campaigns/${created.data.campaign}/confirm`)
     })
   }
+
   goToCreatedCampaign = () => {
     this.props.history.push(`/campaigns/${this.state.pledgeCampaign}`)
   }
