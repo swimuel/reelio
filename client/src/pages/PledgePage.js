@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Icon, Card, Spin } from 'antd'
+import { Row, Col, Icon, Card, Spin, Modal, Button } from 'antd'
 import { Link } from 'react-router-dom'
 import { getCampaignById, createPledge } from '../api'
 import PledgeDetails from '../components/pledge/PledgeDetails'
@@ -12,7 +12,8 @@ class PledgePage extends Component {
     loading: true,
     PledgeForm: null,
     showConfirmation: false,
-    createdPledgeId: null
+    createdPledgeId: null,
+    pledgeCampaign: null
   }
 
   async componentDidMount () {
@@ -46,6 +47,17 @@ class PledgePage extends Component {
             <PledgeDetails id={campaign._id} imdbID={campaign.imdbID} />
           </div>
         </div>
+        <Modal
+          visible={this.state.showConfirmation}
+          title={'Pledge successful!'}
+          closable={false}
+          footer={<Button type='primary' onClick={this.goToCreatedCampaign}>Go to campaign</Button>}
+        >{this.state.showConfirmation &&
+          `You have pledged ${this.state.PledgeForm.ticketsPledged}
+           ${this.state.PledgeForm.ticketsPledged > 1 ? 'tickets' : 'ticket'} 
+           towards a screening of
+          ${this.state.campaign.filmTitle}`}
+        </Modal>
       </div>
     )
   }
@@ -71,9 +83,12 @@ class PledgePage extends Component {
     // Call api to store the new pledge in the back end
     createPledge(pledge).then(created => {
       const id = created.data._id
-      this.setState({ showConfirmation: true, createdPledgeId: id })
-      this.props.history.push(`/campaigns/${created.data.campaign}/confirm`)
+      this.setState({ showConfirmation: true, createdPledgeId: id, pledgeCampaign: created.data.campaign })
     })
+  }
+
+  goToCreatedCampaign = () => {
+    this.props.history.push(`/campaigns/${this.state.pledgeCampaign}/confirm`)
   }
 }
 
