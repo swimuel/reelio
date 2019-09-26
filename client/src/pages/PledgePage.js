@@ -88,7 +88,7 @@ class PledgePage extends Component {
   }
 
   goToCreatedCampaign = () => {
-    this.props.history.push(`/campaigns/${this.state.pledgeCampaign}`)
+    this.props.history.push(`/campaigns/${this.state.pledgeCampaign}/confirm`)
   }
 }
 
