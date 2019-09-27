@@ -67,6 +67,7 @@ class PledgeFormClass extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form
     const { MonthPicker } = DatePicker
+    const seatsClass = 'seats'
 
     // TODO: adjust these to be responsive
     const formItemLayout = {
@@ -102,7 +103,7 @@ class PledgeFormClass extends React.Component {
             <Divider />
             <h2>Seats</h2>
             <h3>You have been allocated the following seats</h3>
-            <img src={Seat1} alt='' />
+            <img className={seatsClass} src={Seat1} alt='' />
             <Divider />
           </div>
       } else if (this.state.tickets === '2') {
@@ -111,7 +112,7 @@ class PledgeFormClass extends React.Component {
             <Divider />
             <h2>Seats</h2>
             <h3>You have been allocated the following seats</h3>
-            <img src={Seat2} alt='' />
+            <img className={seatsClass} src={Seat2} alt='' />
             <Divider />
           </div>
       } else if (this.state.tickets === '3') {
@@ -120,7 +121,7 @@ class PledgeFormClass extends React.Component {
             <Divider />
             <h2>Seats</h2>
             <h3>You have been allocated the following seats</h3>
-            <img src={Seat3} alt='' />
+            <img className={seatsClass} src={Seat3} alt='' />
             <Divider />
           </div>
       } else if (this.state.tickets === '4') {
@@ -129,7 +130,7 @@ class PledgeFormClass extends React.Component {
             <Divider />
             <h2>Seats</h2>
             <h3>You have been allocated the following seats</h3>
-            <img src={Seat4} alt='' />
+            <img className={seatsClass} src={Seat4} alt='' />
             <Divider />
           </div>
       } else if (this.state.tickets === '5') {
@@ -138,7 +139,7 @@ class PledgeFormClass extends React.Component {
             <Divider />
             <h2>Seats</h2>
             <h3>You have been allocated the following seats</h3>
-            <img src={Seat5} alt='' />
+            <img className={seatsClass} src={Seat5} alt='' />
             <Divider />
           </div>
       }
