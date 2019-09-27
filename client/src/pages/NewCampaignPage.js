@@ -4,11 +4,12 @@ import MovieSearchClass from '../components/movie/MovieSearch'
 import { Link } from 'react-router-dom'
 import './NewCampaignPage.css'
 import NewCampaignForm from '../components/form/NewCampaignForm'
-import { createCampaign, getMoviesByID } from '../api'
+import { createCampaign, getMoviesByID, createPledge } from '../api'
 
 class NewCampaignPage extends React.Component {
   state = {
     CampaignForm: null,
+    PledgeForm: null,
     MovieSearchForm: null,
     CanSubmitForm: false,
     showConfirmation: false,
@@ -81,7 +82,6 @@ class NewCampaignPage extends React.Component {
 
   saveData = () => {
     const movie = this.state.MovieSearchForm.movie
-
     const campaign = {
       filmTitle: movie.Title,
       campaignTitle: this.state.CampaignForm.campaignTitle,
@@ -104,6 +104,21 @@ class NewCampaignPage extends React.Component {
       const id = created.data._id
       const numTicketsPledged = this.state.CampaignForm.numTicketsPledged
       this.setState({ showConfirmation: true, createdCampaignId: id, numTicketsPledged })
+      console.log('successfully pushed campaign with id', id)
+
+      const pledge = {
+        name: this.state.CampaignForm.name,
+        email: this.state.CampaignForm.email,
+        campaign: id,
+        ticketsPledged: this.state.CampaignForm.ticketsPledged,
+        creditCardNumber: this.state.CampaignForm.creditCardNumber,
+        creditCardExpiry: this.state.CampaignForm.creditCardExpiry,
+        creditCardCVV: this.state.CampaignForm.creditCardCVV,
+        creditCardName: this.state.CampaignForm.creditCardName
+      }
+      console.log('pledge = ', pledge)
+
+      createPledge(pledge)
     })
   }
 }
