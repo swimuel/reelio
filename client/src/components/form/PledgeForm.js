@@ -67,7 +67,7 @@ class PledgeFormClass extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form
     const { MonthPicker } = DatePicker
-    const seatsClass = "seats"
+    const seatsClass = 'seats'
 
     // TODO: adjust these to be responsive
     const formItemLayout = {
