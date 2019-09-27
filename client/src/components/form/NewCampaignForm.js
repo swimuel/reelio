@@ -26,6 +26,7 @@ class NewCampaignFormClass extends React.Component {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err && this.props.canSubmit) {
+        // Campaign details
         const campaign = {
           ...values,
           campaignTitle: values.campaignTitle,
@@ -37,7 +38,14 @@ class NewCampaignFormClass extends React.Component {
           cinemaName: this.state.cinemas.find(c => c.name === values.cinemaName).name,
           creatorEmail: values.creatorEmail,
           cinemaAddress: this.state.cinemas.find(c => c.name === values.cinemaName).address,
-          price: this.state.screenTypes.find(st => st._id === values.screenType).price
+          price: this.state.screenTypes.find(st => st._id === values.screenType).price,
+          name: values.creatorName,
+          email: values.creatorEmail,
+          ticketsPledged: values.numTicketsPledged,
+          creditCardNumber: values.cardNumber,
+          creditCardExpiry: values.expiryMonth,
+          creditCardCVV: values.cvvNumber,
+          creditCardName: values.cardName
         }
 
         this.setState({
