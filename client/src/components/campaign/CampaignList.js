@@ -115,13 +115,13 @@ class CampaignList extends React.Component {
         <div className='campaigns-container'>
           <List
             grid={{
-              gutter: 16,
+              gutter: 10,
               xs: 1,
               sm: 2,
               md: 2,
-              lg: 3,
+              lg: 4,
               xl: 4,
-              xxl: 5
+              xxl: 6
             }}
             dataSource={filteredCampaigns}
             // renderItem is called with each element in dataSource (which in this case are campaigns).
