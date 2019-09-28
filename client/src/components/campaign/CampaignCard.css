@@ -7,7 +7,8 @@ background-size: 100% 100%;
 position: relative;
 }
 
-/*Adjust height for different widths*/
+/*Adjust height for different widths.
+Has been set to match List grid configurations in CampaignList*/
 @media only screen and (min-width: 576px) and (max-width: 992px) {
     .campaigns-container .ant-card {
         height: calc(60vw);
