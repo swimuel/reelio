@@ -68,7 +68,22 @@ class PledgeFormClass extends React.Component {
     const { getFieldDecorator } = this.props.form
     const { MonthPicker } = DatePicker
     const seatsClass = 'seats'
-
+    const { seatsLeft } = this.props.campaign
+    console.log(seatsLeft)
+    let x = []
+    if (seatsLeft < 5) {
+      for (let i = 1; i <= seatsLeft; i++) {
+        x.push(<Select.Option value={i}>{i}</Select.Option>)
+      }
+    } else {
+      x = [
+        <Select.Option value='1'>1</Select.Option>,
+        <Select.Option value='2'>2</Select.Option>,
+        <Select.Option value='3'>3</Select.Option>,
+        <Select.Option value='4'>4</Select.Option>,
+        <Select.Option value='5'>5</Select.Option>
+      ]
+    }
     // TODO: adjust these to be responsive
     const formItemLayout = {
       labelCol: {
@@ -284,11 +299,7 @@ class PledgeFormClass extends React.Component {
             ]
           })(<Select placeholder='Select number of tickets' className={'ticket-select'}
             onChange={this.handleTicketChange}>
-            <Select.Option value='1'>1</Select.Option>
-            <Select.Option value='2'>2</Select.Option>
-            <Select.Option value='3'>3</Select.Option>
-            <Select.Option value='4'>4</Select.Option>
-            <Select.Option value='5'>5</Select.Option>
+            {x}
           </Select>)}
         </Form.Item>
 

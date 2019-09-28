@@ -40,5 +40,15 @@ module.exports = [
     creditCardExpiry: new Date('2021-08-01'),
     creditCardCVV: '123',
     creditCardName: 'Person'
+  },
+  { // for testing capacity
+    name: 'Testy Bro',
+    email: 'test@yo.com',
+    campaign: campaigns[7]._id,
+    ticketsPledged: 96,
+    creditCardNumber: '1234567876123456',
+    creditCardExpiry: new Date('2021-08-01'),
+    creditCardCVV: '123',
+    creditCardName: 'Person'
   }
 ]
