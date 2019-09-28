@@ -14,9 +14,10 @@ const getAllCampaigns = async (req, res) => {
     dto.percentageComplete = await campaign.calculatePercentageComplete()
     dto.campaignFinishDate = await campaign.calculateCampaignTimeRemainingInDays()
     dto.screenType = await (await ScreenType.findById(dto.screenType)).calculateDisplayName()
+    dto.seatsLeft = await campaign.calculateRemainingSeats()
     return dto
   }))
-  dtoList = dtoList.filter(campaign => campaign.screeningDate > moment() && campaign.percentageComplete < 100)
+  dtoList = dtoList.filter(campaign => campaign.screeningDate > moment() && campaign.seatsLeft > 0)
   dtoList.sort((a, b) => {
     return a.screeningDate - b.screeningDate
   })
@@ -28,6 +29,7 @@ const getCampaignById = async (req, res) => {
   const campaign = await Campaigns.findById(id)
   const dto = campaign.toObject()
   dto.screenType = await (await ScreenType.findById(dto.screenType)).calculateDisplayName()
+  dto.seatsLeft = await campaign.calculateRemainingSeats()
   res.json(dto)
 }
 

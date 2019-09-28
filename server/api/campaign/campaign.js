@@ -42,6 +42,25 @@ CampaignSchema.methods.calculatePercentageComplete = async function () {
   return totalPledged / screenType.numTicketsRequired * 100
 }
 
+CampaignSchema.methods.calculateRemainingSeats = async function () {
+  const campaignId = this._id
+
+  // get all pledges for this campaign and determine number of total tickets
+  const pledges = await Pledge
+    .find({ campaign: campaignId })
+    .select('ticketsPledged')
+
+  let totalPledged = 0
+  pledges.forEach(pledge => {
+    totalPledged += pledge.ticketsPledged
+  })
+
+  // find screen type information for this campaign to compute total tickets required
+  const screenType = await ScreenType.findById(this.screenType)
+
+  return screenType.maxTicketsAvailable - totalPledged
+}
+
 CampaignSchema.methods.calculateCampaignTimeRemainingInDays = async function () {
   // translates a Date object into a Moment object
   const screeningDate = moment(this.screeningDate)
