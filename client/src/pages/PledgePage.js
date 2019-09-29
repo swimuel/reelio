@@ -31,9 +31,13 @@ class PledgePage extends Component {
           <Col span={24}>
             <Card bordered={false}>
               <Link to={`/campaigns/${campaign._id}`}><Icon type='arrow-left' style={styles.backButton} /></Link>
-              <h1 style={{ fontSize: '2.8em' }}>Pledge to '{campaign.campaignTitle}'</h1>
+              <div style={styles.heading}>
+                Pledge to '{campaign.campaignTitle}'
+              </div>
               <Icon type='arrow-left' style={styles.backButton2} />
-              <h1>A screening of {campaign.filmTitle}</h1>
+              <div style={styles.heading2}>
+                A screening of {campaign.filmTitle}
+              </div>
             </Card>
           </Col>
         </Row>
@@ -109,5 +113,15 @@ const styles = {
 
   cardBorder: {
     borderRight: '1px solid #E8E8E8'
+  },
+
+  heading: {
+    fontSize: '3.3em',
+    fontWeight: 'bold'
+  },
+
+  heading2: {
+    fontSize: '2em',
+    fontWeight: 'bold'
   }
 }
