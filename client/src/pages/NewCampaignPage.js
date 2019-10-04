@@ -24,7 +24,9 @@ class NewCampaignPage extends React.Component {
           <Col span={24}>
             <Card bordered={false}>
               <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
-              <h2 style={{ fontSize: '2em' }}>Create Campaign</h2>
+              <div style={styles.heading}>
+                Create Campaign
+              </div>
             </Card>
           </Col>
         </Row>
@@ -133,5 +135,10 @@ const styles = {
 
   cardBorder: {
     borderRight: '1px solid #E8E8E8'
+  },
+
+  heading: {
+    fontSize: '3.3em',
+    fontWeight: 'bold'
   }
 }

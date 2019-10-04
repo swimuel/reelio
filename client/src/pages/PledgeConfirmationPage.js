@@ -30,7 +30,9 @@ class PledgeConfirmationPage extends React.Component {
           <Col span={24}>
             <Card bordered={false}>
               <Link to='/'><Icon type='arrow-left' style={styles.backButton} /></Link>
-              <h1 style={{ fontSize: '2.8em' }}>You have pledged to '{campaign.campaignTitle}'!</h1>
+              <div style={styles.heading}>
+                You have pledged to '{campaign.campaignTitle}'!
+              </div>
             </Card>
           </Col>
         </Row>
@@ -54,5 +56,10 @@ const styles = {
     float: 'left',
     fontSize: '2em',
     color: '#FF6852'
+  },
+
+  heading: {
+    fontSize: '3.3em',
+    fontWeight: 'bold'
   }
 }
