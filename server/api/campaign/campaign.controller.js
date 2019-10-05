@@ -60,7 +60,8 @@ const newCampaign = async (req, res) => {
   try {
     const screenTypeEntry = await ScreenType.findById(req.body.screenType)
     campaign.screenType = screenTypeEntry._id
-    campaign.price = screenTypeEntry.price
+    campaign.adultPrice = screenTypeEntry.adultPrice
+    campaign.childPrice = screenTypeEntry.childPrice
   } catch (err) {
     res.status(404).json({ error: 'Screen Type not found for ' + req.body.screenType })
     return

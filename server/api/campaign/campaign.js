@@ -19,7 +19,8 @@ const CampaignSchema = new Schema({
   creatorEmail: { type: String, required: true },
   cinemaName: { type: String, required: true },
   cinemaAddress: { type: String, required: true },
-  price: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
+  adultPrice: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
+  childPrice: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
   imdbID: { type: String, required: true }
 })
 
