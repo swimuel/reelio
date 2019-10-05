@@ -72,7 +72,7 @@ class CampaignCard extends React.Component {
           <Title level={4}>{campaign.filmTitle}</Title>
           <Paragraph>{campaign.campaignTitle}</Paragraph>
           <Paragraph>Screening: {moment(campaign.screeningDate).format('Do MMMM')}</Paragraph>
-          <Progress percent={Math.round(campaign.percentageComplete)} />
+          <Progress percent={Math.round(campaign.percentageComplete * 10) / 10} />
         </div>
       </Card >
     )
