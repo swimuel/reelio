@@ -5,28 +5,32 @@ module.exports = [
     _id: objectid().toString(),
     name: 'IMAX_3D',
     numTicketsRequired: 50,
-    price: 12,
+    adultPrice: 20,
+    childPrice: 16,
     maxTicketsAvailable: 100
   },
   {
     _id: objectid().toString(),
     name: 'IMAX',
     numTicketsRequired: 50,
-    price: 15,
+    adultPrice: 18,
+    childPrice: 14,
     maxTicketsAvailable: 75
   },
   {
     _id: objectid().toString(),
     name: '2D',
     numTicketsRequired: 20,
-    price: 5,
+    adultPrice: 14,
+    childPrice: 10,
     maxTicketsAvailable: 200
   },
   {
     _id: objectid().toString(),
     name: '3D',
     numTicketsRequired: 30,
-    price: 10,
+    adultPrice: 16,
+    childPrice: 12,
     maxTicketsAvailable: 150
   }
 ]
