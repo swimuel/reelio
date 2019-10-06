@@ -13,13 +13,18 @@ class PledgePage extends Component {
     PledgeForm: null,
     showConfirmation: false,
     createdPledgeId: null,
-    pledgeCampaign: null
+    pledgeCampaign: null,
+    restrictedConfirmation: false
   }
 
   async componentDidMount () {
     const id = this.props.match.params.id
     const campaign = await getCampaignById(id)
-    this.setState({ campaign: campaign, loading: false })
+    this.setState(
+      {
+        campaign: campaign,
+        loading: false,
+        restrictedConfirmation: campaign.rated === 'R' || campaign.rated === 'PG-13' })
   }
 
   render () {
@@ -36,8 +41,19 @@ class PledgePage extends Component {
               </div>
               <Icon type='arrow-left' style={styles.backButton2} />
               <div style={styles.heading2}>
-                A screening of {campaign.filmTitle}
+                A screening of {campaign.filmTitle} (Rated: {campaign.rated})
               </div>
+              {campaign.rated === 'R'
+                ? <div>
+                  You must be at least 16 years old to watch this movie
+                </div>
+                : null
+              }
+              {campaign.rated === 'PG-13'
+                ? <div>
+                  Minors under 13 must be accompanied by an adult
+                </div>
+                : null}
             </Card>
           </Col>
         </Row>
@@ -57,10 +73,25 @@ class PledgePage extends Component {
           closable={false}
           footer={<Button type='primary' onClick={this.goToCreatedCampaign}>Go to campaign</Button>}
         >{this.state.showConfirmation &&
-          `You have pledged ${this.state.PledgeForm.ticketsPledged}
+        `You have pledged ${this.state.PledgeForm.ticketsPledged}
            ${this.state.PledgeForm.ticketsPledged > 1 ? 'tickets' : 'ticket'} 
            towards a screening of
           ${this.state.campaign.filmTitle}`}
+        </Modal>
+        <Modal
+          visible={this.state.restrictedConfirmation}
+          title={'Age Restriction'}
+          closable={false}
+          footer={
+            <div style={styles.restricted}>
+              <Button style={styles.yesButton} type='primary' onClick={this.confirmAge}>Yes</Button>
+              <Button href={`/`}>No</Button>
+            </div>}
+          style={styles.restrictedModal}
+        >
+          {
+            campaign.rated === 'R' ? 'Are you over 16 years old?' : 'Are you over 13 years old?'
+          }
         </Modal>
       </div>
     )
@@ -94,6 +125,12 @@ class PledgePage extends Component {
   goToCreatedCampaign = () => {
     this.props.history.push(`/campaigns/${this.state.pledgeCampaign}/confirm`)
   }
+
+  confirmAge = () => {
+    this.setState({
+      restrictedConfirmation: false
+    })
+  }
 }
 
 export default PledgePage
@@ -123,5 +160,20 @@ const styles = {
   heading2: {
     fontSize: '2em',
     fontWeight: 'bold'
+  },
+
+  restricted: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%'
+  },
+
+  restrictedModal: {
+    textAlign: 'center'
+  },
+
+  yesButton: {
+    marginRight: '2%'
   }
 }

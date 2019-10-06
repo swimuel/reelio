@@ -20,7 +20,8 @@ module.exports = [
     cinemaAddress: cinemas[1].address,
     adultPrice: screenTypes[0].adultPrice,
     childPrice: screenTypes[0].childPrice,
-    imdbID: 'tt4154796'
+    imdbID: 'tt4154796',
+    rated: 'PG-13'
   },
   {
     _id: objectid().toString(),
@@ -38,7 +39,8 @@ module.exports = [
     cinemaAddress: cinemas[2].address,
     adultPrice: screenTypes[3].adultPrice,
     childPrice: screenTypes[3].childPrice,
-    imdbID: 'tt0088763'
+    imdbID: 'tt0088763',
+    rated: 'PG'
   },
   {
     _id: objectid().toString(),
@@ -56,7 +58,8 @@ module.exports = [
     cinemaAddress: cinemas[2].address,
     adultPrice: screenTypes[0].adultPrice,
     childPrice: screenTypes[0].childPrice,
-    imdbID: 'tt0102926'
+    imdbID: 'tt0102926',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -74,7 +77,8 @@ module.exports = [
     cinemaAddress: cinemas[2].address,
     adultPrice: screenTypes[1].adultPrice,
     childPrice: screenTypes[1].childPrice,
-    imdbID: 'tt3606756'
+    imdbID: 'tt3606756',
+    rated: 'PG'
   },
   {
     _id: objectid().toString(),
@@ -92,7 +96,8 @@ module.exports = [
     cinemaAddress: cinemas[3].address,
     adultPrice: screenTypes[2].adultPrice,
     childPrice: screenTypes[2].childPrice,
-    imdbID: 'tt0209144'
+    imdbID: 'tt0209144',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -110,7 +115,8 @@ module.exports = [
     cinemaAddress: cinemas[2].address,
     adultPrice: screenTypes[3].adultPrice,
     childPrice: screenTypes[3].childPrice,
-    imdbID: 'tt2582802'
+    imdbID: 'tt2582802',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -128,7 +134,8 @@ module.exports = [
     cinemaAddress: cinemas[2].address,
     adultPrice: screenTypes[2].adultPrice,
     childPrice: screenTypes[2].childPrice,
-    imdbID: 'tt1979320'
+    imdbID: 'tt1979320',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -146,7 +153,8 @@ module.exports = [
     cinemaAddress: cinemas[0].address,
     adultPrice: screenTypes[0].adultPrice,
     childPrice: screenTypes[0].childPrice,
-    imdbID: 'tt0245429'
+    imdbID: 'tt0245429',
+    rated: 'PG'
   },
   { // purposely outdated
     _id: objectid().toString(),
@@ -164,6 +172,7 @@ module.exports = [
     cinemaAddress: cinemas[1].address,
     adultPrice: screenTypes[0].adultPrice,
     childPrice: screenTypes[0].childPrice,
-    imdbID: 'tt4154796'
+    imdbID: 'tt4154796',
+    rated: 'R'
   }
 ]
