@@ -19,6 +19,7 @@ class NewCampaignFormClass extends React.Component {
   async componentDidMount () {
     const cinemas = await getCinemas()
     const screenTypes = await getScreenTypes()
+    console.log(screenTypes)
     this.setState({ cinemas: cinemas, screenTypes: screenTypes, loading: false, campaignDetails: {} })
   }
 
@@ -38,10 +39,11 @@ class NewCampaignFormClass extends React.Component {
           cinemaName: this.state.cinemas.find(c => c.name === values.cinemaName).name,
           creatorEmail: values.creatorEmail,
           cinemaAddress: this.state.cinemas.find(c => c.name === values.cinemaName).address,
-          price: this.state.screenTypes.find(st => st._id === values.screenType).price,
+          adultPrice: this.state.screenTypes.find(st => st._id === values.screenType).adultPrice,
+          childPrice: this.state.screenTypes.find(st => st._id === values.screenType).childPrice,
           name: values.creatorName,
           email: values.creatorEmail,
-          ticketsPledged: values.numTicketsPledged,
+          ticketsPledged: Number(values.numAdultTicketsPledged) + Number(values.numChildTicketsPledged),
           creditCardNumber: values.cardNumber,
           creditCardExpiry: values.expiryMonth,
           creditCardCVV: values.cvvNumber,
@@ -194,7 +196,7 @@ class NewCampaignFormClass extends React.Component {
         </Form.Item>
         {
           this.state.screenTypes.map(st => {
-            const priceMessage = 'The selected type will mean tickets are $' + st.price + ' each'
+            const priceMessage = 'The selected type will mean adult tickets are $' + st.adultPrice + ' each and child tickets are $' + st.childPrice + ' each'
             const seatsMessage = 'You must sell at least ' + st.numTicketsRequired + ' tickets for this campaign to succeed'
             return this.state.selectedType === st.name
               ? <div>
@@ -235,10 +237,22 @@ class NewCampaignFormClass extends React.Component {
         <h2>Payment</h2>
         <Alert message='You must secure at least one ticket to start the campaign' type='info'
           className={'info-alert'} showIcon />
-        <Form.Item label='Number of Tickets'>
-          {getFieldDecorator('numTicketsPledged', {
+        <Form.Item label='Adult Tickets'>
+          {getFieldDecorator('numAdultTicketsPledged', {
             rules: [],
             initialValue: '1'
+          })(<Select className={'ticket-select'}>
+            <Select.Option value='1'>1</Select.Option>
+            <Select.Option value='2'>2</Select.Option>
+            <Select.Option value='3'>3</Select.Option>
+            <Select.Option value='4'>4</Select.Option>
+            <Select.Option value='5'>5</Select.Option>
+          </Select>)}
+        </Form.Item>
+        <Form.Item label='Child Tickets'>
+          {getFieldDecorator('numChildTicketsPledged', {
+            rules: [],
+            initialValue: '0'
           })(<Select className={'ticket-select'}>
             <Select.Option value='1'>1</Select.Option>
             <Select.Option value='2'>2</Select.Option>

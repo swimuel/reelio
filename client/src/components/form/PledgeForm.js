@@ -13,13 +13,17 @@ import moment from 'moment'
 class PledgeFormClass extends React.Component {
   state = {
     loading: true,
-    tickets: '',
+    tickets: 0,
+    adultTickets: 0,
+    childTickets: 0,
     pledgeDetails: {},
-    totalPrice: ''
+    totalPrice: 0,
+    adultPrice: 0,
+    childPrice: 0
   }
 
   async componentDidMount () {
-    this.setState({ loading: false, tickets: '', pledgeDetails: {} })
+    this.setState({ loading: false, tickets: 0, pledgeDetails: {} })
   }
 
   handleSubmit = e => {
@@ -30,7 +34,7 @@ class PledgeFormClass extends React.Component {
           ...values,
           name: values.name,
           email: values.email,
-          ticketsPledged: values.ticketsPledged,
+          ticketsPledged: Number(values.adultTicketsPledged) + Number(values.childTicketsPledged),
           creditCardNumber: values.creditCardNumber,
           creditCardExpiry: values.creditCardExpiry,
           creditCardCVV: values.creditCardCVV,
@@ -45,9 +49,22 @@ class PledgeFormClass extends React.Component {
     })
   }
 
-  handleTicketChange = (value) => {
-    var total = (Number(value) * Number(this.props.campaign.price))
-    this.setState({ tickets: value, totalPrice: total })
+  handleAdultTicketChange = (value) => {
+    // Calculate total price
+    var price = (Number(value) * Number(this.props.campaign.adultPrice))
+    var total = price + this.state.childPrice
+    // Calculate total tickets
+    var totalTickets = Number(value) + Number(this.state.childTickets)
+    this.setState({ tickets: totalTickets, totalPrice: total, adultTickets: value, adultPrice: price })
+  }
+
+  handleChildTicketChange = (value) => {
+    // Calculate total price
+    var price = (Number(value) * Number(this.props.campaign.childPrice))
+    var total = price + this.state.adultPrice
+    // Calculate total tickets
+    var totalTickets = Number(value) + Number(this.state.adultTickets)
+    this.setState({ tickets: totalTickets, totalPrice: total, childTickets: value, childPrice: price })
   }
 
   validateExpiry = (rule, value, callback) => {
@@ -112,7 +129,7 @@ class PledgeFormClass extends React.Component {
     let payment = ''
     let personalDetails = ''
     if (this.state.tickets) {
-      if (this.state.tickets === '1') {
+      if (this.state.tickets === 1) {
         seats =
           <div>
             <Divider />
@@ -121,7 +138,7 @@ class PledgeFormClass extends React.Component {
             <img className={seatsClass} src={Seat1} alt='' />
             <Divider />
           </div>
-      } else if (this.state.tickets === '2') {
+      } else if (this.state.tickets === 2) {
         seats =
           <div>
             <Divider />
@@ -130,7 +147,7 @@ class PledgeFormClass extends React.Component {
             <img className={seatsClass} src={Seat2} alt='' />
             <Divider />
           </div>
-      } else if (this.state.tickets === '3') {
+      } else if (this.state.tickets === 3) {
         seats =
           <div>
             <Divider />
@@ -139,7 +156,7 @@ class PledgeFormClass extends React.Component {
             <img className={seatsClass} src={Seat3} alt='' />
             <Divider />
           </div>
-      } else if (this.state.tickets === '4') {
+      } else if (this.state.tickets === 4) {
         seats =
           <div>
             <Divider />
@@ -148,7 +165,7 @@ class PledgeFormClass extends React.Component {
             <img className={seatsClass} src={Seat4} alt='' />
             <Divider />
           </div>
-      } else if (this.state.tickets === '5') {
+      } else if (this.state.tickets === 5) {
         seats =
           <div>
             <Divider />
@@ -289,16 +306,29 @@ class PledgeFormClass extends React.Component {
     return this.state.loading ? <Spin /> : (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <h2>Pledge</h2>
-        <Form.Item label='Number of Tickets'>
-          {getFieldDecorator('ticketsPledged', {
+        <Form.Item label='Adult Tickets'>
+          {getFieldDecorator('adultTicketsPledged', {
             rules: [
               {
                 required: true,
-                message: 'Number of tickets pledged is required'
+                message: 'Number of adult tickets pledged is required'
               }
             ]
-          })(<Select placeholder='Select number of tickets' className={'ticket-select'}
-            onChange={this.handleTicketChange}>
+          })(<Select placeholder='Select number of adult tickets' className={'ticket-select'}
+            onChange={this.handleAdultTicketChange}>
+            {x}
+          </Select>)}
+        </Form.Item>
+        <Form.Item label='Child Tickets'>
+          {getFieldDecorator('childTicketsPledged', {
+            rules: [
+              {
+                required: true,
+                message: 'Number of child tickets pledged is required'
+              }
+            ]
+          })(<Select placeholder='Select number of child tickets' className={'ticket-select'}
+            onChange={this.handleChildTicketChange}>
             {x}
           </Select>)}
         </Form.Item>
