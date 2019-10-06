@@ -18,7 +18,8 @@ module.exports = [
     creatorEmail: 'hannah@gmail.com',
     cinemaName: cinemas[1].name,
     cinemaAddress: cinemas[1].address,
-    price: screenTypes[0].price,
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
     imdbID: 'tt4154796'
   },
   {
@@ -35,7 +36,8 @@ module.exports = [
     creatorEmail: 'ryan3@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
+    adultPrice: screenTypes[3].adultPrice,
+    childPrice: screenTypes[3].childPrice,
     imdbID: 'tt0088763'
   },
   {
@@ -52,7 +54,8 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
     imdbID: 'tt0102926'
   },
   {
@@ -69,7 +72,8 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
+    adultPrice: screenTypes[1].adultPrice,
+    childPrice: screenTypes[1].childPrice,
     imdbID: 'tt3606756'
   },
   {
@@ -86,7 +90,8 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: cinemas[3].name,
     cinemaAddress: cinemas[3].address,
-    price: screenTypes[1].price,
+    adultPrice: screenTypes[2].adultPrice,
+    childPrice: screenTypes[2].childPrice,
     imdbID: 'tt0209144'
   },
   {
@@ -103,7 +108,8 @@ module.exports = [
     creatorEmail: 'ryan4@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
+    adultPrice: screenTypes[3].adultPrice,
+    childPrice: screenTypes[3].childPrice,
     imdbID: 'tt2582802'
   },
   {
@@ -120,7 +126,8 @@ module.exports = [
     creatorEmail: 'ryan2@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
+    adultPrice: screenTypes[2].adultPrice,
+    childPrice: screenTypes[2].childPrice,
     imdbID: 'tt1979320'
   },
   {
@@ -137,7 +144,8 @@ module.exports = [
     creatorEmail: 'joe@gmail.com',
     cinemaName: cinemas[0].name,
     cinemaAddress: cinemas[0].address,
-    price: screenTypes[0].price,
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
     imdbID: 'tt0245429'
   },
   { // purposely outdated
@@ -154,7 +162,8 @@ module.exports = [
     creatorEmail: 'hannah@gmail.com',
     cinemaName: cinemas[1].name,
     cinemaAddress: cinemas[1].address,
-    price: screenTypes[0].price,
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
     imdbID: 'tt4154796'
   }
 ]

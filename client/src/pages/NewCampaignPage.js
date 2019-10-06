@@ -97,15 +97,15 @@ class NewCampaignPage extends React.Component {
       creatorEmail: this.state.CampaignForm.creatorEmail,
       cinemaName: this.state.CampaignForm.cinemaName,
       cinemaAddress: this.state.CampaignForm.cinemaAddress,
-      price: this.state.CampaignForm.price,
+      adultPrice: this.state.CampaignForm.adultPrice,
+      childPrice: this.state.CampaignForm.childPrice,
       imdbID: this.state.MovieSearchForm.key
     }
 
     // Call api to store the new campaign in the back end
     createCampaign(campaign).then(created => {
       const id = created.data._id
-      const numTicketsPledged = this.state.CampaignForm.numTicketsPledged
-      this.setState({ showConfirmation: true, createdCampaignId: id, numTicketsPledged })
+      this.setState({ showConfirmation: true, createdCampaignId: id, numTicketsPledged: this.state.CampaignForm.ticketsPledged })
       console.log('successfully pushed campaign with id', id)
 
       const pledge = {
