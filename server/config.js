@@ -1,3 +1,5 @@
 module.exports = {
-  omdbApiKey: ''
+  omdbApiKey: '',
+  reelioEmailUsername: '',
+  reelioEmailPassword: ''
 }
