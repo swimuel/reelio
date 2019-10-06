@@ -1,5 +1,6 @@
 import React from 'react'
 import CampaignList from '../components/campaign/CampaignList'
+import './HomePage.css'
 
 class HomePage extends React.Component {
   render () {
