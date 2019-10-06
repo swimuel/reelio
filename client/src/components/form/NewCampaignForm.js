@@ -27,7 +27,6 @@ class NewCampaignFormClass extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err && this.props.canSubmit) {
         const childTickets = values.numChildTicketsPledged == null ? 0 : values.numChildTicketsPledged
-        console.log(childTickets)
         // Campaign details
         const campaign = {
           ...values,
