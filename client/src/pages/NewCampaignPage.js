@@ -18,6 +18,7 @@ class NewCampaignPage extends React.Component {
   };
 
   render () {
+    const rating = this.state.MovieSearchForm != null && this.state.MovieSearchForm.movie != null ? this.state.MovieSearchForm.movie.Rated : null
     return (
       <div>
         <Row>
@@ -27,13 +28,19 @@ class NewCampaignPage extends React.Component {
               <div style={styles.heading}>
                 Create Campaign
               </div>
+              {rating === 'R'
+                ? <div>
+                  You must be at least 16 years old to watch this movie
+                </div>
+                : null
+              }
             </Card>
           </Col>
         </Row>
         <div className={'form-container'}>
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
-              <NewCampaignForm sendDetails={this.fromCampaignForm} canSubmit={this.state.CanSubmitForm} />
+              <NewCampaignForm sendDetails={this.fromCampaignForm} canSubmit={this.state.CanSubmitForm} rated={rating} />
             </Card>
           </div>
           <div className={'custom-col-2'}>
@@ -49,7 +56,7 @@ class NewCampaignPage extends React.Component {
           closable={false}
           footer={<Button type='primary' onClick={this.goToCreatedCampaign}>Go to campaign</Button>}
         >{this.state.showConfirmation &&
-          `You have pledged ${this.state.numTicketsPledged}
+        `You have pledged ${this.state.numTicketsPledged}
            ${this.state.numTicketsPledged > 1 ? 'tickets' : 'ticket'} 
         towards a screening of
           ${this.state.MovieSearchForm.movie.Title}`}
@@ -99,15 +106,14 @@ class NewCampaignPage extends React.Component {
       cinemaAddress: this.state.CampaignForm.cinemaAddress,
       adultPrice: this.state.CampaignForm.adultPrice,
       childPrice: this.state.CampaignForm.childPrice,
-      imdbID: this.state.MovieSearchForm.key
+      imdbID: this.state.MovieSearchForm.key,
+      rated: movie.Rated
     }
 
     // Call api to store the new campaign in the back end
     createCampaign(campaign).then(created => {
       const id = created.data._id
       this.setState({ showConfirmation: true, createdCampaignId: id, numTicketsPledged: this.state.CampaignForm.ticketsPledged })
-      console.log('successfully pushed campaign with id', id)
-
       const pledge = {
         name: this.state.CampaignForm.name,
         email: this.state.CampaignForm.email,
@@ -118,8 +124,6 @@ class NewCampaignPage extends React.Component {
         creditCardCVV: this.state.CampaignForm.creditCardCVV,
         creditCardName: this.state.CampaignForm.creditCardName
       }
-      console.log('pledge = ', pledge)
-
       createPledge(pledge)
     })
   }

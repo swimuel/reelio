@@ -36,8 +36,14 @@ class PledgePage extends Component {
               </div>
               <Icon type='arrow-left' style={styles.backButton2} />
               <div style={styles.heading2}>
-                A screening of {campaign.filmTitle}
+                A screening of {campaign.filmTitle} (Rated: {campaign.rated})
               </div>
+              {campaign.rated === 'R'
+                ? <div>
+                  You must be at least 16 years old to watch this movie
+                </div>
+                : null
+              }
             </Card>
           </Col>
         </Row>

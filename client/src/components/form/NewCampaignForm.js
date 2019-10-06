@@ -19,7 +19,6 @@ class NewCampaignFormClass extends React.Component {
   async componentDidMount () {
     const cinemas = await getCinemas()
     const screenTypes = await getScreenTypes()
-    console.log(screenTypes)
     this.setState({ cinemas: cinemas, screenTypes: screenTypes, loading: false, campaignDetails: {} })
   }
 
@@ -27,6 +26,8 @@ class NewCampaignFormClass extends React.Component {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err && this.props.canSubmit) {
+        const childTickets = values.numChildTicketsPledged == null ? 0 : values.numChildTicketsPledged
+        console.log(childTickets)
         // Campaign details
         const campaign = {
           ...values,
@@ -43,7 +44,7 @@ class NewCampaignFormClass extends React.Component {
           childPrice: this.state.screenTypes.find(st => st._id === values.screenType).childPrice,
           name: values.creatorName,
           email: values.creatorEmail,
-          ticketsPledged: Number(values.numAdultTicketsPledged) + Number(values.numChildTicketsPledged),
+          ticketsPledged: Number(values.numAdultTicketsPledged) + Number(childTickets),
           creditCardNumber: values.cardNumber,
           creditCardExpiry: values.expiryMonth,
           creditCardCVV: values.cvvNumber,
@@ -96,6 +97,7 @@ class NewCampaignFormClass extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form
+    const rated = this.props.rated
     const { MonthPicker } = DatePicker
 
     // TODO: adjust these to be responsive
@@ -249,7 +251,8 @@ class NewCampaignFormClass extends React.Component {
             <Select.Option value='5'>5</Select.Option>
           </Select>)}
         </Form.Item>
-        <Form.Item label='Child Tickets'>
+        {/* Disable child tickets for R rated movies */}
+        {rated !== 'R' ? <Form.Item label='Child Tickets'>
           {getFieldDecorator('numChildTicketsPledged', {
             rules: [],
             initialValue: '0'
@@ -260,7 +263,7 @@ class NewCampaignFormClass extends React.Component {
             <Select.Option value='4'>4</Select.Option>
             <Select.Option value='5'>5</Select.Option>
           </Select>)}
-        </Form.Item>
+        </Form.Item> : null}
         <Form.Item label='Payment Type'>
           {getFieldDecorator('paymentType', {
             rules: [

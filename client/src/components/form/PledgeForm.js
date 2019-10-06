@@ -34,7 +34,7 @@ class PledgeFormClass extends React.Component {
           ...values,
           name: values.name,
           email: values.email,
-          ticketsPledged: Number(values.adultTicketsPledged) + Number(values.childTicketsPledged),
+          ticketsPledged: (Number(this.state.childTickets) + Number(this.state.adultTickets)),
           creditCardNumber: values.creditCardNumber,
           creditCardExpiry: values.creditCardExpiry,
           creditCardCVV: values.creditCardCVV,
@@ -85,8 +85,7 @@ class PledgeFormClass extends React.Component {
     const { getFieldDecorator } = this.props.form
     const { MonthPicker } = DatePicker
     const seatsClass = 'seats'
-    const { seatsLeft } = this.props.campaign
-    console.log(seatsLeft)
+    const { seatsLeft, rated } = this.props.campaign
     let x = []
     if (seatsLeft < 5) {
       for (let i = 1; i <= seatsLeft; i++) {
@@ -319,11 +318,12 @@ class PledgeFormClass extends React.Component {
             {x}
           </Select>)}
         </Form.Item>
-        <Form.Item label='Child Tickets'>
+        {/* Disable child tickets for R rated movies */}
+        { rated !== 'R' ? <Form.Item label='Child Tickets'>
           {getFieldDecorator('childTicketsPledged', {
             rules: [
               {
-                required: true,
+                required: false,
                 message: 'Number of child tickets pledged is required'
               }
             ]
@@ -332,6 +332,7 @@ class PledgeFormClass extends React.Component {
             {x}
           </Select>)}
         </Form.Item>
+          : null }
 
         {seats}
         {personalDetails}

@@ -21,7 +21,8 @@ const CampaignSchema = new Schema({
   cinemaAddress: { type: String, required: true },
   adultPrice: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
   childPrice: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
-  imdbID: { type: String, required: true }
+  imdbID: { type: String, required: true },
+  rated: { type: String, required: true }
 })
 
 CampaignSchema.methods.calculatePercentageComplete = async function () {
