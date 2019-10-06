@@ -44,6 +44,11 @@ class PledgePage extends Component {
                 </div>
                 : null
               }
+              {campaign.rated === 'PG-13'
+                ? <div>
+                  Minors under 13 must be accompanied by an adult
+                </div>
+                : null}
             </Card>
           </Col>
         </Row>
