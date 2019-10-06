@@ -14,11 +14,20 @@ class NewCampaignPage extends React.Component {
     CanSubmitForm: false,
     showConfirmation: false,
     createdCampaignId: null,
-    numTicketsPledged: null
+    numTicketsPledged: null,
+    Rated: null,
+    ratingConfirmation: false,
+    underage: false,
+    underageModal: false
   };
 
   render () {
     const rating = this.state.MovieSearchForm != null && this.state.MovieSearchForm.movie != null ? this.state.MovieSearchForm.movie.Rated : null
+    const restriction = {
+      R: 16,
+      'PG-13': 13
+    }
+
     return (
       <div>
         <Row>
@@ -28,17 +37,12 @@ class NewCampaignPage extends React.Component {
               <div style={styles.heading}>
                 Create Campaign
               </div>
-              {rating === 'R'
-                ? <div>
-                  You must be at least 16 years old to watch this movie
+              {(rating === 'R' || rating === 'PG-13') && this.state.underage
+                ? <div style={{ color: 'red' }}>
+                  You must be at least {restriction[rating]} years old to create a campaign for this movie
                 </div>
                 : null
               }
-              {rating === 'PG-13'
-                ? <div>
-                  Minors under 13 must be accompanied by an adult
-                </div>
-                : null}
             </Card>
           </Col>
         </Row>
@@ -46,6 +50,12 @@ class NewCampaignPage extends React.Component {
           <div className={'custom-col-1'}>
             <Card bordered={false} style={styles.cardBorder}>
               <NewCampaignForm sendDetails={this.fromCampaignForm} canSubmit={this.state.CanSubmitForm} rated={rating} />
+              {(rating === 'R' || rating === 'PG-13') && this.state.underage
+                ? <div style={{ color: 'red' }}>
+                  You must be at least {restriction[rating]} years old to create a campaign for this movie
+                </div>
+                : null
+              }
             </Card>
           </div>
           <div className={'custom-col-2'}>
@@ -66,8 +76,37 @@ class NewCampaignPage extends React.Component {
         towards a screening of
           ${this.state.MovieSearchForm.movie.Title}`}
         </Modal>
+        <Modal
+          visible={this.state.ratingConfirmation}
+          title={'Age Restriction'}
+          closable={false}
+          footer={
+            <div style={styles.restricted}>
+              <Button type='primary' onClick={this.confirmAge} style={styles.yesButton}>Yes</Button>
+              <Button onClick={this.underage}>No</Button>
+            </div>}
+          style={styles.restrictedModal}
+        >
+          {this.state.ratingConfirmation &&
+          `The movie ${this.state.MovieSearchForm.movie.Title} is rated ${this.state.MovieSearchForm.movie.Rated}. \n
+          Are you over ${restriction[rating]} years old?`}
+        </Modal>
       </div>
     )
+  }
+
+  confirmAge = () => {
+    this.setState({
+      ratingConfirmation: false,
+      underage: false
+    })
+  }
+
+  underage = () => {
+    this.setState({
+      CanSubmitForm: false,
+      ratingConfirmation: false,
+      underage: true })
   }
 
   fromCampaignForm = (formData) => {
@@ -83,7 +122,9 @@ class NewCampaignPage extends React.Component {
       } else {
         const movieInfo = getMoviesByID(this.state.MovieSearchForm.key)
         movieInfo.then(info => {
-          this.setState({ MovieSearchForm: { ...searchResults, movie: info } })
+          this.setState({
+            MovieSearchForm: { ...searchResults, movie: info },
+            ratingConfirmation: info.Rated === 'R' || info.Rated === 'PG-13' })
         })
         this.setState({ CanSubmitForm: true })
       }
@@ -149,5 +190,20 @@ const styles = {
   heading: {
     fontSize: '3.3em',
     fontWeight: 'bold'
+  },
+
+  restricted: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%'
+  },
+
+  restrictedModal: {
+    textAlign: 'center'
+  },
+
+  yesButton: {
+    marginRight: '2%'
   }
 }

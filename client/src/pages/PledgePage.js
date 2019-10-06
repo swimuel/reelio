@@ -24,7 +24,7 @@ class PledgePage extends Component {
       {
         campaign: campaign,
         loading: false,
-        restrictedConfirmation: campaign.rated == 'R' || campaign.rated == 'PG-13'})
+        restrictedConfirmation: campaign.rated === 'R' || campaign.rated === 'PG-13' })
   }
 
   render () {
@@ -177,4 +177,3 @@ const styles = {
     marginRight: '2%'
   }
 }
-
