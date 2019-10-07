@@ -2,6 +2,7 @@
 
 // the model can be used to interact with the database entities
 const Pledges = require('./pledge')
+const { updateStatusToCampaignMembers } = require('../campaign/campaign.controller')
 const Campaigns = require('../campaign/campaign')
 
 const getAllPledges = async (req, res) => {
@@ -43,6 +44,30 @@ const newPledge = async (req, res) => {
       res.status(201).json({ data: pledge })
     }
   })
+
+  // Let user know they have successfully pledged to their campaign
+  await updateStatusToCampaignMembers(pledge.email, await Campaigns.findById(req.body.campaign), 'newPledge')
+
+  // Logic for whether added pledge makes the campaign successful (and notification of such)
+  const campaignForPledge = await Campaigns.findById(req.body.campaign)
+  const percentageComplete = await campaignForPledge.calculatePercentageComplete()
+
+  if (percentageComplete >= 100) {
+    // get all pledges for this campaign
+    const pledges = await Pledges
+      .find({ campaign: campaignForPledge._id })
+
+    let pledgers = ''
+
+    pledges.forEach(pledge => {
+      pledgers += (pledge.email + ', ')
+    })
+
+    // Remove trailing comma and space
+    pledgers = pledgers.substring(0, pledgers.length - 2)
+
+    await updateStatusToCampaignMembers(pledgers, campaignForPledge, 'successful')
+  }
 }
 
 module.exports = {
