@@ -78,6 +78,9 @@ const newCampaign = async (req, res) => {
   campaign.cinemaAddress = req.body.cinemaAddress
   campaign.imdbID = req.body.imdbID
   campaign.screeningTime = req.body.screeningTime
+  campaign.childPrice = req.body.childPrice
+  campaign.rated = req.body.rated
+  campaign.adultPrice = req.body.adultPrice
 
   // try making a Date object form supplied data. If for some reason its invalid then return
   try {
