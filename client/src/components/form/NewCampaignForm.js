@@ -26,6 +26,8 @@ class NewCampaignFormClass extends React.Component {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err && this.props.canSubmit) {
+        const childTickets = values.numChildTicketsPledged == null ? 0 : values.numChildTicketsPledged
+        // Campaign details
         const campaign = {
           ...values,
           campaignTitle: values.campaignTitle,
@@ -37,7 +39,15 @@ class NewCampaignFormClass extends React.Component {
           cinemaName: this.state.cinemas.find(c => c.name === values.cinemaName).name,
           creatorEmail: values.creatorEmail,
           cinemaAddress: this.state.cinemas.find(c => c.name === values.cinemaName).address,
-          price: this.state.screenTypes.find(st => st._id === values.screenType).price
+          adultPrice: this.state.screenTypes.find(st => st._id === values.screenType).adultPrice,
+          childPrice: this.state.screenTypes.find(st => st._id === values.screenType).childPrice,
+          name: values.creatorName,
+          email: values.creatorEmail,
+          ticketsPledged: Number(values.numAdultTicketsPledged) + Number(childTickets),
+          creditCardNumber: values.cardNumber,
+          creditCardExpiry: values.expiryMonth,
+          creditCardCVV: values.cvvNumber,
+          creditCardName: values.cardName
         }
 
         this.setState({
@@ -86,6 +96,7 @@ class NewCampaignFormClass extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form
+    const rated = this.props.rated
     const { MonthPicker } = DatePicker
 
     // TODO: adjust these to be responsive
@@ -186,7 +197,7 @@ class NewCampaignFormClass extends React.Component {
         </Form.Item>
         {
           this.state.screenTypes.map(st => {
-            const priceMessage = 'The selected type will mean tickets are $' + st.price + ' each'
+            const priceMessage = 'The selected type will mean adult tickets are $' + st.adultPrice + ' each and child tickets are $' + st.childPrice + ' each'
             const seatsMessage = 'You must sell at least ' + st.numTicketsRequired + ' tickets for this campaign to succeed'
             return this.state.selectedType === st.name
               ? <div>
@@ -227,8 +238,8 @@ class NewCampaignFormClass extends React.Component {
         <h2>Payment</h2>
         <Alert message='You must secure at least one ticket to start the campaign' type='info'
           className={'info-alert'} showIcon />
-        <Form.Item label='Number of Tickets'>
-          {getFieldDecorator('numTicketsPledged', {
+        <Form.Item label='Adult Tickets'>
+          {getFieldDecorator('numAdultTicketsPledged', {
             rules: [],
             initialValue: '1'
           })(<Select className={'ticket-select'}>
@@ -239,6 +250,19 @@ class NewCampaignFormClass extends React.Component {
             <Select.Option value='5'>5</Select.Option>
           </Select>)}
         </Form.Item>
+        {/* Disable child tickets for R rated movies */}
+        {rated !== 'R' ? <Form.Item label='Child Tickets'>
+          {getFieldDecorator('numChildTicketsPledged', {
+            rules: [],
+            initialValue: '0'
+          })(<Select className={'ticket-select'}>
+            <Select.Option value='1'>1</Select.Option>
+            <Select.Option value='2'>2</Select.Option>
+            <Select.Option value='3'>3</Select.Option>
+            <Select.Option value='4'>4</Select.Option>
+            <Select.Option value='5'>5</Select.Option>
+          </Select>)}
+        </Form.Item> : null}
         <Form.Item label='Payment Type'>
           {getFieldDecorator('paymentType', {
             rules: [

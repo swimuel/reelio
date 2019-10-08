@@ -2,6 +2,8 @@ import React from 'react'
 import { Card, Progress, Typography } from 'antd'
 import { withRouter } from 'react-router-dom'
 import TimeRemaining from './TimeRemaining'
+import './CampaignCard.css'
+
 const moment = require('moment')
 
 class CampaignCard extends React.Component {
@@ -55,7 +57,7 @@ class CampaignCard extends React.Component {
       <Card
         onClick={this.goToDetails}
         hoverable
-        style={{ ...styles.card, ...{ backgroundImage: `url(${campaign.imageUrl})` } }}
+        style={{ ...{ backgroundImage: `url(${campaign.imageUrl})` } }}
         bodyStyle={styles.bodyOverride}
       >
         <div style={styles.screenType}>
@@ -70,7 +72,7 @@ class CampaignCard extends React.Component {
           <Title level={4}>{campaign.filmTitle}</Title>
           <Paragraph>{campaign.campaignTitle}</Paragraph>
           <Paragraph>Screening: {moment(campaign.screeningDate).format('Do MMMM')}</Paragraph>
-          <Progress percent={campaign.percentageComplete} />
+          <Progress percent={Math.round(campaign.percentageComplete * 10) / 10} />
         </div>
       </Card >
     )
@@ -80,12 +82,6 @@ class CampaignCard extends React.Component {
 export default withRouter(CampaignCard)
 
 const styles = {
-  card: {
-    width: 300,
-    height: 440,
-    borderRadius: 5,
-    backgroundSize: 'cover'
-  },
   bodyOverride: { // doing this allows us to treat the body of the card as the entire card
     width: '100%',
     height: '100%',

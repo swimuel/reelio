@@ -19,8 +19,10 @@ const CampaignSchema = new Schema({
   creatorEmail: { type: String, required: true },
   cinemaName: { type: String, required: true },
   cinemaAddress: { type: String, required: true },
-  price: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
-  imdbID: { type: String, required: true }
+  adultPrice: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
+  childPrice: { type: Schema.Types.Number, ref: 'ScreenType', required: true },
+  imdbID: { type: String, required: true },
+  rated: { type: String, required: true }
 })
 
 CampaignSchema.methods.calculatePercentageComplete = async function () {
@@ -40,6 +42,25 @@ CampaignSchema.methods.calculatePercentageComplete = async function () {
   const screenType = await ScreenType.findById(this.screenType)
 
   return totalPledged / screenType.numTicketsRequired * 100
+}
+
+CampaignSchema.methods.calculateRemainingSeats = async function () {
+  const campaignId = this._id
+
+  // get all pledges for this campaign and determine number of total tickets
+  const pledges = await Pledge
+    .find({ campaign: campaignId })
+    .select('ticketsPledged')
+
+  let totalPledged = 0
+  pledges.forEach(pledge => {
+    totalPledged += pledge.ticketsPledged
+  })
+
+  // find screen type information for this campaign to compute total tickets required
+  const screenType = await ScreenType.findById(this.screenType)
+
+  return screenType.maxTicketsAvailable - totalPledged
 }
 
 CampaignSchema.methods.calculateCampaignTimeRemainingInDays = async function () {

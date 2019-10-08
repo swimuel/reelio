@@ -1,0 +1,28 @@
+/*Reference campaigns-container to avoid affecting all ant-cards*/
+.campaigns-container .ant-card {
+width: 100%;
+height: calc(100vw + 140px);
+border-radius: 5px;
+background-size: 100% 100%;
+position: relative;
+}
+
+/*Adjust height for different widths.
+Has been set to match List grid configurations in CampaignList*/
+@media only screen and (min-width: 576px) and (max-width: 992px) {
+    .campaigns-container .ant-card {
+        height: calc(60vw);
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1600px) {
+    .campaigns-container .ant-card {
+        height: calc(30vw);
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .campaigns-container .ant-card {
+        height: calc(20vw + 80px);
+    }
+}

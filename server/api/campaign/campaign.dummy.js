@@ -18,8 +18,10 @@ module.exports = [
     creatorEmail: 'hannah@gmail.com',
     cinemaName: cinemas[1].name,
     cinemaAddress: cinemas[1].address,
-    price: screenTypes[0].price,
-    imdbID: 'tt4154796'
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
+    imdbID: 'tt4154796',
+    rated: 'PG-13'
   },
   {
     _id: objectid().toString(),
@@ -35,8 +37,10 @@ module.exports = [
     creatorEmail: 'ryan3@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
-    imdbID: 'tt0088763'
+    adultPrice: screenTypes[3].adultPrice,
+    childPrice: screenTypes[3].childPrice,
+    imdbID: 'tt0088763',
+    rated: 'PG'
   },
   {
     _id: objectid().toString(),
@@ -52,8 +56,10 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
-    imdbID: 'tt0102926'
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
+    imdbID: 'tt0102926',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -69,8 +75,10 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
-    imdbID: 'tt3606756'
+    adultPrice: screenTypes[1].adultPrice,
+    childPrice: screenTypes[1].childPrice,
+    imdbID: 'tt3606756',
+    rated: 'PG'
   },
   {
     _id: objectid().toString(),
@@ -86,8 +94,10 @@ module.exports = [
     creatorEmail: 'ryan@gmail.com',
     cinemaName: cinemas[3].name,
     cinemaAddress: cinemas[3].address,
-    price: screenTypes[1].price,
-    imdbID: 'tt0209144'
+    adultPrice: screenTypes[2].adultPrice,
+    childPrice: screenTypes[2].childPrice,
+    imdbID: 'tt0209144',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -103,8 +113,10 @@ module.exports = [
     creatorEmail: 'ryan4@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
-    imdbID: 'tt2582802'
+    adultPrice: screenTypes[3].adultPrice,
+    childPrice: screenTypes[3].childPrice,
+    imdbID: 'tt2582802',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -120,8 +132,10 @@ module.exports = [
     creatorEmail: 'ryan2@gmail.com',
     cinemaName: cinemas[2].name,
     cinemaAddress: cinemas[2].address,
-    price: screenTypes[1].price,
-    imdbID: 'tt1979320'
+    adultPrice: screenTypes[2].adultPrice,
+    childPrice: screenTypes[2].childPrice,
+    imdbID: 'tt1979320',
+    rated: 'R'
   },
   {
     _id: objectid().toString(),
@@ -137,8 +151,10 @@ module.exports = [
     creatorEmail: 'joe@gmail.com',
     cinemaName: cinemas[0].name,
     cinemaAddress: cinemas[0].address,
-    price: screenTypes[0].price,
-    imdbID: 'tt0245429'
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
+    imdbID: 'tt0245429',
+    rated: 'PG'
   },
   { // purposely outdated
     _id: objectid().toString(),
@@ -154,7 +170,9 @@ module.exports = [
     creatorEmail: 'hannah@gmail.com',
     cinemaName: cinemas[1].name,
     cinemaAddress: cinemas[1].address,
-    price: screenTypes[0].price,
-    imdbID: 'tt4154796'
+    adultPrice: screenTypes[0].adultPrice,
+    childPrice: screenTypes[0].childPrice,
+    imdbID: 'tt4154796',
+    rated: 'R'
   }
 ]

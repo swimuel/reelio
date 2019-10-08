@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 const ScreenTypeSchema = new Schema({
   name: { type: String, required: true, enum: ['IMAX', 'IMAX_3D', '2D', '3D'] },
   numTicketsRequired: { type: Number, required: true },
-  price: { type: Number, required: true },
+  adultPrice: { type: Number, required: true },
+  childPrice: { type: Number, required: true },
   maxTicketsAvailable: { type: Number, required: true }
 })
 
